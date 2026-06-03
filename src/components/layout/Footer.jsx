@@ -1,6 +1,9 @@
 import React from "react";
 
 export function Footer() {
+  // Automatically calculates and updates the current year dynamically
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="border-t border-white/5 py-10">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -58,7 +61,9 @@ export function Footer() {
             Email
           </a>
         </div>
-        <span className="text-xs text-white/15 font-mono">© 2026</span>
+        
+        {/* Renders the dynamic year variable */}
+        <span className="text-xs text-white/15 font-mono">© {currentYear}</span>
       </div>
     </footer>
   );
