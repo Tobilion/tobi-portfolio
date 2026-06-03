@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useSectionInView } from "../../hooks/useSectionInView";
-import { MagneticButton } from "../ui/MagneticButton"; // Import Magnetic wrapper
+import MagneticButton from "../ui/MagneticButton";
 import { fadeUp, stagger } from "../../animations/variants";
 
 export function About() {
@@ -28,7 +28,7 @@ export function About() {
           animate={isInView ? "visible" : "hidden"}
           className="flex flex-col gap-8"
         >
-          <div className="rounded-2xl border border-white/5 bg-[#121214] p-8 lg:p-10 shadow-2xl">
+          <div className="rounded-2xl border border-white/5 bg-[#0d0d0f]/60 backdrop-blur-xl p-8 lg:p-10 shadow-2xl hover:border-white/10 transition-all duration-300">
             <motion.p variants={fadeUp} className="text-white/70 leading-[1.8] text-base mb-6">
               I'm a passionate software engineer with a deep obsession for distributed systems, 
               developer experience, and the craftsmanship of high-quality software. My journey started 
@@ -40,7 +40,7 @@ export function About() {
               best code is invisible — it empowers teams, survives ambiguity, and ages gracefully.
             </motion.p>
 
-            {/* Wrap Download CV Button in Magnetic proximity wrapper */}
+            {/* Resume Button wrapped in Magnetic Proximity */}
             <MagneticButton className="w-fit">
               <motion.a
                 variants={fadeUp}
@@ -62,3 +62,5 @@ export function About() {
     </section>
   );
 }
+
+export default About;
