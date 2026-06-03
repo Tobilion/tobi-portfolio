@@ -1,3 +1,4 @@
+// src/App.jsx
 import React, { useEffect } from "react";
 import Lenis from "lenis";
 import Navbar from "./components/layout/Navbar";
@@ -40,8 +41,8 @@ export default function App() {
         <Experience />
         <Projects />
         <Contact />
+        <Footer />
       </main>
-      <Footer />
     </div>
   );
 }

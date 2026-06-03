@@ -1,18 +1,16 @@
+// src/components/ui/EvolvingBackground.jsx
 import React from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"; // Changed to framer-motion for your local setup
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 export function EvolvingBackground() {
   const { scrollYProgress } = useScroll();
 
-  // Smooth out the progress output with a spring for a pleasant liquid feel
   const smoothY = useSpring(scrollYProgress, {
     stiffness: 45,
     damping: 24,
     mass: 1.2,
   });
 
-  // Dynamic coordinates, scale factors, and glow colors based on scroll height
-  // Orb 1: Moves top-left down through center
   const orb1X = useTransform(smoothY, [0, 0.2, 0.4, 0.6, 0.8, 1], ["5%", "25%", "-10%", "50%", "30%", "10%"]);
   const orb1Y = useTransform(smoothY, [0, 0.2, 0.4, 0.6, 0.8, 1], ["5%", "35%", "70%", "15%", "85%", "50%"]);
   const orb1Scale = useTransform(smoothY, [0, 0.35, 0.7, 1], [1, 1.4, 0.85, 1.2]);
@@ -22,7 +20,6 @@ export function EvolvingBackground() {
     ["rgba(0, 255, 136, 0.18)", "rgba(0, 229, 255, 0.18)", "rgba(124, 58, 237, 0.18)", "rgba(236, 72, 153, 0.18)", "rgba(0, 255, 136, 0.18)"]
   );
 
-  // Orb 2: Moves top-right to mid-left to bottom-right
   const orb2X = useTransform(smoothY, [0, 0.2, 0.4, 0.6, 0.8, 1], ["85%", "10%", "80%", "20%", "75%", "90%"]);
   const orb2Y = useTransform(smoothY, [0, 0.2, 0.4, 0.6, 0.8, 1], ["20%", "55%", "15%", "90%", "45%", "85%"]);
   const orb2Scale = useTransform(smoothY, [0, 0.5, 1], [0.9, 1.35, 1.1]);
@@ -32,7 +29,6 @@ export function EvolvingBackground() {
     ["rgba(124, 58, 237, 0.18)", "rgba(0, 255, 136, 0.18)", "rgba(14, 165, 233, 0.18)", "rgba(245, 158, 11, 0.18)", "rgba(124, 58, 237, 0.18)"]
   );
 
-  // Orb 3: Slow large underlying shadow orb
   const orb3X = useTransform(smoothY, [0, 0.3, 0.6, 1], ["35%", "75%", "15%", "50%"]);
   const orb3Y = useTransform(smoothY, [0, 0.3, 0.6, 1], ["80%", "20%", "45%", "90%"]);
   const orb3Scale = useTransform(smoothY, [0, 0.5, 1], [1.2, 0.8, 1.4]);
@@ -44,7 +40,6 @@ export function EvolvingBackground() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#060608]">
-      {/* Dynamic Digital Mesh Grid Overlay */}
       <div
         className="absolute inset-0 opacity-[0.035]"
         style={{
@@ -52,11 +47,8 @@ export function EvolvingBackground() {
           backgroundSize: "48px 48px",
         }}
       />
-      
-      {/* Fluid Ambient Light Layer */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0c]/10 via-[#0a0a0c]/50 to-[#060608]" />
 
-      {/* Amorphous scrolling orbs */}
       <motion.div
         className="absolute rounded-full filter blur-[150px] md:blur-[220px] mix-blend-screen"
         style={{
