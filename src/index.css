@@ -30,6 +30,17 @@
   --color-border: #27272A;
 }
 
+/* Respect OS-level reduced motion preference — disables all animations
+   without removing any interactive functionality. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Spinner Loader styling */
 .loader {
   width: 48px;

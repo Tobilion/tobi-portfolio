@@ -1,31 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, Suspense, lazy, useState } from "react";
 import Lenis from "lenis";
 import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
 import Hero from "./components/sections/Hero";
-import About from "./components/sections/About";
-import Skills from "./components/sections/Skills";
-import Experience from "./components/sections/Experience";
-import Projects from "./components/sections/Projects";
-import Contact from "./components/sections/Contact";
 import EvolvingBackground from "./components/ui/EvolvingBackground";
 
+// Below-fold sections are lazy-loaded so they don't block the initial paint
+const Footer    = lazy(() => import("./components/layout/Footer"));
+const About     = lazy(() => import("./components/sections/About"));
+const Skills    = lazy(() => import("./components/sections/Skills"));
+const Experience = lazy(() => import("./components/sections/Experience"));
+const Projects  = lazy(() => import("./components/sections/Projects"));
+const Contact   = lazy(() => import("./components/sections/Contact"));
+
+/** Tiny skeleton shown while a lazy section hydrates */
+function SectionSkeleton(): React.JSX.Element {
+  return (
+    <div className="w-full py-32 flex items-center justify-center">
+      <div className="w-8 h-8 rounded-full border-2 border-[#0066CC]/20 border-t-[#0066CC] animate-spin" />
+    </div>
+  );
+}
+
 export default function App(): React.JSX.Element {
+  const belowFoldRef = useRef<HTMLDivElement>(null);
+  const [belowFoldVisible, setBelowFoldVisible] = useState(false);
+
   useEffect(() => {
+    // Kick off smooth scroll
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
-
     function raf(time: number): void {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
+
+    // Only mount below-fold sections when the user is about to scroll there
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setBelowFoldVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" } // start loading 200px before it enters viewport
+    );
+    if (belowFoldRef.current) observer.observe(belowFoldRef.current);
 
     return () => {
       lenis.destroy();
+      observer.disconnect();
     };
   }, []);
 
@@ -34,13 +60,25 @@ export default function App(): React.JSX.Element {
       <EvolvingBackground />
       <Navbar />
       <main className="relative z-10">
+        {/* Hero — always eagerly loaded, it's the first thing the user sees */}
         <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Contact />
-        <Footer />
+
+        {/* Sentinel: when this div scrolls into view, lazy sections are mounted */}
+        <div ref={belowFoldRef} />
+
+        {belowFoldVisible ? (
+          <Suspense fallback={<SectionSkeleton />}>
+            <About />
+            <Skills />
+            <Experience />
+            <Projects />
+            <Contact />
+            <Footer />
+          </Suspense>
+        ) : (
+          // Reserve space to prevent layout shift while sections haven't mounted
+          <div style={{ minHeight: "400vh" }} />
+        )}
       </main>
     </div>
   );
