@@ -80,7 +80,7 @@ export function About() {
   const { ref, isInView } = useSectionInView();
 
   return (
-    <section id="about" ref={ref} className="py-32 relative">
+    <section id="about" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_2fr] gap-20 items-start">
         <motion.div
           initial={{ opacity: 0, x: -30 }}

@@ -166,7 +166,7 @@ export default function RadialOrbitalTimeline({
           <div className="absolute w-12 h-12 rounded-full bg-gradient-to-br from-[#0066CC] via-[#0ea5e9] to-[#7c3aed] animate-pulse flex items-center justify-center z-10 shadow-lg shadow-[#0066CC]/20">
             <div className="absolute w-16 h-16 rounded-full border border-[#0066CC]/20 animate-ping opacity-60"></div>
             <div
-              className="absolute w-20 h-20 rounded-full border border-slate-200 animate-ping opacity-35"
+              className="absolute w-20 h-20 rounded-full border border-slate-200 dark:border-zinc-700 animate-ping opacity-35"
               style={{ animationDelay: "0.5s" }}
             ></div>
             <div className="w-6 h-6 rounded-full bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md flex items-center justify-center text-[10px] font-mono text-[#0066CC] dark:text-blue-400 font-bold shadow-sm border border-slate-100 dark:border-zinc-900">
@@ -257,7 +257,7 @@ export default function RadialOrbitalTimeline({
                 {/* Node Detail overlay Card */}
                 {isExpanded && (
                   <Card className="absolute top-14 w-60 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-slate-200/80 dark:border-zinc-800 shadow-xl shadow-slate-200/40 dark:shadow-none overflow-visible z-[400] -translate-x-1/2 left-1/2">
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white dark:border-b-zinc-900"></div>
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white/95 dark:border-b-zinc-900/95"></div>
                     <CardHeader className="p-3 pb-1.5">
                       <div className="flex justify-between items-center">
                         <Badge

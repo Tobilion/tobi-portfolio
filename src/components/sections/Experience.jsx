@@ -146,7 +146,7 @@ export function Experience() {
                   </h3>
                   <button
                     onClick={() => setIsExpanded(false)}
-                    className="px-4 py-2 text-xs font-mono font-semibold rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-850 text-slate-600 dark:text-zinc-450 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 text-xs font-mono font-semibold rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <ChevronUp size={14} />
                     Collapse Stack
