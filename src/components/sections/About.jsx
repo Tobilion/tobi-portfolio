@@ -105,7 +105,7 @@ export function About() {
           animate={isInView ? "visible" : "hidden"}
           className="flex flex-col gap-8"
         >
-          <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.025)] dark:shadow-none hover:border-slate-200 dark:hover:border-zinc-750 transition-all duration-300">
+          <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 backdrop-blur-md p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.025)] dark:shadow-none hover:border-slate-200 dark:hover:border-zinc-700 transition-all duration-300">
             <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 leading-[1.8] text-base mb-6">
               I'm a passionate software engineer with a deep obsession for distributed systems, 
               developer experience, and the craftsmanship of high-quality software. My journey started 

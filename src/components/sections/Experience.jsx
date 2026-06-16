@@ -32,7 +32,7 @@ function TimelineNode({ item, index }) {
 
       {/* Styled card wrapper matches reference timeline style */}
       <div className="flex flex-col gap-2 pb-12 pl-4 flex-1">
-        <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md p-6 shadow-md shadow-slate-200/5 dark:shadow-none relative overflow-hidden group hover:border-[#0066cc]/30 transition-all duration-300">
+        <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 backdrop-blur-md p-6 shadow-md shadow-slate-200/5 dark:shadow-none relative overflow-hidden group hover:border-[#0066cc]/30 transition-all duration-300">
           <span className="text-xs font-mono text-[#0066cc] tracking-widest font-semibold block mb-1">{item.period}</span>
           <h3 className="text-xl font-bold text-[#1D1D1F] dark:text-[#F5F5F7] group-hover:text-[#0066cc] transition-colors duration-200">{item.role}</h3>
           <span className="text-sm text-slate-500 dark:text-zinc-400 font-medium block mt-0.5 mb-3">{item.company}</span>
@@ -45,40 +45,40 @@ function TimelineNode({ item, index }) {
 
 const experienceStackCards = [
   {
-    icon: <GraduationCap className="size-4 text-blue-600 dark:text-blue-455" />,
+    icon: <GraduationCap className="size-4 text-blue-600 dark:text-blue-400" />,
     title: "Covenant University",
     description: "B.Sc. Computer Science (2024 - Pres)",
     date: "Education Journey",
     iconClassName: "bg-blue-50 p-1 rounded-full text-blue-600 border border-blue-100 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900/40",
     titleClassName: "text-blue-600 dark:text-blue-400 font-semibold",
-    className: "[grid-area:stack] hover:-translate-y-10 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
+    className: "[grid-area:stack] hover:-translate-y-10 border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
   },
   {
-    icon: <Briefcase className="size-4 text-purple-600 dark:text-purple-455" />,
+    icon: <Briefcase className="size-4 text-purple-600 dark:text-purple-400" />,
     title: "Quantum Systems",
     description: "Senior Software Engineer (2023 - Pres)",
     date: "Work History",
     iconClassName: "bg-purple-50 p-1 rounded-full text-purple-600 border border-purple-100 dark:bg-purple-950/40 dark:text-purple-400 dark:border-purple-900/40",
     titleClassName: "text-purple-600 dark:text-purple-400 font-semibold",
-    className: "[grid-area:stack] translate-x-8 translate-y-6 hover:-translate-y-4 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
+    className: "[grid-area:stack] translate-x-8 translate-y-6 hover:-translate-y-4 border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
   },
   {
-    icon: <Briefcase className="size-4 text-amber-600" />,
+    icon: <Briefcase className="size-4 text-amber-600 dark:text-amber-400" />,
     title: "NexaCloud",
     description: "Full-Stack Engineer (2021 - 2023)",
     date: "Work History",
-    iconClassName: "bg-amber-50 p-1 rounded-full text-amber-600 border border-amber-100 dark:bg-amber-955/40 dark:text-amber-400 dark:border-amber-900/40",
+    iconClassName: "bg-amber-50 p-1 rounded-full text-amber-600 border border-amber-100 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/40",
     titleClassName: "text-amber-600 dark:text-amber-400 font-semibold",
-    className: "[grid-area:stack] translate-x-16 translate-y-12 hover:-translate-y-2 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
+    className: "[grid-area:stack] translate-x-16 translate-y-12 hover:-translate-y-2 border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
   },
   {
-    icon: <Briefcase className="size-4 text-green-600 dark:text-emerald-450" />,
+    icon: <Briefcase className="size-4 text-green-600 dark:text-emerald-400" />,
     title: "Vertex Labs",
     description: "Software Developer (2019 - 2021)",
     date: "Work History",
     iconClassName: "bg-green-50 p-1 rounded-full text-green-600 border border-green-100 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/40",
     titleClassName: "text-green-600 dark:text-emerald-400 font-semibold",
-    className: "[grid-area:stack] translate-x-24 translate-y-18 hover:translate-y-8 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none",
+    className: "[grid-area:stack] translate-x-24 translate-y-18 hover:translate-y-8 border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none",
   },
 ];
 
