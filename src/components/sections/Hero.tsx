@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { GlowOrb } from "../ui/GlowOrb";
 import { SplineScene } from "../ui/splite";
@@ -6,9 +6,9 @@ import { MagneticButton } from "../ui/MagneticButton";
 import { fadeUp, stagger } from "../../animations/variants";
 import { MetalButton } from "../ui/liquid-glass-button";
 
-export function Hero() {
-  const containerRef = useRef(null);
-  
+export function Hero(): React.JSX.Element {
+  const containerRef = React.useRef<HTMLElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -36,7 +36,7 @@ export function Hero() {
         }}
       />
 
-      <motion.div 
+      <motion.div
         style={{ scale, opacity, y }}
         className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center z-10"
       >
@@ -60,8 +60,8 @@ export function Hero() {
             <span className="text-[#1D1D1F] dark:text-[#F5F5F7]">Jagun</span>
           </motion.h1>
 
-          <motion.div 
-            variants={fadeUp} 
+          <motion.div
+            variants={fadeUp}
             className="w-fit px-5 py-2.5 rounded-full border border-slate-200/60 dark:border-zinc-800/60 bg-[#F5F5F7] dark:bg-zinc-900 text-[#86868B] dark:text-zinc-400 text-xs font-mono font-semibold tracking-wider uppercase"
           >
             Front-End Developer
@@ -71,25 +71,23 @@ export function Hero() {
             variants={fadeUp}
             className="text-base text-[#86868B] dark:text-zinc-400 leading-relaxed max-w-md font-light pt-2"
           >
-            Software engineer crafting high-performance systems and elegant interfaces. 
+            Software engineer crafting high-performance systems and elegant interfaces.
             Specialising in distributed architecture, developer tooling, and ML infrastructure.
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4 pt-4 items-center">
-            {/* CTA 1 wrapped in Magnetic */}
             <MagneticButton>
-              <MetalButton 
-                variant="primary" 
+              <MetalButton
+                variant="primary"
                 onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
               >
                 View My Work
               </MetalButton>
             </MagneticButton>
 
-            {/* CTA 2 wrapped in Magnetic */}
             <MagneticButton>
-              <MetalButton 
-                variant="default" 
+              <MetalButton
+                variant="default"
                 onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               >
                 Get in Touch
@@ -99,7 +97,7 @@ export function Hero() {
         </motion.div>
 
         <div className="relative w-full aspect-square max-w-[480px] mx-auto">
-          <SplineScene 
+          <SplineScene
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="w-full h-full"
             offlineFallback="/Images/hero-3d.jpeg"

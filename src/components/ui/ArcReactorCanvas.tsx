@@ -1,10 +1,11 @@
 import React, { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Center } from "@react-three/drei";
+import { Group } from "three";
 
-function ReactorModel() {
+function ReactorModel(): React.JSX.Element {
   const { scene } = useGLTF("/models/arc_reactor.glb");
-  const modelRef = useRef();
+  const modelRef = useRef<Group>(null);
 
   useFrame((state) => {
     if (modelRef.current) {
@@ -16,7 +17,7 @@ function ReactorModel() {
   return <primitive object={scene} ref={modelRef} scale={1.3} />;
 }
 
-export function ArcReactorCanvas() {
+export function ArcReactorCanvas(): React.JSX.Element {
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-20">
       <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>

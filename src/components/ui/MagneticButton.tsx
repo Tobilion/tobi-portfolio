@@ -1,8 +1,13 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
-export function MagneticButton({ children, className = "" }) {
-  const buttonRef = useRef(null);
+interface MagneticButtonProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function MagneticButton({ children, className = "" }: MagneticButtonProps): React.JSX.Element {
+  const buttonRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -10,11 +15,11 @@ export function MagneticButton({ children, className = "" }) {
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     if (!buttonRef.current) return;
     const { clientX, clientY } = e;
     const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
-    
+
     const centerX = left + width / 2;
     const centerY = top + height / 2;
 
@@ -25,7 +30,7 @@ export function MagneticButton({ children, className = "" }) {
     y.set(offsetY);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (): void => {
     x.set(0);
     y.set(0);
   };

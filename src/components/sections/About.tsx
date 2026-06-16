@@ -6,8 +6,9 @@ import { fadeUp, stagger } from "../../animations/variants";
 import RadialOrbitalTimeline from "../ui/radial-orbital-timeline";
 import { Code, Terminal, Database, Cpu, Binary, Brain } from "lucide-react";
 import { MetalButton } from "../ui/liquid-glass-button";
+import { TimelineItem } from "../ui/radial-orbital-timeline";
 
-const languageTimelineData = [
+const languageTimelineData: TimelineItem[] = [
   {
     id: 1,
     title: "TypeScript",
@@ -15,7 +16,7 @@ const languageTimelineData = [
     content: "My primary tool for building scalable web apps, robust backend services, and type-safe developer tooling. Extensive experience in React and Node.js ecosystems.",
     category: "Languages",
     icon: Code,
-    relatedIds: [4, 6], // Related to Go, SQL
+    relatedIds: [4, 6],
     status: "completed",
     energy: 95,
   },
@@ -26,7 +27,7 @@ const languageTimelineData = [
     content: "Extensively used for data engineering pipelines, ML infrastructure, automation scripting, and backend development with FastAPI/PyTorch.",
     category: "Languages",
     icon: Brain,
-    relatedIds: [1, 6], // Related to TypeScript, SQL
+    relatedIds: [1, 6],
     status: "completed",
     energy: 90,
   },
@@ -37,7 +38,7 @@ const languageTimelineData = [
     content: "Utilized for performance-critical systems, WebAssembly tooling, network protocol design, and safe concurrency patterns.",
     category: "Languages",
     icon: Terminal,
-    relatedIds: [5], // Related to C++
+    relatedIds: [5],
     status: "in-progress",
     energy: 80,
   },
@@ -48,7 +49,7 @@ const languageTimelineData = [
     content: "Used to build highly concurrent microservices, CLI tools, Kubernetes controllers, and high-performance network daemons.",
     category: "Languages",
     icon: Binary,
-    relatedIds: [1, 6], // Related to TypeScript, SQL
+    relatedIds: [1, 6],
     status: "in-progress",
     energy: 85,
   },
@@ -59,7 +60,7 @@ const languageTimelineData = [
     content: "Applied for graphics rendering engines, algorithm performance optimizations, and memory-constrained system engineering.",
     category: "Languages",
     icon: Cpu,
-    relatedIds: [3], // Related to Rust
+    relatedIds: [3],
     status: "pending",
     energy: 65,
   },
@@ -70,13 +71,13 @@ const languageTimelineData = [
     content: "Proficient in database schema design, indexing strategies, querying optimization, and transactional performance tuning in PostgreSQL.",
     category: "Languages",
     icon: Database,
-    relatedIds: [1, 2, 4], // Related to TypeScript, Python, Go
+    relatedIds: [1, 2, 4],
     status: "completed",
     energy: 88,
   },
 ];
 
-export function About() {
+export function About(): React.JSX.Element {
   const { ref, isInView } = useSectionInView();
 
   return (
@@ -107,20 +108,19 @@ export function About() {
         >
           <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 backdrop-blur-md p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.025)] dark:shadow-none hover:border-slate-200 dark:hover:border-zinc-700 transition-all duration-300">
             <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 leading-[1.8] text-base mb-6">
-              I'm a passionate software engineer with a deep obsession for distributed systems, 
-              developer experience, and the craftsmanship of high-quality software. My journey started 
+              I'm a passionate software engineer with a deep obsession for distributed systems,
+              developer experience, and the craftsmanship of high-quality software. My journey started
               tinkering with network protocols at 14 — today I architect systems at scale.
             </motion.p>
             <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 leading-[1.8] text-base mb-8">
-              My approach combines clean code principles with modern design aesthetics, ensuring that 
-              every project delivers exceptional value to users and stakeholders alike. I believe the 
+              My approach combines clean code principles with modern design aesthetics, ensuring that
+              every project delivers exceptional value to users and stakeholders alike. I believe the
               best code is invisible — it empowers teams, survives ambiguity, and ages gracefully.
             </motion.p>
 
-            {/* Resume Button wrapped in Magnetic Proximity */}
             <MagneticButton className="w-fit">
-              <MetalButton 
-                variant="success" 
+              <MetalButton
+                variant="success"
                 onClick={() => window.open("/Tobiloba_Jagun_CV.pdf", "_blank")}
               >
                 <svg className="w-4 h-4 inline-block mr-1.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">

@@ -5,7 +5,20 @@ import { EXPERIENCES } from "../../constants/portfolioData";
 import DisplayCards from "../ui/display-cards";
 import { GraduationCap, Briefcase, ChevronUp } from "lucide-react";
 
-function TimelineNode({ item, index }) {
+interface ExperienceItem {
+  period: string;
+  role: string;
+  company: string;
+  desc: string;
+  type: "education" | "work";
+}
+
+interface TimelineNodeProps {
+  item: ExperienceItem;
+  index: number;
+}
+
+function TimelineNode({ item, index }: TimelineNodeProps): React.JSX.Element {
   const { ref, isInView } = useSectionInView(0.3);
   return (
     <motion.div
@@ -30,7 +43,7 @@ function TimelineNode({ item, index }) {
         </motion.div>
       </div>
 
-      {/* Styled card wrapper matches reference timeline style */}
+      {/* Styled card wrapper */}
       <div className="flex flex-col gap-2 pb-12 pl-4 flex-1">
         <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 backdrop-blur-md p-6 shadow-md shadow-slate-200/5 dark:shadow-none relative overflow-hidden group hover:border-[#0066cc]/30 transition-all duration-300">
           <span className="text-xs font-mono text-[#0066cc] tracking-widest font-semibold block mb-1">{item.period}</span>
@@ -82,9 +95,9 @@ const experienceStackCards = [
   },
 ];
 
-export function Experience() {
+export function Experience(): React.JSX.Element {
   const { ref, isInView } = useSectionInView();
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   return (
     <section id="experience" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
@@ -96,7 +109,7 @@ export function Experience() {
           className="lg:sticky lg:top-32"
         >
           <span className="text-xs font-mono text-[#0066cc] tracking-widest uppercase font-semibold">
-            EXPERIENCE & EDUCATION
+            EXPERIENCE &amp; EDUCATION
           </span>
           <h2 className="text-4xl font-extrabold text-[#1D1D1F] dark:text-[#F5F5F7] mt-3 leading-tight tracking-tight">
             My Journey
@@ -162,7 +175,7 @@ export function Experience() {
                     className="absolute left-5 top-5 bottom-0 w-px bg-gradient-to-b from-[#0066cc]/30 via-[#0066cc]/10 to-transparent origin-top"
                   />
                   {EXPERIENCES.map((item, i) => (
-                    <TimelineNode key={item.company + i} item={item} index={i} />
+                    <TimelineNode key={item.company + i} item={item as ExperienceItem} index={i} />
                   ))}
                 </div>
               </motion.div>

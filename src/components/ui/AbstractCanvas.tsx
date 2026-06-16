@@ -1,7 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export function AbstractCanvas() {
+interface Node {
+  angle: number;
+  r: number;
+  color: string;
+  label: string;
+}
+
+const nodes: Node[] = [
+  { angle: 0,   r: 42, color: "#00ff88", label: "Node.js" },
+  { angle: 72,  r: 42, color: "#7c3aed", label: "Rust"    },
+  { angle: 144, r: 42, color: "#0ea5e9", label: "K8s"     },
+  { angle: 216, r: 42, color: "#f59e0b", label: "React"   },
+  { angle: 288, r: 42, color: "#ec4899", label: "ML"      },
+];
+
+export function AbstractCanvas(): React.JSX.Element {
   return (
     <div className="relative w-full aspect-square max-w-[480px] mx-auto">
       {/* Outer ring */}
@@ -38,13 +53,7 @@ export function AbstractCanvas() {
       </div>
 
       {/* Floating nodes */}
-      {[
-        { angle: 0, r: 42, color: "#00ff88", label: "Node.js" },
-        { angle: 72, r: 42, color: "#7c3aed", label: "Rust" },
-        { angle: 144, r: 42, color: "#0ea5e9", label: "K8s" },
-        { angle: 216, r: 42, color: "#f59e0b", label: "React" },
-        { angle: 288, r: 42, color: "#ec4899", label: "ML" },
-      ].map(({ angle, r, color, label }, i) => {
+      {nodes.map(({ angle, r, color, label }, i) => {
         const rad = (angle * Math.PI) / 180;
         const x = 50 + r * Math.cos(rad);
         const y = 50 + r * Math.sin(rad);
@@ -54,11 +63,7 @@ export function AbstractCanvas() {
             animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 2 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
             className="absolute flex items-center justify-center"
-            style={{
-              left: `${x}%`,
-              top: `${y}%`,
-              transform: "translate(-50%, -50%)",
-            }}
+            style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }}
           >
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center border text-[10px] font-mono font-bold"

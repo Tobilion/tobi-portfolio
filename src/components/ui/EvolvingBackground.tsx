@@ -1,8 +1,7 @@
-// src/components/ui/EvolvingBackground.jsx
 import React from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
-export function EvolvingBackground() {
+export function EvolvingBackground(): React.JSX.Element {
   const { scrollYProgress } = useScroll();
 
   const smoothY = useSpring(scrollYProgress, {
@@ -69,7 +68,7 @@ export function EvolvingBackground() {
           backgroundColor: orb1Color,
         }}
       />
-      
+
       <motion.div
         className="absolute rounded-full filter blur-[160px] md:blur-[240px]"
         style={{
@@ -81,7 +80,7 @@ export function EvolvingBackground() {
           backgroundColor: orb2Color,
         }}
       />
-      
+
       <motion.div
         className="absolute rounded-full filter blur-[150px] md:blur-[220px]"
         style={{

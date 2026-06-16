@@ -1,12 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import useSectionInView from "../../hooks/useSectionInView";
+import { useSectionInView } from "../../hooks/useSectionInView";
 import { SKILLS } from "../../constants/portfolioData";
 import { fadeUp, stagger } from "../../animations/variants";
 import TiltCard from "../ui/TiltCard";
 import SpotlightCard from "../ui/SpotlightCard";
 
-function SkillPill({ label }) {
+interface SkillPillProps {
+  label: string;
+}
+
+function SkillPill({ label }: SkillPillProps): React.JSX.Element {
   return (
     <motion.span
       whileHover={{
@@ -20,7 +24,14 @@ function SkillPill({ label }) {
   );
 }
 
-function BentoCard({ title, items, span = "", icon }) {
+interface BentoCardProps {
+  title: string;
+  items: string[];
+  span?: string;
+  icon: string;
+}
+
+function BentoCard({ title, items, span = "", icon }: BentoCardProps): React.JSX.Element {
   return (
     <TiltCard className={span}>
       <SpotlightCard
@@ -43,10 +54,18 @@ function BentoCard({ title, items, span = "", icon }) {
   );
 }
 
-export function Skills() {
+interface CardConfig {
+  title: string;
+  items: string[];
+  span: string;
+  accent: string;
+  icon: string;
+}
+
+export function Skills(): React.JSX.Element {
   const { ref, isInView } = useSectionInView();
 
-  const cards = [
+  const cards: CardConfig[] = [
     { title: "Languages", items: SKILLS.Languages, span: "lg:col-span-2", accent: "#0066CC", icon: "🌌" },
     { title: "Dev Tools", items: SKILLS["Dev Tools"], span: "", accent: "#0066CC", icon: "🛠️" },
     { title: "Architecture", items: SKILLS.Architecture, span: "lg:col-span-2", accent: "#0066CC", icon: "🏗️" },

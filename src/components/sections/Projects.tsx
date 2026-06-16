@@ -3,20 +3,29 @@ import { motion } from "framer-motion";
 import { useSectionInView } from "../../hooks/useSectionInView";
 import { PROJECTS } from "../../constants/portfolioData";
 import { fadeUp, stagger } from "../../animations/variants";
-import { TiltCard } from "../ui/TiltCard"; // Import Tilt
-import { SpotlightCard } from "../ui/SpotlightCard"; // Import Spotlight
+import { TiltCard } from "../ui/TiltCard";
+import { SpotlightCard } from "../ui/SpotlightCard";
 
-function ProjectCard({ project }) {
+interface Project {
+  title: string;
+  desc: string;
+  tags: string[];
+  color: string;
+}
+
+interface ProjectCardProps {
+  project: Project;
+}
+
+function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
   return (
     <TiltCard>
-      <SpotlightCard 
+      <SpotlightCard
         spotlightColor={`${project.color}08`}
         className="rounded-3xl border border-slate-200/50 dark:border-zinc-800/50 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md overflow-hidden flex flex-col h-full shadow-[0_4px_20px_rgba(0,0,0,0.01)] dark:shadow-none hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300"
       >
         {/* Image placeholder wrapper */}
-        <div
-          className="h-44 w-full relative overflow-hidden bg-[#F5F5F7] dark:bg-zinc-950 transition-colors duration-300"
-        >
+        <div className="h-44 w-full relative overflow-hidden bg-[#F5F5F7] dark:bg-zinc-950 transition-colors duration-300">
           <div
             className="absolute inset-0 opacity-[0.25]"
             style={{
@@ -70,7 +79,7 @@ function ProjectCard({ project }) {
               href="#"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="flex-1 text-xs font-semibold text-center py-2.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm hover:bg-slate-50 dark:hover:bg-zinc-850 transition-all duration-200 cursor-pointer"
+              className="flex-1 text-xs font-semibold text-center py-2.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
             >
               ↗ Live Demo
             </motion.a>
@@ -93,7 +102,7 @@ function ProjectCard({ project }) {
   );
 }
 
-export function Projects() {
+export function Projects(): React.JSX.Element {
   const { ref, isInView } = useSectionInView();
   return (
     <section id="projects" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
@@ -116,7 +125,7 @@ export function Projects() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {PROJECTS.map((p, i) => <ProjectCard key={p.title} project={p} index={i} />)}
+          {PROJECTS.map((p, i) => <ProjectCard key={p.title} project={p as Project} index={i} />)}
         </div>
       </div>
     </section>

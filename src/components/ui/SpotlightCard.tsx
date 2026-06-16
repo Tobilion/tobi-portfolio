@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 
-export function SpotlightCard({ children, className = "", spotlightColor = "rgba(0, 255, 136, 0.08)" }) {
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [hovered, setHovered] = useState(false);
+interface SpotlightCardProps {
+  children: React.ReactNode;
+  className?: string;
+  spotlightColor?: string;
+}
 
-  const handleMouseMove = (e) => {
+export function SpotlightCard({
+  children,
+  className = "",
+  spotlightColor = "rgba(0, 255, 136, 0.08)",
+}: SpotlightCardProps): React.JSX.Element {
+  const [coords, setCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState<boolean>(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     const rect = e.currentTarget.getBoundingClientRect();
     setCoords({
       x: e.clientX - rect.left,

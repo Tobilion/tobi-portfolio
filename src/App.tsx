@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect } from "react";
 import Lenis from "lenis";
 import Navbar from "./components/layout/Navbar";
@@ -11,14 +10,14 @@ import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
 import EvolvingBackground from "./components/ui/EvolvingBackground";
 
-export default function App() {
+export default function App(): React.JSX.Element {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
-    function raf(time) {
+    function raf(time: number): void {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }

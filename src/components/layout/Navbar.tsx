@@ -4,13 +4,15 @@ import { NAV_LINKS } from "../../constants/portfolioData";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { Sun, Moon } from "lucide-react";
 
-export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
-  const [theme, setTheme] = useState(() => {
+type Theme = "light" | "dark";
+
+export function Navbar(): React.JSX.Element {
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState<string>("hero");
+  const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "light";
+      return (localStorage.getItem("theme") as Theme) || "light";
     }
     return "light";
   });
@@ -25,21 +27,21 @@ export function Navbar() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = (): void => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     const sections = ["hero", "about", "skills", "experience", "projects", "contact"];
-    
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 220; // Perfect viewport offset for tracking
+
+    const handleScroll = (): void => {
+      const scrollPos = window.scrollY + 220;
 
       if (window.scrollY < 60) {
         setActiveSection("hero");
@@ -66,14 +68,14 @@ export function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const themeToggleBtn = (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full cursor-pointer transition-colors duration-200 text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-zinc-200 bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-805 border border-slate-200/50 dark:border-zinc-800 flex items-center justify-center"
+      className="p-2 rounded-full cursor-pointer transition-colors duration-200 text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-zinc-200 bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-slate-200/50 dark:border-zinc-800 flex items-center justify-center"
       aria-label="Toggle Theme"
     >
       {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
@@ -115,7 +117,6 @@ export function Navbar() {
                     : "text-[#86868B] hover:text-[#1D1D1F] dark:text-zinc-400 dark:hover:text-zinc-200"
                 }`}
               >
-                {/* Sprung-loaded slide pill background */}
                 {isLinkActive && (
                   <motion.span
                     layoutId="activeNavIndicator"
@@ -131,7 +132,7 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           {themeToggleBtn}
-          <LiquidButton 
+          <LiquidButton
             onClick={() => window.open("/Tobiloba_Jagun_CV.pdf", "_blank")}
             className="text-xs h-8 px-4"
           >
