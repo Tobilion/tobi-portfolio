@@ -22,7 +22,7 @@ export function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 bg-white"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 bg-white dark:bg-[#0B0B0C] transition-colors duration-300"
     >
       {/* Soft light studio highlights */}
       <GlowOrb color="#0066CC" size="600px" top="-150px" left="-250px" blur={220} opacity={0.06} />
@@ -46,30 +46,30 @@ export function Hero() {
           animate="visible"
           className="flex flex-col gap-5"
         >
-          <motion.span variants={fadeUp} className="text-[#86868B] text-lg font-normal tracking-wide font-mono">
+          <motion.span variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 text-lg font-normal tracking-wide font-mono">
             Hi there, I'm
           </motion.span>
 
           <motion.h1
             variants={fadeUp}
-            className="text-6xl lg:text-7xl font-extrabold leading-[1.0] tracking-tight text-[#1D1D1F]"
+            className="text-6xl lg:text-7xl font-extrabold leading-[1.0] tracking-tight text-[#1D1D1F] dark:text-[#F5F5F7]"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            <span className="text-[#86868B]">Tobiloba</span>
+            <span className="text-[#86868B] dark:text-zinc-500">Tobiloba</span>
             <br />
-            <span className="text-[#1D1D1F]">Jagun</span>
+            <span className="text-[#1D1D1F] dark:text-[#F5F5F7]">Jagun</span>
           </motion.h1>
 
           <motion.div 
             variants={fadeUp} 
-            className="w-fit px-5 py-2.5 rounded-full border border-slate-200/60 bg-[#F5F5F7] text-[#86868B] text-xs font-mono font-semibold tracking-wider uppercase"
+            className="w-fit px-5 py-2.5 rounded-full border border-slate-200/60 dark:border-zinc-800/60 bg-[#F5F5F7] dark:bg-zinc-900 text-[#86868B] dark:text-zinc-400 text-xs font-mono font-semibold tracking-wider uppercase"
           >
             Front-End Developer
           </motion.div>
 
           <motion.p
             variants={fadeUp}
-            className="text-base text-[#86868B] leading-relaxed max-w-md font-light pt-2"
+            className="text-base text-[#86868B] dark:text-zinc-400 leading-relaxed max-w-md font-light pt-2"
           >
             Software engineer crafting high-performance systems and elegant interfaces. 
             Specialising in distributed architecture, developer tooling, and ML infrastructure.

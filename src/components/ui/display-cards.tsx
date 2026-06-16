@@ -25,7 +25,7 @@ export function DisplayCard({
   return (
     <div
       className={cn(
-        "relative flex h-36 w-[22rem] -skew-y-[8deg] select-none flex-col justify-between rounded-xl border border-slate-200/80 bg-white/95 shadow-md shadow-slate-200/10 px-4 py-3 transition-all duration-500 hover:border-slate-300/80 hover:bg-slate-50/50 [&>*]:flex [&>*]:items-center [&>*]:gap-2",
+        "relative flex h-36 w-[22rem] -skew-y-[8deg] select-none flex-col justify-between rounded-xl border border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 shadow-md shadow-slate-200/10 dark:shadow-none px-4 py-3 transition-all duration-500 hover:border-slate-300/80 dark:hover:border-zinc-700 hover:bg-slate-50/50 dark:hover:bg-zinc-850/50 [&>*]:flex [&>*]:items-center [&>*]:gap-2",
         className
       )}
     >
@@ -35,7 +35,7 @@ export function DisplayCard({
         </span>
         <p className={cn("text-sm font-bold tracking-wide font-mono", titleClassName)}>{title}</p>
       </div>
-      <p className="whitespace-nowrap text-base font-semibold text-[#1D1D1F]">{description}</p>
+      <p className="whitespace-nowrap text-base font-semibold text-[#1D1D1F] dark:text-[#F5F5F7]">{description}</p>
       <p className="text-muted-foreground text-[10px] font-mono">{date}</p>
     </div>
   );

@@ -5,7 +5,6 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
-import TextRevealSection from "./components/sections/TextRevealSection";
 import Skills from "./components/sections/Skills";
 import Experience from "./components/sections/Experience";
 import Projects from "./components/sections/Projects";
@@ -32,13 +31,12 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-[#1D1D1F] antialiased selection:bg-[#0066CC]/10 selection:text-[#0066CC] relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#FFFFFF] dark:bg-[#0B0B0C] text-[#1D1D1F] dark:text-[#F5F5F7] antialiased selection:bg-[#0066CC]/10 selection:text-[#0066CC] relative overflow-x-hidden transition-colors duration-300">
       <EvolvingBackground />
       <Navbar />
       <main className="relative z-10">
         <Hero />
         <About />
-        <TextRevealSection />
         <Skills />
         <Experience />
         <Projects />

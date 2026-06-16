@@ -138,13 +138,13 @@ export default function RadialOrbitalTimeline({
   const getStatusStyles = (status: TimelineItem["status"]): string => {
     switch (status) {
       case "completed":
-        return "text-[#0066CC] bg-[#0066CC]/5 border-[#0066CC]/20";
+        return "text-[#0066CC] dark:text-blue-400 bg-[#0066CC]/5 dark:bg-blue-950/20 border-[#0066CC]/20 dark:border-blue-900/30";
       case "in-progress":
-        return "text-purple-600 bg-purple-50 border-purple-200";
+        return "text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-900/30";
       case "pending":
-        return "text-slate-500 bg-slate-50 border-slate-200";
+        return "text-slate-500 dark:text-zinc-400 bg-slate-50 dark:bg-zinc-900/50 border-slate-200 dark:border-zinc-800";
       default:
-        return "text-slate-500 bg-slate-50 border-slate-200";
+        return "text-slate-500 dark:text-zinc-400 bg-slate-50 dark:bg-zinc-900/50 border-slate-200 dark:border-zinc-800";
     }
   };
 
@@ -169,13 +169,13 @@ export default function RadialOrbitalTimeline({
               className="absolute w-20 h-20 rounded-full border border-slate-200 animate-ping opacity-35"
               style={{ animationDelay: "0.5s" }}
             ></div>
-            <div className="w-6 h-6 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center text-[10px] font-mono text-[#0066CC] font-bold shadow-sm border border-slate-100">
+            <div className="w-6 h-6 rounded-full bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md flex items-center justify-center text-[10px] font-mono text-[#0066CC] dark:text-blue-400 font-bold shadow-sm border border-slate-100 dark:border-zinc-900">
               Tech
             </div>
           </div>
 
           {/* Orbit Line Ring */}
-          <div className="absolute rounded-full border border-slate-200/80" style={{ width: `${radius * 2}px`, height: `${radius * 2}px` }}></div>
+          <div className="absolute rounded-full border border-slate-200/80 dark:border-zinc-800/80" style={{ width: `${radius * 2}px`, height: `${radius * 2}px` }}></div>
 
           {/* Render Language Nodes */}
           {timelineData.map((item, index) => {
@@ -224,8 +224,8 @@ export default function RadialOrbitalTimeline({
                     isExpanded
                       ? "bg-[#0066CC] text-white"
                       : isRelated
-                      ? "bg-[#0066CC]/10 text-[#0066CC]"
-                      : "bg-white text-slate-700"
+                      ? "bg-[#0066CC]/10 text-[#0066CC] dark:text-blue-400"
+                      : "bg-white dark:bg-zinc-900 text-slate-700 dark:text-zinc-300"
                   }
                   border
                   ${
@@ -233,7 +233,7 @@ export default function RadialOrbitalTimeline({
                       ? "border-[#0066CC] shadow-md shadow-[#0066CC]/20"
                       : isRelated
                       ? "border-[#0066CC]/50 animate-pulse"
-                      : "border-slate-200/80 hover:border-slate-400"
+                      : "border-slate-200/80 dark:border-zinc-800 hover:border-slate-400 dark:hover:border-zinc-600"
                   }
                   transition-all duration-300 transform
                   ${isExpanded ? "scale-125" : "hover:scale-110"}
@@ -248,7 +248,7 @@ export default function RadialOrbitalTimeline({
                   absolute top-9 whitespace-nowrap
                   text-[9px] font-mono font-semibold uppercase tracking-wider
                   transition-all duration-300
-                  ${isExpanded ? "text-[#1d1d1f] scale-110" : "text-[#86868b] opacity-85"}
+                  ${isExpanded ? "text-[#1d1d1f] dark:text-white scale-110" : "text-[#86868b] dark:text-zinc-400 opacity-85"}
                 `}
                 >
                   {item.title}
@@ -256,8 +256,8 @@ export default function RadialOrbitalTimeline({
 
                 {/* Node Detail overlay Card */}
                 {isExpanded && (
-                  <Card className="absolute top-14 w-60 bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-xl shadow-slate-200/40 overflow-visible z-[400] -translate-x-1/2 left-1/2">
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white"></div>
+                  <Card className="absolute top-14 w-60 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-slate-200/80 dark:border-zinc-800 shadow-xl shadow-slate-200/40 dark:shadow-none overflow-visible z-[400] -translate-x-1/2 left-1/2">
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white dark:border-b-zinc-900"></div>
                     <CardHeader className="p-3 pb-1.5">
                       <div className="flex justify-between items-center">
                         <Badge
@@ -275,23 +275,23 @@ export default function RadialOrbitalTimeline({
                           {item.date}
                         </span>
                       </div>
-                      <CardTitle className="text-xs text-[#1d1d1f] font-bold font-mono mt-1">
+                      <CardTitle className="text-xs text-[#1d1d1f] dark:text-[#F5F5F7] font-bold font-mono mt-1">
                         {item.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="p-3 pt-0 text-[10px] text-[#86868b] leading-relaxed">
+                    <CardContent className="p-3 pt-0 text-[10px] text-[#86868b] dark:text-zinc-400 leading-relaxed">
                       <p>{item.content}</p>
 
                       {/* Profiency progress bar */}
-                      <div className="mt-3 pt-2 border-t border-slate-100">
+                      <div className="mt-3 pt-2 border-t border-slate-100 dark:border-zinc-800/50">
                         <div className="flex justify-between items-center text-[9px] mb-1">
-                          <span className="flex items-center text-[#86868b]/70">
+                          <span className="flex items-center text-[#86868b]/70 dark:text-zinc-400">
                             <Zap size={8} className="mr-1 text-[#0066CC]" />
                             Proficiency
                           </span>
                           <span className="font-mono text-[#0066CC]">{item.energy}%</span>
                         </div>
-                        <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                        <div className="w-full h-1 bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-gradient-to-r from-[#0066CC] to-[#7c3aed]"
                             style={{ width: `${item.energy}%` }}
@@ -301,7 +301,7 @@ export default function RadialOrbitalTimeline({
 
                       {/* Connected Tech Links */}
                       {item.relatedIds.length > 0 && (
-                        <div className="mt-3 pt-2 border-t border-slate-100">
+                        <div className="mt-3 pt-2 border-t border-slate-100 dark:border-zinc-800/50">
                           <div className="flex items-center mb-1 text-[9px] text-[#86868b]/70">
                             <Link size={8} className="mr-1" />
                             <span>ecosystem</span>
@@ -316,7 +316,7 @@ export default function RadialOrbitalTimeline({
                                   key={relatedId}
                                   variant="outline"
                                   size="sm"
-                                  className="flex items-center h-5 px-1.5 py-0 text-[8px] rounded border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-all font-mono"
+                                  className="flex items-center h-5 px-1.5 py-0 text-[8px] rounded border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/50 hover:bg-slate-100 dark:hover:bg-zinc-850 text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-zinc-100 transition-all font-mono"
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     toggleItem(relatedId);

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --animate-spotlight: spotlight 2s ease .75s 1 normal forwards;
 

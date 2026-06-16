@@ -61,7 +61,7 @@ const liquidbuttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-transparent hover:scale-105 duration-300 transition text-[#1D1D1F]",
+        default: "bg-transparent hover:scale-105 duration-300 transition text-[#1D1D1F] dark:text-[#F5F5F7]",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         outline:
@@ -119,7 +119,7 @@ function LiquidButton({
           style={{ backdropFilter: 'url("#container-glass")' }}
         />
 
-        <div className="pointer-events-none z-10 flex items-center justify-center gap-1.5 w-full h-full text-[#1d1d1f] font-semibold text-sm">
+        <div className="pointer-events-none z-10 flex items-center justify-center gap-1.5 w-full h-full text-[#1d1d1f] dark:text-[#F5F5F7] font-semibold text-sm">
           {children}
         </div>
         <GlassFilter />
@@ -197,45 +197,45 @@ const colorVariants: Record<
   }
 > = {
   default: {
-    outer: "bg-gradient-to-b from-slate-300/40 to-slate-200/20",
-    inner: "bg-gradient-to-b from-white/60 via-slate-100/10 to-slate-200/20",
-    button: "bg-slate-500/5 hover:bg-slate-500/10 backdrop-blur-md",
-    textColor: "text-slate-700",
+    outer: "bg-gradient-to-b from-slate-300/40 to-slate-200/20 dark:from-zinc-700/40 dark:to-zinc-800/20",
+    inner: "bg-gradient-to-b from-white/60 via-slate-100/10 to-slate-200/20 dark:from-zinc-800/40 dark:via-zinc-900/10 dark:to-zinc-850/20",
+    button: "bg-slate-500/5 hover:bg-slate-500/10 backdrop-blur-md dark:bg-zinc-500/5 dark:hover:bg-zinc-500/10",
+    textColor: "text-slate-700 dark:text-zinc-300",
     textShadow: "",
   },
   primary: {
-    outer: "bg-gradient-to-b from-[#0066CC]/30 to-[#0066CC]/10",
-    inner: "bg-gradient-to-b from-white/40 via-[#0066CC]/5 to-[#0066CC]/10",
-    button: "bg-[#0066CC]/8 hover:bg-[#0066CC]/12 backdrop-blur-md",
-    textColor: "text-[#0066cc]",
+    outer: "bg-gradient-to-b from-[#0066CC]/30 to-[#0066CC]/10 dark:from-blue-500/45 dark:to-blue-600/15",
+    inner: "bg-gradient-to-b from-white/40 via-[#0066CC]/5 to-[#0066CC]/10 dark:from-white/10 via-blue-500/5 dark:to-blue-500/20",
+    button: "bg-[#0066CC]/8 hover:bg-[#0066CC]/12 backdrop-blur-md dark:bg-blue-500/15 dark:hover:bg-blue-500/25",
+    textColor: "text-[#0066cc] dark:text-blue-400",
     textShadow: "",
   },
   success: {
-    outer: "bg-gradient-to-b from-emerald-500/30 to-emerald-500/10",
-    inner: "bg-gradient-to-b from-white/40 via-emerald-500/5 to-emerald-500/10",
-    button: "bg-emerald-500/8 hover:bg-emerald-500/12 backdrop-blur-md",
-    textColor: "text-emerald-600",
+    outer: "bg-gradient-to-b from-emerald-500/30 to-emerald-500/10 dark:from-emerald-500/40 dark:to-emerald-600/10",
+    inner: "bg-gradient-to-b from-white/40 via-emerald-500/5 to-emerald-500/10 dark:from-white/10 via-emerald-500/5 dark:to-emerald-500/20",
+    button: "bg-emerald-500/8 hover:bg-emerald-500/12 backdrop-blur-md dark:bg-emerald-500/15 dark:hover:bg-emerald-500/25",
+    textColor: "text-emerald-600 dark:text-emerald-400",
     textShadow: "",
   },
   error: {
-    outer: "bg-gradient-to-b from-red-500/30 to-red-500/10",
-    inner: "bg-gradient-to-b from-white/40 via-red-500/5 to-red-500/10",
-    button: "bg-red-500/8 hover:bg-red-500/12 backdrop-blur-md",
-    textColor: "text-red-600",
+    outer: "bg-gradient-to-b from-red-500/30 to-red-500/10 dark:from-red-500/40 dark:to-red-600/10",
+    inner: "bg-gradient-to-b from-white/40 via-red-500/5 to-red-500/10 dark:from-white/10 via-red-500/5 dark:to-red-500/20",
+    button: "bg-red-500/8 hover:bg-red-500/12 backdrop-blur-md dark:bg-red-500/15 dark:hover:bg-red-500/25",
+    textColor: "text-red-600 dark:text-red-400",
     textShadow: "",
   },
   gold: {
-    outer: "bg-gradient-to-b from-amber-500/30 to-amber-500/10",
-    inner: "bg-gradient-to-b from-white/40 via-amber-500/5 to-amber-500/10",
-    button: "bg-amber-500/8 hover:bg-amber-500/12 backdrop-blur-md",
-    textColor: "text-amber-700",
+    outer: "bg-gradient-to-b from-amber-500/30 to-amber-500/10 dark:from-amber-500/40 dark:to-amber-600/10",
+    inner: "bg-gradient-to-b from-white/40 via-amber-500/5 to-amber-500/10 dark:from-white/10 via-amber-500/5 dark:to-amber-500/20",
+    button: "bg-amber-500/8 hover:bg-amber-500/12 backdrop-blur-md dark:bg-amber-500/15 dark:hover:bg-amber-500/25",
+    textColor: "text-amber-700 dark:text-amber-400",
     textShadow: "",
   },
   bronze: {
-    outer: "bg-gradient-to-b from-orange-600/30 to-orange-600/10",
-    inner: "bg-gradient-to-b from-white/40 via-orange-600/5 to-orange-600/10",
-    button: "bg-orange-600/8 hover:bg-orange-600/12 backdrop-blur-md",
-    textColor: "text-orange-700",
+    outer: "bg-gradient-to-b from-orange-600/30 to-orange-600/10 dark:from-orange-500/40 dark:to-orange-600/10",
+    inner: "bg-gradient-to-b from-white/40 via-orange-600/5 to-orange-600/10 dark:from-white/10 via-orange-500/5 dark:to-orange-500/20",
+    button: "bg-orange-600/8 hover:bg-orange-600/12 backdrop-blur-md dark:bg-orange-500/15 dark:hover:bg-orange-500/25",
+    textColor: "text-orange-700 dark:text-orange-400",
     textShadow: "",
   },
 };

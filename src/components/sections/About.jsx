@@ -105,13 +105,13 @@ export function About() {
           animate={isInView ? "visible" : "hidden"}
           className="flex flex-col gap-8"
         >
-          <div className="rounded-3xl border border-slate-200/60 bg-white/80 backdrop-blur-md p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.025)] hover:border-slate-200 transition-all duration-300">
-            <motion.p variants={fadeUp} className="text-[#86868B] leading-[1.8] text-base mb-6">
+          <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.025)] dark:shadow-none hover:border-slate-200 dark:hover:border-zinc-750 transition-all duration-300">
+            <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 leading-[1.8] text-base mb-6">
               I'm a passionate software engineer with a deep obsession for distributed systems, 
               developer experience, and the craftsmanship of high-quality software. My journey started 
               tinkering with network protocols at 14 — today I architect systems at scale.
             </motion.p>
-            <motion.p variants={fadeUp} className="text-[#86868B] leading-[1.8] text-base mb-8">
+            <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 leading-[1.8] text-base mb-8">
               My approach combines clean code principles with modern design aesthetics, ensuring that 
               every project delivers exceptional value to users and stakeholders alike. I believe the 
               best code is invisible — it empowers teams, survives ambiguity, and ages gracefully.

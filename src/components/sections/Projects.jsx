@@ -6,20 +6,23 @@ import { fadeUp, stagger } from "../../animations/variants";
 import { TiltCard } from "../ui/TiltCard"; // Import Tilt
 import { SpotlightCard } from "../ui/SpotlightCard"; // Import Spotlight
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project }) {
   return (
     <TiltCard>
       <SpotlightCard 
         spotlightColor={`${project.color}08`}
-        className="rounded-3xl border border-slate-200/50 bg-[#F5F5F7]/85 backdrop-blur-md overflow-hidden flex flex-col h-full shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:border-slate-300 transition-all duration-300"
+        className="rounded-3xl border border-slate-200/50 dark:border-zinc-800/50 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md overflow-hidden flex flex-col h-full shadow-[0_4px_20px_rgba(0,0,0,0.01)] dark:shadow-none hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300"
       >
         {/* Image placeholder wrapper */}
         <div
-          className="h-44 w-full relative overflow-hidden"
-          style={{
-            background: `linear-gradient(135deg, ${project.color}08 0%, #F5F5F7 100%)`,
-          }}
+          className="h-44 w-full relative overflow-hidden bg-[#F5F5F7] dark:bg-zinc-950 transition-colors duration-300"
         >
+          <div
+            className="absolute inset-0 opacity-[0.25]"
+            style={{
+              background: `linear-gradient(135deg, ${project.color}15 0%, transparent 100%)`,
+            }}
+          />
           <div
             className="absolute inset-0"
             style={{
@@ -30,7 +33,7 @@ function ProjectCard({ project, index }) {
             <motion.div
               animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="text-5xl font-black text-slate-900/5 select-none"
+              className="text-5xl font-black text-slate-900/5 dark:text-white/5 select-none"
             >
               {project.title.split(" ")[0]}
             </motion.div>
@@ -43,8 +46,8 @@ function ProjectCard({ project, index }) {
 
         {/* Card Content info */}
         <div className="p-6 flex flex-col gap-4 flex-1">
-          <h3 className="text-base font-bold text-[#1D1D1F]">{project.title}</h3>
-          <p className="text-sm text-[#86868B] leading-relaxed flex-1">{project.desc}</p>
+          <h3 className="text-base font-bold text-[#1D1D1F] dark:text-[#F5F5F7]">{project.title}</h3>
+          <p className="text-sm text-[#86868B] dark:text-zinc-400 leading-relaxed flex-1">{project.desc}</p>
 
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
@@ -67,7 +70,7 @@ function ProjectCard({ project, index }) {
               href="#"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="flex-1 text-xs font-semibold text-center py-2.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:text-slate-800 shadow-sm hover:bg-slate-50 transition-all duration-200 cursor-pointer"
+              className="flex-1 text-xs font-semibold text-center py-2.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm hover:bg-slate-50 dark:hover:bg-zinc-850 transition-all duration-200 cursor-pointer"
             >
               ↗ Live Demo
             </motion.a>
@@ -93,7 +96,7 @@ function ProjectCard({ project, index }) {
 export function Projects() {
   const { ref, isInView } = useSectionInView();
   return (
-    <section id="projects" ref={ref} className="py-32 relative bg-white">
+    <section id="projects" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           variants={stagger}
@@ -104,10 +107,10 @@ export function Projects() {
           <motion.span variants={fadeUp} className="text-xs font-mono text-[#0066cc] tracking-widest uppercase font-semibold">
             04 / Projects
           </motion.span>
-          <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl font-extrabold text-[#1D1D1F] tracking-tight">
+          <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl font-extrabold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight">
             Selected Work
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[#86868B] max-w-md text-sm leading-relaxed">
+          <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 max-w-md text-sm leading-relaxed">
             Projects built for production, open-source, and experiments that pushed boundaries.
           </motion.p>
         </motion.div>

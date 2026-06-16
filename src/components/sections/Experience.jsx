@@ -20,7 +20,7 @@ function TimelineNode({ item, index }) {
         <motion.div
           animate={isInView ? { scale: [0, 1.2, 1], opacity: [0, 1, 1] } : {}}
           transition={{ duration: 0.5, delay: index * 0.15 }}
-          className="w-10 h-10 rounded-full bg-white border border-[#0066cc]/30 flex items-center justify-center relative z-10 text-xs shadow-md shadow-[#0066cc]/5"
+          className="w-10 h-10 rounded-full bg-white dark:bg-zinc-900 border border-[#0066cc]/30 flex items-center justify-center relative z-10 text-xs shadow-md shadow-[#0066cc]/5"
         >
           {item.type === "education" ? (
             <GraduationCap className="w-5 h-5 text-[#0066cc]" />
@@ -32,11 +32,11 @@ function TimelineNode({ item, index }) {
 
       {/* Styled card wrapper matches reference timeline style */}
       <div className="flex flex-col gap-2 pb-12 pl-4 flex-1">
-        <div className="rounded-3xl border border-slate-200/60 bg-white/80 backdrop-blur-md p-6 shadow-md shadow-slate-200/5 relative overflow-hidden group hover:border-[#0066cc]/30 transition-all duration-300">
+        <div className="rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md p-6 shadow-md shadow-slate-200/5 dark:shadow-none relative overflow-hidden group hover:border-[#0066cc]/30 transition-all duration-300">
           <span className="text-xs font-mono text-[#0066cc] tracking-widest font-semibold block mb-1">{item.period}</span>
-          <h3 className="text-xl font-bold text-[#1D1D1F] group-hover:text-[#0066cc] transition-colors duration-200">{item.role}</h3>
-          <span className="text-sm text-slate-500 font-medium block mt-0.5 mb-3">{item.company}</span>
-          <p className="text-sm text-[#86868B] leading-relaxed max-w-xl">{item.desc}</p>
+          <h3 className="text-xl font-bold text-[#1D1D1F] dark:text-[#F5F5F7] group-hover:text-[#0066cc] transition-colors duration-200">{item.role}</h3>
+          <span className="text-sm text-slate-500 dark:text-zinc-400 font-medium block mt-0.5 mb-3">{item.company}</span>
+          <p className="text-sm text-[#86868B] dark:text-zinc-400 leading-relaxed max-w-xl">{item.desc}</p>
         </div>
       </div>
     </motion.div>
@@ -45,40 +45,40 @@ function TimelineNode({ item, index }) {
 
 const experienceStackCards = [
   {
-    icon: <GraduationCap className="size-4 text-blue-600" />,
+    icon: <GraduationCap className="size-4 text-blue-600 dark:text-blue-455" />,
     title: "Covenant University",
     description: "B.Sc. Computer Science (2024 - Pres)",
     date: "Education Journey",
-    iconClassName: "bg-blue-50 p-1 rounded-full text-blue-600 border border-blue-100",
-    titleClassName: "text-blue-600 font-semibold",
-    className: "[grid-area:stack] hover:-translate-y-10 border-slate-200/80 bg-white/95 shadow-md shadow-slate-200/20 grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
+    iconClassName: "bg-blue-50 p-1 rounded-full text-blue-600 border border-blue-100 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900/40",
+    titleClassName: "text-blue-600 dark:text-blue-400 font-semibold",
+    className: "[grid-area:stack] hover:-translate-y-10 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
   },
   {
-    icon: <Briefcase className="size-4 text-purple-600" />,
+    icon: <Briefcase className="size-4 text-purple-600 dark:text-purple-455" />,
     title: "Quantum Systems",
     description: "Senior Software Engineer (2023 - Pres)",
     date: "Work History",
-    iconClassName: "bg-purple-50 p-1 rounded-full text-purple-600 border border-purple-100",
-    titleClassName: "text-purple-600 font-semibold",
-    className: "[grid-area:stack] translate-x-8 translate-y-6 hover:-translate-y-4 border-slate-200/80 bg-white/95 shadow-md shadow-slate-200/20 grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
+    iconClassName: "bg-purple-50 p-1 rounded-full text-purple-600 border border-purple-100 dark:bg-purple-950/40 dark:text-purple-400 dark:border-purple-900/40",
+    titleClassName: "text-purple-600 dark:text-purple-400 font-semibold",
+    className: "[grid-area:stack] translate-x-8 translate-y-6 hover:-translate-y-4 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
   },
   {
     icon: <Briefcase className="size-4 text-amber-600" />,
     title: "NexaCloud",
     description: "Full-Stack Engineer (2021 - 2023)",
     date: "Work History",
-    iconClassName: "bg-amber-50 p-1 rounded-full text-amber-600 border border-amber-100",
-    titleClassName: "text-amber-600 font-semibold",
-    className: "[grid-area:stack] translate-x-16 translate-y-12 hover:-translate-y-2 border-slate-200/80 bg-white/95 shadow-md shadow-slate-200/20 grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
+    iconClassName: "bg-amber-50 p-1 rounded-full text-amber-600 border border-amber-100 dark:bg-amber-955/40 dark:text-amber-400 dark:border-amber-900/40",
+    titleClassName: "text-amber-600 dark:text-amber-400 font-semibold",
+    className: "[grid-area:stack] translate-x-16 translate-y-12 hover:-translate-y-2 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
   },
   {
-    icon: <Briefcase className="size-4 text-green-600" />,
+    icon: <Briefcase className="size-4 text-green-600 dark:text-emerald-450" />,
     title: "Vertex Labs",
     description: "Software Developer (2019 - 2021)",
     date: "Work History",
-    iconClassName: "bg-green-50 p-1 rounded-full text-green-600 border border-green-100",
-    titleClassName: "text-green-600 font-semibold",
-    className: "[grid-area:stack] translate-x-24 translate-y-18 hover:translate-y-8 border-slate-200/80 bg-white/95 shadow-md shadow-slate-200/20",
+    iconClassName: "bg-green-50 p-1 rounded-full text-green-600 border border-green-100 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/40",
+    titleClassName: "text-green-600 dark:text-emerald-400 font-semibold",
+    className: "[grid-area:stack] translate-x-24 translate-y-18 hover:translate-y-8 border-slate-200/80 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none",
   },
 ];
 
@@ -87,7 +87,7 @@ export function Experience() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <section id="experience" ref={ref} className="py-32 relative bg-white">
+    <section id="experience" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_2.2fr] gap-16">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -98,11 +98,11 @@ export function Experience() {
           <span className="text-xs font-mono text-[#0066cc] tracking-widest uppercase font-semibold">
             EXPERIENCE & EDUCATION
           </span>
-          <h2 className="text-4xl font-extrabold text-[#1D1D1F] mt-3 leading-tight tracking-tight">
+          <h2 className="text-4xl font-extrabold text-[#1D1D1F] dark:text-[#F5F5F7] mt-3 leading-tight tracking-tight">
             My Journey
           </h2>
           <div className="mt-3 w-12 h-px bg-[#0066cc]/40" />
-          <p className="mt-6 text-sm text-[#86868B] leading-relaxed max-w-xs">
+          <p className="mt-6 text-sm text-[#86868B] dark:text-zinc-400 leading-relaxed max-w-xs">
             An interactive timeline of my professional experience and academic milestones. Click the stack to explore.
           </p>
         </motion.div>
@@ -140,13 +140,13 @@ export function Experience() {
                 className="relative pl-2"
               >
                 <div className="flex justify-between items-center mb-10">
-                  <h3 className="text-xl font-bold text-[#1D1D1F] flex items-center gap-2 font-mono">
+                  <h3 className="text-xl font-bold text-[#1D1D1F] dark:text-[#F5F5F7] flex items-center gap-2 font-mono">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0066cc]" />
                     Journey Timeline
                   </h3>
                   <button
                     onClick={() => setIsExpanded(false)}
-                    className="px-4 py-2 text-xs font-mono font-semibold rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 text-xs font-mono font-semibold rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-850 text-slate-600 dark:text-zinc-450 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <ChevronUp size={14} />
                     Collapse Stack
