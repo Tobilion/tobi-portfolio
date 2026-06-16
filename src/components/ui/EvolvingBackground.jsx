@@ -17,7 +17,7 @@ export function EvolvingBackground() {
   const orb1Color = useTransform(
     smoothY,
     [0, 0.25, 0.5, 0.75, 1],
-    ["rgba(0, 255, 136, 0.18)", "rgba(0, 229, 255, 0.18)", "rgba(124, 58, 237, 0.18)", "rgba(236, 72, 153, 0.18)", "rgba(0, 255, 136, 0.18)"]
+    ["rgba(0, 102, 204, 0.06)", "rgba(0, 180, 216, 0.06)", "rgba(124, 58, 237, 0.06)", "rgba(236, 72, 153, 0.06)", "rgba(0, 102, 204, 0.06)"]
   );
 
   const orb2X = useTransform(smoothY, [0, 0.2, 0.4, 0.6, 0.8, 1], ["85%", "10%", "80%", "20%", "75%", "90%"]);
@@ -26,7 +26,7 @@ export function EvolvingBackground() {
   const orb2Color = useTransform(
     smoothY,
     [0, 0.25, 0.5, 0.75, 1],
-    ["rgba(124, 58, 237, 0.18)", "rgba(0, 255, 136, 0.18)", "rgba(14, 165, 233, 0.18)", "rgba(245, 158, 11, 0.18)", "rgba(124, 58, 237, 0.18)"]
+    ["rgba(124, 58, 237, 0.06)", "rgba(0, 102, 204, 0.06)", "rgba(14, 165, 233, 0.06)", "rgba(245, 158, 11, 0.06)", "rgba(124, 58, 237, 0.06)"]
   );
 
   const orb3X = useTransform(smoothY, [0, 0.3, 0.6, 1], ["35%", "75%", "15%", "50%"]);
@@ -35,22 +35,22 @@ export function EvolvingBackground() {
   const orb3Color = useTransform(
     smoothY,
     [0, 0.3, 0.6, 1],
-    ["rgba(14, 165, 233, 0.15)", "rgba(236, 72, 153, 0.15)", "rgba(124, 58, 237, 0.15)", "rgba(0, 255, 136, 0.15)"]
+    ["rgba(14, 165, 233, 0.05)", "rgba(236, 72, 153, 0.05)", "rgba(124, 58, 237, 0.05)", "rgba(0, 102, 204, 0.05)"]
   );
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#060608]">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#FAFAFC]">
       <div
-        className="absolute inset-0 opacity-[0.035]"
+        className="absolute inset-0 opacity-[0.25]"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1.5px, transparent 1.5px)",
+          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.1) 1.2px, transparent 1.2px)",
           backgroundSize: "48px 48px",
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0c]/10 via-[#0a0a0c]/50 to-[#060608]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-[#FAFAFC]" />
 
       <motion.div
-        className="absolute rounded-full filter blur-[150px] md:blur-[220px] mix-blend-screen"
+        className="absolute rounded-full filter blur-[150px] md:blur-[220px]"
         style={{
           width: "560px",
           height: "560px",
@@ -62,7 +62,7 @@ export function EvolvingBackground() {
       />
       
       <motion.div
-        className="absolute rounded-full filter blur-[160px] md:blur-[240px] mix-blend-screen"
+        className="absolute rounded-full filter blur-[160px] md:blur-[240px]"
         style={{
           width: "490px",
           height: "490px",
@@ -74,7 +74,7 @@ export function EvolvingBackground() {
       />
       
       <motion.div
-        className="absolute rounded-full filter blur-[150px] md:blur-[220px] mix-blend-screen"
+        className="absolute rounded-full filter blur-[150px] md:blur-[220px]"
         style={{
           width: "440px",
           height: "440px",

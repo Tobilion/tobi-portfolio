@@ -5,10 +5,10 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/5 py-10 relative z-20">
+    <footer className="border-t border-slate-200/60 py-10 relative z-20 bg-white">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <span className="font-mono text-sm text-white/20">
-          <span className="text-[#00ff88]/50">&lt;</span> TJ <span className="text-[#00ff88]/50">/&gt;</span>
+        <span className="font-mono text-sm text-[#86868B]">
+          <span className="text-[#0066CC]">&lt;</span> TJ <span className="text-[#0066CC]">/&gt;</span>
           {" "}• Designed & Built by Tobiloba Jagun
         </span>
         
@@ -17,7 +17,7 @@ export function Footer() {
             href="https://github.com/Tobilion" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-xs text-white/20 hover:text-[#00ff88] transition-colors duration-200 font-mono"
+            className="text-xs text-[#86868B] hover:text-[#0066CC] transition-colors duration-200 font-mono"
           >
             GitHub
           </a>
@@ -26,7 +26,7 @@ export function Footer() {
             href="https://www.linkedin.com/in/tobiloba-jagun"
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-xs text-white/20 hover:text-[#00ff88] transition-colors duration-200 font-mono"
+            className="text-xs text-[#86868B] hover:text-[#0066CC] transition-colors duration-200 font-mono"
           >
             LinkedIn
           </a>
@@ -35,7 +35,7 @@ export function Footer() {
             href="https://www.instagram.com/theylovejagun?igsh=aWlvYnU3NnJqNGpz&utm_source=qr" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-xs text-white/20 hover:text-[#00ff88] transition-colors duration-200 font-mono"
+            className="text-xs text-[#86868B] hover:text-[#0066CC] transition-colors duration-200 font-mono"
           >
             Instagram
           </a>
@@ -44,20 +44,20 @@ export function Footer() {
             href="https://wa.me/2347073948340" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-xs text-white/20 hover:text-[#00ff88] transition-colors duration-200 font-mono"
+            className="text-xs text-[#86868B] hover:text-[#0066CC] transition-colors duration-200 font-mono"
           >
             WhatsApp
           </a>
 
           <a 
             href="mailto:tobilobajagun@gmail.com" 
-            className="text-xs text-white/20 hover:text-[#00ff88] transition-colors duration-200 font-mono"
+            className="text-xs text-[#86868B] hover:text-[#0066CC] transition-colors duration-200 font-mono"
           >
             Email
           </a>
         </div>
         
-        <span className="text-xs text-white/15 font-mono">© {currentYear}</span>
+        <span className="text-xs text-[#86868B]/60 font-mono">© {currentYear}</span>
       </div>
     </footer>
   );

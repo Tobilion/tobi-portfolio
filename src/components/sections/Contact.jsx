@@ -5,21 +5,21 @@ import { fadeUp, stagger } from "../../animations/variants";
 
 function ContactCard({ label, value, icon, status = false }) {
   return (
-    <div className="flex items-center gap-5 p-5 rounded-2xl border border-white/5 bg-[#121214] shadow-md hover:border-white/10 transition-all duration-200">
-      <div className="w-12 h-12 rounded-xl border border-white/10 bg-[#161618] flex items-center justify-center text-white/60">
+    <div className="flex items-center gap-5 p-5 rounded-3xl border border-slate-200/60 bg-[#F5F5F7]/85 backdrop-blur-md shadow-sm hover:border-slate-300 transition-all duration-200">
+      <div className="w-12 h-12 rounded-2xl border border-slate-200 bg-white flex items-center justify-center text-slate-500">
         {status ? (
-          /* Pulsing Green Dot */
+          /* Pulsing Apple Blue Dot */
           <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ff88] opacity-75" />
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#00ff88]" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0066cc] opacity-75" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#0066cc]" />
           </span>
         ) : (
           icon
         )}
       </div>
       <div className="flex flex-col">
-        <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">{label}</span>
-        <span className="text-sm font-semibold text-white/80 mt-0.5">{value}</span>
+        <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-semibold">{label}</span>
+        <span className="text-sm font-bold text-[#1D1D1F] mt-0.5">{value}</span>
       </div>
     </div>
   );
@@ -61,7 +61,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref} className="py-32">
+    <section id="contact" ref={ref} className="py-32 relative bg-white">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-start">
         {/* Left Side: Custom Cards aligned with visual references */}
         <motion.div
@@ -71,15 +71,15 @@ export function Contact() {
           className="flex flex-col gap-6"
         >
           <div className="flex flex-col gap-3">
-            <motion.span variants={fadeUp} className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+            <motion.span variants={fadeUp} className="text-xs font-mono text-[#0066cc] tracking-widest uppercase font-semibold">
               CONTACT ME
             </motion.span>
-            <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+            <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl font-extrabold text-[#1D1D1F] tracking-tight leading-tight">
               Let's work
               <br />
-              <span className="text-white/25">together.</span>
+              <span className="text-slate-400">together.</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-sm text-white/35 leading-relaxed max-w-sm mt-2">
+            <motion.p variants={fadeUp} className="text-sm text-[#86868B] leading-relaxed max-w-sm mt-2">
               Whether you have a project in mind, a role to fill, or just want to talk shop about systems design — my inbox is open.
             </motion.p>
           </div>
@@ -131,70 +131,70 @@ export function Contact() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="rounded-2xl border border-white/5 bg-[#121214] p-8 flex flex-col gap-5 shadow-2xl"
+          className="rounded-3xl border border-slate-200/80 bg-white/95 p-8 flex flex-col gap-5 shadow-lg shadow-slate-200/10 backdrop-blur-md"
         >
           {/* Row 1: Full Name */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-mono text-white/40 uppercase tracking-widest font-semibold">Your Name *</label>
+            <label className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">Your Name *</label>
             <input
               required
               type="text"
               placeholder="e.g. Ade Okafor"
               value={formData.name}
               onChange={(e) => handleInputChange("name", e.target.value)}
-              className="bg-[#161618] border border-white/5 rounded-xl px-4 py-3.5 text-sm text-white/80 placeholder-white/20 outline-none transition-all duration-200 focus:border-[#00ff88]/50 focus:shadow-[0_0_20px_rgba(0,255,136,0.08)]"
+              className="bg-[#F5F5F7] border border-slate-200/60 rounded-xl px-4 py-3.5 text-sm text-[#1D1D1F] placeholder-slate-400 outline-none transition-all duration-200 focus:border-[#0066cc]/50 focus:bg-white focus:shadow-[0_0_20px_rgba(0,102,204,0.05)]"
             />
           </div>
 
           {/* Row 2: Split Columns (Email + Phone) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-mono text-white/40 uppercase tracking-widest font-semibold">Email Address *</label>
+              <label className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">Email Address *</label>
               <input
                 required
                 type="email"
                 placeholder="you@example.com"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className="bg-[#161618] border border-white/5 rounded-xl px-4 py-3.5 text-sm text-white/80 placeholder-white/20 outline-none transition-all duration-200 focus:border-[#00ff88]/50 focus:shadow-[0_0_20px_rgba(0,255,136,0.08)]"
+                className="bg-[#F5F5F7] border border-slate-200/60 rounded-xl px-4 py-3.5 text-sm text-[#1D1D1F] placeholder-slate-400 outline-none transition-all duration-200 focus:border-[#0066cc]/50 focus:bg-white focus:shadow-[0_0_20px_rgba(0,102,204,0.05)]"
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-mono text-white/40 uppercase tracking-widest font-semibold">Phone Number *</label>
+              <label className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">Phone Number *</label>
               <input
                 required
                 type="tel"
                 placeholder="+234..."
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
-                className="bg-[#161618] border border-white/5 rounded-xl px-4 py-3.5 text-sm text-white/80 placeholder-white/20 outline-none transition-all duration-200 focus:border-[#00ff88]/50 focus:shadow-[0_0_20px_rgba(0,255,136,0.08)]"
+                className="bg-[#F5F5F7] border border-slate-200/60 rounded-xl px-4 py-3.5 text-sm text-[#1D1D1F] placeholder-slate-400 outline-none transition-all duration-200 focus:border-[#0066cc]/50 focus:bg-white focus:shadow-[0_0_20px_rgba(0,102,204,0.05)]"
               />
             </div>
           </div>
 
           {/* Row 3: Subject */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-mono text-white/40 uppercase tracking-widest font-semibold">Subject *</label>
+            <label className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">Subject *</label>
             <input
               required
               type="text"
               placeholder="Project Collaboration"
               value={formData.subject}
               onChange={(e) => handleInputChange("subject", e.target.value)}
-              className="bg-[#161618] border border-white/5 rounded-xl px-4 py-3.5 text-sm text-white/80 placeholder-white/20 outline-none transition-all duration-200 focus:border-[#00ff88]/50 focus:shadow-[0_0_20px_rgba(0,255,136,0.08)]"
+              className="bg-[#F5F5F7] border border-slate-200/60 rounded-xl px-4 py-3.5 text-sm text-[#1D1D1F] placeholder-slate-400 outline-none transition-all duration-200 focus:border-[#0066cc]/50 focus:bg-white focus:shadow-[0_0_20px_rgba(0,102,204,0.05)]"
             />
           </div>
 
           {/* Row 4: Message */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-mono text-white/40 uppercase tracking-widest font-semibold">Message *</label>
+            <label className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">Message *</label>
             <textarea
               required
               rows={5}
               placeholder="Tell me about your project ideas..."
               value={formData.message}
               onChange={(e) => handleInputChange("message", e.target.value)}
-              className="bg-[#161618] border border-white/5 rounded-xl px-4 py-3.5 text-sm text-white/80 placeholder-white/20 outline-none resize-none transition-all duration-200 focus:border-[#00ff88]/50 focus:shadow-[0_0_20px_rgba(0,255,136,0.08)]"
+              className="bg-[#F5F5F7] border border-slate-200/60 rounded-xl px-4 py-3.5 text-sm text-[#1D1D1F] placeholder-slate-400 outline-none resize-none transition-all duration-200 focus:border-[#0066cc]/50 focus:bg-white focus:shadow-[0_0_20px_rgba(0,102,204,0.05)]"
             />
           </div>
 
@@ -204,16 +204,16 @@ export function Contact() {
                 key="send"
                 type="submit"
                 disabled={sending}
-                whileHover={!sending ? { scale: 1.02, boxShadow: "0 0 30px #00ff8840" } : {}}
+                whileHover={!sending ? { scale: 1.02, boxShadow: "0 4px 15px rgba(0, 102, 204, 0.15)" } : {}}
                 whileTap={!sending ? { scale: 0.98 } : {}}
-                className="mt-2 px-8 py-4 rounded-xl font-bold text-sm text-[#0a0a0a] bg-[#00ff88] hover:bg-[#00e07a] disabled:opacity-70 transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer"
+                className="mt-2 px-8 py-4 rounded-2xl font-bold text-sm text-white bg-[#0066cc] hover:bg-[#0055b3] disabled:opacity-70 transition-all duration-200 flex items-center justify-center gap-3 cursor-pointer shadow-sm"
               >
                 {sending ? (
                   <>
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                      className="w-4 h-4 border-2 border-[#0a0a0a]/40 border-t-[#0a0a0a] rounded-full"
+                      className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full"
                     />
                     Sending...
                   </>
@@ -226,7 +226,7 @@ export function Contact() {
                 key="success"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mt-2 px-8 py-4 rounded-xl font-bold text-sm text-[#00ff88] border border-[#00ff88]/30 bg-[#00ff88]/5 text-center"
+                className="mt-2 px-8 py-4 rounded-xl font-bold text-sm text-[#0066cc] border border-[#0066cc]/30 bg-[#0066cc]/5 text-center"
               >
                 ✓ Message sent — opening mail client!
               </motion.div>
