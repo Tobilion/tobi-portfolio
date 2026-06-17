@@ -79,7 +79,7 @@ export function Skills(): React.JSX.Element {
   ];
 
   return (
-    <section id="skills" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
+    <section id="skills" ref={ref} className="py-32 relative bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           variants={stagger}

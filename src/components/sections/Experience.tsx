@@ -100,7 +100,7 @@ export function Experience(): React.JSX.Element {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   return (
-    <section id="experience" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
+    <section id="experience" ref={ref} className="py-32 relative bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_2.2fr] gap-16">
         <motion.div
           initial={{ opacity: 0, x: -30 }}

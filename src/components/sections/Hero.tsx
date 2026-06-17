@@ -8,6 +8,22 @@ import { MetalButton } from "../ui/liquid-glass-button";
 
 export function Hero(): React.JSX.Element {
   const containerRef = React.useRef<HTMLElement>(null);
+  const [titleNumber, setTitleNumber] = React.useState(0);
+  const titles = React.useMemo(
+    () => ["innovative", "adaptive", "detail-oriented", "resourceful", "passionate"],
+    []
+  );
+
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (titleNumber === titles.length - 1) {
+        setTitleNumber(0);
+      } else {
+        setTitleNumber(titleNumber + 1);
+      }
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [titleNumber, titles]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -22,7 +38,7 @@ export function Hero(): React.JSX.Element {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 bg-white dark:bg-[#0B0B0C] transition-colors duration-300"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300"
     >
       {/* Soft light studio highlights */}
       <GlowOrb color="#0066CC" size="600px" top="-150px" left="-250px" blur={220} opacity={0.06} />
@@ -62,7 +78,37 @@ export function Hero(): React.JSX.Element {
 
           <motion.div
             variants={fadeUp}
-            className="w-fit px-5 py-2.5 rounded-full border border-slate-200/60 dark:border-zinc-800/60 bg-[#F5F5F7] dark:bg-zinc-900 text-[#86868B] dark:text-zinc-400 text-xs font-mono font-semibold tracking-wider uppercase"
+            className="relative flex items-center h-10 w-full overflow-hidden font-sans text-spektr-cyan-50 text-2xl md:text-3xl font-regular"
+          >
+            <span className="text-zinc-500 dark:text-zinc-400 mr-2">I am</span>
+            <div className="relative flex-1 h-full">
+              {titles.map((title, index) => (
+                <motion.span
+                  key={index}
+                  className="absolute font-semibold text-[#0066CC] dark:text-[#0070F3] left-0"
+                  initial={{ opacity: 0, y: "-100" }}
+                  transition={{ type: "spring", stiffness: 50 }}
+                  animate={
+                    titleNumber === index
+                      ? {
+                          y: 0,
+                          opacity: 1,
+                        }
+                      : {
+                          y: titleNumber > index ? -150 : 150,
+                          opacity: 0,
+                        }
+                  }
+                >
+                  {title}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="w-fit px-5 py-2.5 rounded-full border border-slate-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 text-[#86868B] dark:text-zinc-400 text-xs font-mono font-semibold tracking-wider uppercase"
           >
             Front-End Developer
           </motion.div>

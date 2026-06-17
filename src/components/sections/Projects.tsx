@@ -105,7 +105,7 @@ function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
 export function Projects(): React.JSX.Element {
   const { ref, isInView } = useSectionInView();
   return (
-    <section id="projects" ref={ref} className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300">
+    <section id="projects" ref={ref} className="py-32 relative bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           variants={stagger}

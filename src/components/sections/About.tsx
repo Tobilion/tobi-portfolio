@@ -89,7 +89,7 @@ export function About(): React.JSX.Element {
     <section
       id="about"
       ref={ref}
-      className="py-32 relative bg-white dark:bg-[#0B0B0C] transition-colors duration-300"
+      className="py-32 relative bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section label */}
