@@ -82,13 +82,22 @@ export function NavBar({ items, className }: NavBarProps) {
                 e.preventDefault()
                 setActiveTab(item.name)
                 const targetId = item.url.replace("#", "")
+                const lenis = (window as any).lenis
                 if (targetId) {
                   const element = document.getElementById(targetId)
                   if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
+                    if (lenis) {
+                      lenis.scrollTo(element, { duration: 1.5, offset: -80 })
+                    } else {
+                      element.scrollIntoView({ behavior: "smooth" })
+                    }
                   }
                 } else {
-                  window.scrollTo({ top: 0, behavior: "smooth" })
+                  if (lenis) {
+                    lenis.scrollTo(0, { duration: 1.5 })
+                  } else {
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 }
               }}
               className={cn(

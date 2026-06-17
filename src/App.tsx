@@ -29,9 +29,10 @@ export default function App(): React.JSX.Element {
   useEffect(() => {
     // Kick off smooth scroll
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.5,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
+    (window as any).lenis = lenis;
     function raf(time: number): void {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -52,6 +53,7 @@ export default function App(): React.JSX.Element {
 
     return () => {
       lenis.destroy();
+      delete (window as any).lenis;
       observer.disconnect();
     };
   }, []);
