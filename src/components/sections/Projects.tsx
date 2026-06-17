@@ -111,43 +111,6 @@ function DuplicateFileGraphic({ color }: { color: string }): React.JSX.Element {
   );
 }
 
-function AetherGraphic({ color }: { color: string }): React.JSX.Element {
-  return (
-    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Aether distributed message broker graphic">
-      <rect width="400" height="176" rx="8" fill={`${color}08`} />
-      {/* Network nodes */}
-      <circle cx="80" cy="50" r="18" fill={`${color}15`} stroke={color} strokeWidth="1" />
-      <motion.circle cx="80" cy="50" r="18" fill={`${color}20`} animate={{ r: [18, 22, 18] }} transition={{ duration: 2, repeat: Infinity }} />
-      <text x="80" y="54" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace" fontWeight="700">Publisher</text>
-
-      <circle cx="200" cy="88" r="26" fill={`${color}15`} stroke={color} strokeWidth="1.2" />
-      <circle cx="200" cy="88" r="12" fill={`${color}25`} />
-      <text x="200" y="92" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">Broker</text>
-
-      <circle cx="320" cy="50" r="18" fill={`${color}15`} stroke={color} strokeWidth="1" />
-      <text x="320" y="54" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace" fontWeight="700">Consumer</text>
-
-      {/* Message particles traveling */}
-      <motion.circle cx="110" cy="60" r="4" fill={color}
-        animate={{ cx: [110, 195, 110] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        opacity={0.7}
-      />
-      <motion.circle cx="215" cy="70" r="3" fill={color}
-        animate={{ cx: [215, 310, 215], cy: [70, 55, 70] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "linear", delay: 0.5 }}
-        opacity={0.7}
-      />
-      {/* Connection lines */}
-      <line x1="98" y1="50" x2="174" y2="80" stroke={color} strokeWidth="0.5" opacity="0.3" strokeDasharray="3 3" />
-      <line x1="226" y1="80" x2="302" y2="55" stroke={color} strokeWidth="0.5" opacity="0.3" strokeDasharray="3 3" />
-      {/* Latency badge */}
-      <rect x="280" y="120" width="100" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
-      <text x="330" y="133" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">0.4ms p99</text>
-    </svg>
-  );
-}
-
 function VaultexGraphic({ color }: { color: string }): React.JSX.Element {
   return (
     <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Vaultex secrets manager graphic">
@@ -212,8 +175,8 @@ function InsightFlowGraphic({ color }: { color: string }): React.JSX.Element {
 function ProjectIllustration({ project }: { project: Project }): React.JSX.Element {
   const title = project.title.toLowerCase();
   if (title.includes("log")) return <LogAnalyzerGraphic color={project.color} />;
+  if (title.includes("duplicate")) return <DuplicateFileGraphic color={project.color} />;
   if (title.includes("insight")) return <InsightFlowGraphic color={project.color} />;
-  if (title.includes("aether")) return <AetherGraphic color={project.color} />;
   return <VaultexGraphic color={project.color} />;
 }
 
