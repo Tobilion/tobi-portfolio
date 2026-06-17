@@ -19,7 +19,7 @@ function ReactorModel(): React.JSX.Element {
 
 export function ArcReactorCanvas(): React.JSX.Element {
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-20">
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-20" role="img" aria-label="Interactive 3D arc reactor model">
       <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[3, 5, 3]} intensity={1.2} />

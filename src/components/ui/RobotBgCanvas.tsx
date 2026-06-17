@@ -18,7 +18,7 @@ function RobotModel(): React.JSX.Element {
 
 export function RobotBgCanvas(): React.JSX.Element {
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-25">
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-25" role="img" aria-label="Interactive 3D robot background model">
       <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 10, 5]} intensity={1} />

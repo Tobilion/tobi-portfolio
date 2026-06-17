@@ -31,7 +31,7 @@ export default function App(): React.JSX.Element {
       duration: 1.5,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
-    (window as any).lenis = lenis;
+    window.lenis = lenis;
     function raf(time: number): void {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -52,7 +52,7 @@ export default function App(): React.JSX.Element {
 
     return () => {
       lenis.destroy();
-      delete (window as any).lenis;
+      delete window.lenis;
       observer.disconnect();
     };
   }, []);

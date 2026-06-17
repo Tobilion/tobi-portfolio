@@ -22,7 +22,7 @@ function HeadModel(): React.JSX.Element {
 
 export function HumanHeadCanvas(): React.JSX.Element {
   return (
-    <div className="w-full h-full min-h-[400px] flex items-center justify-center">
+    <div className="w-full h-full min-h-[400px] flex items-center justify-center" role="img" aria-label="Interactive 3D human head model">
       <Canvas camera={{ position: [0, 0, 4.5], fov: 45 }}>
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={1.5} />

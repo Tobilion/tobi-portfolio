@@ -38,7 +38,7 @@ export function EvolvingBackground(): React.JSX.Element {
   );
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300" aria-hidden="true">
       {/* Light grid lines */}
       <div
         className="absolute inset-0 opacity-[0.25] dark:hidden"

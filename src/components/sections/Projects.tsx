@@ -11,42 +11,195 @@ interface Project {
   desc: string;
   tags: string[];
   color: string;
+  githubUrl: string;
+  demoUrl: string;
 }
 
 interface ProjectCardProps {
   project: Project;
+  index: number;
 }
 
-function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
+/* ── Project-specific inline SVG illustrations ── */
+
+function LogAnalyzerGraphic({ color }: { color: string }): React.JSX.Element {
+  return (
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Log Analyzer terminal dashboard graphic">
+      <rect width="400" height="176" rx="8" fill={`${color}08`} />
+      {/* Terminal title bar */}
+      <rect x="0" y="0" width="400" height="24" rx="8" fill={`${color}15`} />
+      <circle cx="16" cy="12" r="4" fill={`${color}40`} />
+      <circle cx="28" cy="12" r="4" fill={`${color}30`} />
+      <circle cx="40" cy="12" r="4" fill={`${color}20`} />
+      <text x="200" y="16" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="600">log_analyzer — tail -f</text>
+      {/* Log lines */}
+      <text x="16" y="44" fill={`${color}90`} fontSize="9" fontFamily="monospace">
+        [INFO]  Server listening on port 8080<tspan fill={color}> ▎</tspan>
+      </text>
+      <text x="16" y="60" fill={`${color}70`} fontSize="9" fontFamily="monospace">
+        [DEBUG] Buffer flushed — chunk size 4.2 KB
+      </text>
+      <text x="16" y="76" fill={`${color}70`} fontSize="9" fontFamily="monospace">
+        [WARN]  Response latency spike detected — 1200ms<tspan fill={`${color}`}> ⚠</tspan>
+      </text>
+      <text x="16" y="92" fill={`${color}60`} fontSize="9" fontFamily="monospace">
+        [INFO]  Reconnecting idle worker pool...
+      </text>
+      {/* Pulse wave */}
+      <motion.path
+        d="M0 140 Q50 120 100 140 T200 140 T300 140 T400 140"
+        stroke={color}
+        strokeWidth="1.5"
+        fill="none"
+        opacity={0.4}
+        animate={{ d: ["M0 140 Q50 120 100 140 T200 140 T300 140 T400 140", "M0 140 Q50 160 100 140 T200 140 T300 140 T400 140", "M0 140 Q50 120 100 140 T200 140 T300 140 T400 140"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.path
+        d="M0 150 Q50 140 100 150 T200 150 T300 150 T400 150"
+        stroke={color}
+        strokeWidth="0.8"
+        fill="none"
+        opacity={0.2}
+        animate={{ d: ["M0 150 Q50 140 100 150 T200 150 T300 150 T400 150", "M0 150 Q50 160 100 150 T200 150 T300 150 T400 150", "M0 150 Q50 140 100 150 T200 150 T300 150 T400 150"] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      {/* Alert badge */}
+      <rect x="280" y="110" width="104" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
+      <text x="332" y="123" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">3 CRITICAL ALERTS</text>
+    </svg>
+  );
+}
+
+function DuplicateFileGraphic({ color }: { color: string }): React.JSX.Element {
+  return (
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Duplicate File Analyzer hashing graphic">
+      <rect width="400" height="176" rx="8" fill={`${color}08`} />
+      {/* File blocks */}
+      <rect x="40" y="30" width="80" height="100" rx="4" fill={`${color}12`} stroke={color} strokeWidth="0.8" />
+      <rect x="50" y="42" width="60" height="4" rx="1" fill={`${color}60`} />
+      <rect x="50" y="54" width="40" height="4" rx="1" fill={`${color}40`} />
+      <rect x="50" y="66" width="52" height="4" rx="1" fill={`${color}40`} />
+      <rect x="50" y="78" width="30" height="4" rx="1" fill={`${color}40`} />
+      <rect x="50" y="90" width="48" height="4" rx="1" fill={`${color}40`} />
+      <text x="80" y="148" textAnchor="middle" fill={`${color}80`} fontSize="7" fontFamily="monospace">File A</text>
+
+      <rect x="140" y="30" width="80" height="100" rx="4" fill={`${color}12`} stroke={color} strokeWidth="0.8" />
+      <rect x="150" y="42" width="60" height="4" rx="1" fill={`${color}60`} />
+      <rect x="150" y="54" width="40" height="4" rx="1" fill={`${color}40`} />
+      <rect x="150" y="66" width="52" height="4" rx="1" fill={`${color}40`} />
+      <rect x="150" y="78" width="30" height="4" rx="1" fill={`${color}40`} />
+      <rect x="150" y="90" width="48" height="4" rx="1" fill={`${color}40`} />
+      <text x="180" y="148" textAnchor="middle" fill={`${color}80`} fontSize="7" fontFamily="monospace">File B</text>
+
+      {/* Scanner laser */}
+      <motion.rect
+        x="40" y="70" width="180" height="2" rx="1" fill={color}
+        animate={{ y: [70, 120, 70] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+        opacity={0.5}
+      />
+      {/* Cryptographic hash display */}
+      <motion.rect x="240" y="55" width="128" height="48" rx="6" fill={`${color}15`} stroke={color} strokeWidth="0.8"
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      />
+      <text x="304" y="72" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace" fontWeight="700">SHA-256</text>
+      <text x="304" y="88" textAnchor="middle" fill={`${color}80`} fontSize="6" fontFamily="monospace">f7a3b...9c1d2</text>
+      <text x="304" y="98" textAnchor="middle" fill={`${color}50`} fontSize="6" fontFamily="monospace">MATCH ✓</text>
+    </svg>
+  );
+}
+
+function AetherGraphic({ color }: { color: string }): React.JSX.Element {
+  return (
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Aether distributed message broker graphic">
+      <rect width="400" height="176" rx="8" fill={`${color}08`} />
+      {/* Network nodes */}
+      <circle cx="80" cy="50" r="18" fill={`${color}15`} stroke={color} strokeWidth="1" />
+      <motion.circle cx="80" cy="50" r="18" fill={`${color}20`} animate={{ r: [18, 22, 18] }} transition={{ duration: 2, repeat: Infinity }} />
+      <text x="80" y="54" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace" fontWeight="700">Publisher</text>
+
+      <circle cx="200" cy="88" r="26" fill={`${color}15`} stroke={color} strokeWidth="1.2" />
+      <circle cx="200" cy="88" r="12" fill={`${color}25`} />
+      <text x="200" y="92" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">Broker</text>
+
+      <circle cx="320" cy="50" r="18" fill={`${color}15`} stroke={color} strokeWidth="1" />
+      <text x="320" y="54" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace" fontWeight="700">Consumer</text>
+
+      {/* Message particles traveling */}
+      <motion.circle cx="110" cy="60" r="4" fill={color}
+        animate={{ cx: [110, 195, 110] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        opacity={0.7}
+      />
+      <motion.circle cx="215" cy="70" r="3" fill={color}
+        animate={{ cx: [215, 310, 215], cy: [70, 55, 70] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "linear", delay: 0.5 }}
+        opacity={0.7}
+      />
+      {/* Connection lines */}
+      <line x1="98" y1="50" x2="174" y2="80" stroke={color} strokeWidth="0.5" opacity="0.3" strokeDasharray="3 3" />
+      <line x1="226" y1="80" x2="302" y2="55" stroke={color} strokeWidth="0.5" opacity="0.3" strokeDasharray="3 3" />
+      {/* Latency badge */}
+      <rect x="280" y="120" width="100" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
+      <text x="330" y="133" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">0.4ms p99</text>
+    </svg>
+  );
+}
+
+function VaultexGraphic({ color }: { color: string }): React.JSX.Element {
+  return (
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Vaultex secrets manager graphic">
+      <rect width="400" height="176" rx="8" fill={`${color}08`} />
+      {/* Shield / Vault outline */}
+      <motion.path
+        d="M200 24 L290 60 L290 105 Q290 140 200 160 Q110 140 110 105 L110 60 Z"
+        fill={`${color}10`}
+        stroke={color}
+        strokeWidth="1.2"
+        animate={{ scale: [1, 1.02, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        style={{ transformOrigin: "200px 92px" }}
+      />
+      {/* Key icon inside shield */}
+      <circle cx="185" cy="85" r="6" stroke={color} strokeWidth="1.2" fill={`${color}15`} />
+      <line x1="190" y1="88" x2="205" y2="103" stroke={color} strokeWidth="1.2" />
+      <line x1="198" y1="94" x2="208" y2="94" stroke={color} strokeWidth="1.2" />
+      {/* Encryption particles */}
+      <motion.circle cx="240" cy="40" r="2" fill={color} animate={{ opacity: [0, 0.8, 0] }} transition={{ duration: 1.5, repeat: Infinity }} />
+      <motion.circle cx="310" cy="55" r="2" fill={color} animate={{ opacity: [0, 0.6, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }} />
+      <motion.circle cx="150" cy="38" r="1.5" fill={color} animate={{ opacity: [0, 0.7, 0] }} transition={{ duration: 1.8, repeat: Infinity, delay: 0.6 }} />
+      <motion.circle cx="265" cy="145" r="2" fill={color} animate={{ opacity: [0, 0.5, 0] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.9 }} />
+      {/* Lock badge */}
+      <rect x="280" y="125" width="96" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
+      <text x="328" y="138" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">AES-256-GCM</text>
+    </svg>
+  );
+}
+
+/* ── SVG project illustration router ── */
+
+function ProjectIllustration({ project }: { project: Project }): React.JSX.Element {
+  const title = project.title.toLowerCase();
+  if (title.includes("log")) return <LogAnalyzerGraphic color={project.color} />;
+  if (title.includes("duplicate")) return <DuplicateFileGraphic color={project.color} />;
+  if (title.includes("aether")) return <AetherGraphic color={project.color} />;
+  return <VaultexGraphic color={project.color} />;
+}
+
+/* ── Project Card ── */
+
+function ProjectCard({ project, index }: ProjectCardProps): React.JSX.Element {
   return (
     <TiltCard>
       <SpotlightCard
         spotlightColor={`${project.color}08`}
         className="rounded-3xl border border-slate-200/50 dark:border-zinc-800/50 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md overflow-hidden flex flex-col h-full shadow-[0_4px_20px_rgba(0,0,0,0.01)] dark:shadow-none hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300"
       >
-        {/* Image placeholder wrapper */}
+        {/* SVG illustration wrapper */}
         <div className="h-44 w-full relative overflow-hidden bg-[#F5F5F7] dark:bg-zinc-950 transition-colors duration-300">
-          <div
-            className="absolute inset-0 opacity-[0.25]"
-            style={{
-              background: `linear-gradient(135deg, ${project.color}15 0%, transparent 100%)`,
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 30% 50%, ${project.color}10 0%, transparent 60%)`,
-            }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="text-5xl font-black text-slate-900/5 dark:text-white/5 select-none"
-            >
-              {project.title.split(" ")[0]}
-            </motion.div>
-          </div>
+          <ProjectIllustration project={project} />
           <div
             className="absolute top-4 right-4 w-2 h-2 rounded-full"
             style={{ background: project.color }}
@@ -75,16 +228,22 @@ function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
           </div>
 
           <div className="flex gap-3 pt-2">
+            {project.demoUrl && (
+              <motion.a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex-1 text-xs font-semibold text-center py-2.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
+              >
+                ↗ Live Demo
+              </motion.a>
+            )}
             <motion.a
-              href="#"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="flex-1 text-xs font-semibold text-center py-2.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 shadow-sm hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
-            >
-              ↗ Live Demo
-            </motion.a>
-            <motion.a
-              href="#"
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="flex-1 text-xs font-semibold text-center py-2.5 rounded-full transition-all duration-200 cursor-pointer text-white shadow-sm"

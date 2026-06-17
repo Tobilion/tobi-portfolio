@@ -142,7 +142,7 @@ export function Hero(): React.JSX.Element {
           </motion.div>
         </motion.div>
 
-        <div className="relative w-full aspect-square max-w-[480px] mx-auto">
+        <div className="relative w-full aspect-square max-w-[480px] mx-auto" role="img" aria-label="Interactive 3D abstract hero graphic">
           <SplineScene
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="w-full h-full"
