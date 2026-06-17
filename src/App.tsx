@@ -8,7 +8,6 @@ import EvolvingBackground from "./components/ui/EvolvingBackground";
 const Footer    = lazy(() => import("./components/layout/Footer"));
 const About     = lazy(() => import("./components/sections/About"));
 const Skills    = lazy(() => import("./components/sections/Skills"));
-const ScrollShowcase = lazy(() => import("./components/ui/scroll-showcase"));
 const Experience = lazy(() => import("./components/sections/Experience"));
 const Projects  = lazy(() => import("./components/sections/Projects"));
 const Contact   = lazy(() => import("./components/sections/Contact"));
@@ -73,7 +72,6 @@ export default function App(): React.JSX.Element {
           <Suspense fallback={<SectionSkeleton />}>
             <About />
             <Skills />
-            <ScrollShowcase />
             <Experience />
             <Projects />
             <Contact />

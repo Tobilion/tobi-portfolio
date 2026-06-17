@@ -38,7 +38,7 @@ export function EvolvingBackground(): React.JSX.Element {
   );
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#FAFAFC] dark:bg-[#0B0B0C] transition-colors duration-300">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300">
       {/* Light grid lines */}
       <div
         className="absolute inset-0 opacity-[0.25] dark:hidden"
@@ -55,7 +55,7 @@ export function EvolvingBackground(): React.JSX.Element {
           backgroundSize: "48px 48px",
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-[#FAFAFC] dark:from-black/10 dark:via-black/50 dark:to-[#0B0B0C]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-[#FAF9F6] dark:from-black/10 dark:via-black/50 dark:to-[#0B0B0C]" />
 
       <motion.div
         className="absolute rounded-full filter blur-[150px] md:blur-[220px]"
