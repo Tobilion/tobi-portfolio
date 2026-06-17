@@ -1,25 +1,14 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect } from "react";
 import Lenis from "lenis";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
+import Footer from "./components/layout/Footer";
+import About from "./components/sections/About";
+import Skills from "./components/sections/Skills";
+import Experience from "./components/sections/Experience";
+import Projects from "./components/sections/Projects";
+import Contact from "./components/sections/Contact";
 import EvolvingBackground from "./components/ui/EvolvingBackground";
-
-// Below-fold sections are lazy-loaded so they don't block the initial paint
-const Footer    = lazy(() => import("./components/layout/Footer"));
-const About     = lazy(() => import("./components/sections/About"));
-const Skills    = lazy(() => import("./components/sections/Skills"));
-const Experience = lazy(() => import("./components/sections/Experience"));
-const Projects  = lazy(() => import("./components/sections/Projects"));
-const Contact   = lazy(() => import("./components/sections/Contact"));
-
-/** Tiny skeleton shown while a lazy section hydrates */
-function SectionSkeleton(): React.JSX.Element {
-  return (
-    <div className="w-full py-32 flex items-center justify-center">
-      <div className="w-8 h-8 rounded-full border-2 border-[#0066CC]/20 border-t-[#0066CC] animate-spin" />
-    </div>
-  );
-}
 
 export default function App(): React.JSX.Element {
   useEffect(() => {
@@ -46,14 +35,12 @@ export default function App(): React.JSX.Element {
       <Navbar />
       <main className="relative z-10">
         <Hero />
-        <Suspense fallback={<SectionSkeleton />}>
-          <About />
-          <Skills />
-          <Experience />
-          <Projects />
-          <Contact />
-          <Footer />
-        </Suspense>
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Contact />
+        <Footer />
       </main>
     </div>
   );
