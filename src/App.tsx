@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, Suspense, lazy, useState } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import Lenis from "lenis";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
@@ -22,11 +22,7 @@ function SectionSkeleton(): React.JSX.Element {
 }
 
 export default function App(): React.JSX.Element {
-  const belowFoldRef = useRef<HTMLDivElement>(null);
-  const [belowFoldVisible, setBelowFoldVisible] = useState(false);
-
   useEffect(() => {
-    // Kick off smooth scroll
     const lenis = new Lenis({
       duration: 1.5,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -38,22 +34,9 @@ export default function App(): React.JSX.Element {
     }
     requestAnimationFrame(raf);
 
-    // Only mount below-fold sections when the user is about to scroll there
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setBelowFoldVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" } // start loading 200px before it enters viewport
-    );
-    if (belowFoldRef.current) observer.observe(belowFoldRef.current);
-
     return () => {
       lenis.destroy();
       delete window.lenis;
-      observer.disconnect();
     };
   }, []);
 
@@ -62,25 +45,15 @@ export default function App(): React.JSX.Element {
       <EvolvingBackground />
       <Navbar />
       <main className="relative z-10">
-        {/* Hero — always eagerly loaded, it's the first thing the user sees */}
         <Hero />
-
-        {/* Sentinel: when this div scrolls into view, lazy sections are mounted */}
-        <div ref={belowFoldRef} />
-
-        {belowFoldVisible ? (
-          <Suspense fallback={<SectionSkeleton />}>
-            <About />
-            <Skills />
-            <Experience />
-            <Projects />
-            <Contact />
-            <Footer />
-          </Suspense>
-        ) : (
-          // Reserve space to prevent layout shift while sections haven't mounted
-          <div style={{ minHeight: "400vh" }} />
-        )}
+        <Suspense fallback={<SectionSkeleton />}>
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Contact />
+          <Footer />
+        </Suspense>
       </main>
     </div>
   );
