@@ -41,6 +41,12 @@
   }
 }
 
+/* Skip offscreen paint for section content — keeps scrolling smooth on mobile */
+#about, #skills, #experience, #projects, #contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 /* Spinner Loader styling */
 .loader {
   width: 48px;

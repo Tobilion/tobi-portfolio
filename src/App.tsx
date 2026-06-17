@@ -1,20 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import Lenis from "lenis";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
-import Footer from "./components/layout/Footer";
-import About from "./components/sections/About";
-import Skills from "./components/sections/Skills";
-import Experience from "./components/sections/Experience";
-import Projects from "./components/sections/Projects";
-import Contact from "./components/sections/Contact";
 import EvolvingBackground from "./components/ui/EvolvingBackground";
+
+const Footer    = lazy(() => import("./components/layout/Footer"));
+const About     = lazy(() => import("./components/sections/About"));
+const Skills    = lazy(() => import("./components/sections/Skills"));
+const Experience = lazy(() => import("./components/sections/Experience"));
+const Projects  = lazy(() => import("./components/sections/Projects"));
+const Contact   = lazy(() => import("./components/sections/Contact"));
 
 export default function App(): React.JSX.Element {
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: isMobile ? 0.6 : 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: isMobile ? 1.2 : 2,
+      wheelMultiplier: isMobile ? 0.8 : 1.2,
     });
     window.lenis = lenis;
     function raf(time: number): void {
@@ -35,12 +39,12 @@ export default function App(): React.JSX.Element {
       <Navbar />
       <main className="relative z-10">
         <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Contact />
-        <Footer />
+        <Suspense fallback={null}><About /></Suspense>
+        <Suspense fallback={null}><Skills /></Suspense>
+        <Suspense fallback={null}><Experience /></Suspense>
+        <Suspense fallback={null}><Projects /></Suspense>
+        <Suspense fallback={null}><Contact /></Suspense>
+        <Suspense fallback={null}><Footer /></Suspense>
       </main>
     </div>
   );
