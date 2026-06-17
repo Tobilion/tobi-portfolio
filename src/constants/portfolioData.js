@@ -47,11 +47,11 @@ export const PROJECTS = [
     demoUrl: "https://ai.studio/apps/d926e70d-03e5-4d04-9c14-676f97e1e86b",
   },
   {
-    title: "Duplicate File Analyzer",
-    tags: ["Python", "CLI", "Cryptography", "Hashing"],
-    desc: "A high-performance command-line utility that identifies duplicate files and analyzes storage footprints using cryptographic chunked hashing for maximum speed and accuracy.",
-    color: "#7c3aed",
-    githubUrl: "https://github.com/Tobilion/Duplicate-File-Analyzer",
+    title: "InsightFlow — Data Analysis Utility",
+    tags: ["Python", "PySide6", "Pandas", "REST API"],
+    desc: "A modular, desktop-based data analysis utility with a guided wizard interface. Features real-time financial data retrieval, automated cleaning, and analysis using Pandas.",
+    color: "#f59e0b",
+    githubUrl: "https://github.com/Tobilion/insightflow",
     demoUrl: "",
   },
   {
