@@ -55,7 +55,7 @@ export function Navbar(): React.JSX.Element {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <motion.a
             href="#"
-            className="font-mono text-xl font-bold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight flex items-center"
+            className="font-mono text-xl font-bold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight flex items-center shrink-0"
             whileHover={{ scale: 1.03 }}
             onClick={(e) => {
               e.preventDefault();
@@ -67,10 +67,12 @@ export function Navbar(): React.JSX.Element {
             <span className="text-[#0066CC] font-semibold">/&gt;</span>
           </motion.a>
 
-          {/* Center spacing helper */}
-          <div className="hidden md:block w-96 pointer-events-none" />
+          <NavBar
+            items={navItems}
+            className="sm:static! sm:left-auto! sm:top-auto! sm:translate-x-0! sm:z-auto!"
+          />
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 shrink-0">
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             <LiquidButton
               onClick={() => window.open("/Tobiloba_Jagun_CV.pdf", "_blank")}
@@ -81,9 +83,6 @@ export function Navbar(): React.JSX.Element {
           </div>
         </div>
       </header>
-
-      {/* Tubelight Navbar */}
-      <NavBar items={navItems} />
     </>
   );
 }
