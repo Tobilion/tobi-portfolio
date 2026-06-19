@@ -55,6 +55,22 @@ export const PROJECTS = [
     demoUrl: "",
   },
   {
+    title: "Football Bet Simulator",
+    tags: ["React", "Vite", "Tailwind CSS", "Local Storage"],
+    desc: "A web-based football betting simulator where users can manage virtual bankrolls, place bets on real-time simulated odds, and track their performance history.",
+    color: "#10b981",
+    githubUrl: "https://github.com/Tobilion/football-bet-simulator",
+    demoUrl: "https://football-bet-simulator.vercel.app/",
+  },
+  {
+    title: "Football Manager Simulator",
+    tags: ["React", "Vite", "Tailwind CSS", "Simulation"],
+    desc: "A sports management simulation game allowing users to take control of a club, formulate tactics, schedule matches, and guide their team to success through database simulation.",
+    color: "#f43f5e",
+    githubUrl: "https://github.com/Tobilion/Sport-sim",
+    demoUrl: "https://sport-sim-three.vercel.app/",
+  },
+  {
     title: "InsightFlow — Data Analysis Utility",
     tags: ["Python", "PySide6", "Pandas", "REST API"],
     desc: "A modular, desktop-based data analysis utility with a guided wizard interface. Features real-time financial data retrieval, automated cleaning, and analysis using Pandas.",
