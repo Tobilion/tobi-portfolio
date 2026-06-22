@@ -58,7 +58,6 @@ interface CardConfig {
   title: string;
   items: string[];
   span: string;
-  accent: string;
   icon: string;
 }
 
@@ -66,16 +65,10 @@ export function Skills(): React.JSX.Element {
   const { ref, isInView } = useSectionInView();
 
   const cards: CardConfig[] = [
-    { title: "Languages", items: SKILLS.Languages, span: "lg:col-span-2", accent: "#0066CC", icon: "🌌" },
-    { title: "Dev Tools", items: SKILLS["Dev Tools"], span: "", accent: "#0066CC", icon: "🛠️" },
-    { title: "Architecture", items: SKILLS.Architecture, span: "lg:col-span-2", accent: "#0066CC", icon: "🏗️" },
-    {
-      title: "Currently Learning",
-      items: ["WebAssembly", "eBPF", "Temporal", "Nix"],
-      span: "",
-      accent: "#0066CC",
-      icon: "🧪",
-    },
+    { title: "Languages", items: SKILLS.Languages, span: "lg:col-span-2", icon: "🌌" },
+    { title: "Dev Tools", items: SKILLS["Dev Tools"], span: "", icon: "🛠️" },
+    { title: "Architecture", items: SKILLS.Architecture, span: "lg:col-span-2", icon: "🏗️" },
+    { title: "Currently Learning", items: ["WebAssembly", "eBPF", "Temporal", "Nix"], span: "", icon: "🧪" },
   ];
 
   return (

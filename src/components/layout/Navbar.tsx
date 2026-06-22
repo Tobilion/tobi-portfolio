@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { ThemeToggle } from "../ui/theme-toggle";
 import { NavBar } from "../ui/tubelight-navbar";
-import { Home, User, Code2, Briefcase, FileText, Mail } from "lucide-react";
+import { Home, User, Code2, Briefcase, FileText, Mail, X } from "lucide-react";
+
+const NAV_ITEMS = [
+  { name: "Home", url: "#hero", icon: Home },
+  { name: "About", url: "#about", icon: User },
+  { name: "Skills", url: "#skills", icon: Code2 },
+  { name: "Experience", url: "#experience", icon: Briefcase },
+  { name: "Projects", url: "#projects", icon: FileText },
+  { name: "Contact", url: "#contact", icon: Mail },
+];
 
 export function Navbar(): React.JSX.Element {
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const [pillVisible, setPillVisible] = useState<boolean>(true);
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
       return (localStorage.getItem("theme") as "light" | "dark") || "light";
@@ -34,17 +44,34 @@ export function Navbar(): React.JSX.Element {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems = [
-    { name: "Home", url: "#hero", icon: Home },
-    { name: "About", url: "#about", icon: User },
-    { name: "Skills", url: "#skills", icon: Code2 },
-    { name: "Experience", url: "#experience", icon: Briefcase },
-    { name: "Projects", url: "#projects", icon: FileText },
-    { name: "Contact", url: "#contact", icon: Mail },
-  ];
-
   return (
     <>
+      {/* Availability pill */}
+      <AnimatePresence>
+        {pillVisible && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, delay: 1 }}
+            className="fixed top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-200/60 dark:border-emerald-800/40 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md shadow-sm text-xs font-mono font-semibold text-emerald-700 dark:text-emerald-400 whitespace-nowrap"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            Available for freelance &amp; full-time — Lagos / Remote
+            <button
+              onClick={() => setPillVisible(false)}
+              className="ml-1 text-emerald-400 hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors cursor-pointer"
+              aria-label="Dismiss"
+            >
+              <X size={11} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
@@ -68,7 +95,7 @@ export function Navbar(): React.JSX.Element {
           </motion.a>
 
           <NavBar
-            items={navItems}
+            items={NAV_ITEMS}
             className="sm:static! sm:left-auto! sm:top-auto! sm:translate-x-0! sm:z-auto!"
           />
 

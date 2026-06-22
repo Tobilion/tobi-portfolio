@@ -5,25 +5,22 @@ import { SplineScene } from "../ui/splite";
 import { MagneticButton } from "../ui/MagneticButton";
 import { fadeUp, stagger } from "../../animations/variants";
 import { MetalButton } from "../ui/liquid-glass-button";
+import { useTextScramble } from "../../hooks/useTextScramble";
+
+const TITLES = ["innovative", "adaptive", "detail-oriented", "resourceful", "passionate"];
 
 export function Hero(): React.JSX.Element {
   const containerRef = React.useRef<HTMLElement>(null);
   const [titleNumber, setTitleNumber] = React.useState(0);
-  const titles = React.useMemo(
-    () => ["innovative", "adaptive", "detail-oriented", "resourceful", "passionate"],
-    []
-  );
+  const firstName = useTextScramble("Tobiloba", 400);
+  const lastName  = useTextScramble("Jagun", 700);
 
   React.useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (titleNumber === titles.length - 1) {
-        setTitleNumber(0);
-      } else {
-        setTitleNumber(titleNumber + 1);
-      }
+      setTitleNumber(prev => (prev + 1) % TITLES.length);
     }, 2000);
     return () => clearTimeout(timeoutId);
-  }, [titleNumber, titles]);
+  }, [titleNumber]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -71,9 +68,9 @@ export function Hero(): React.JSX.Element {
             className="text-6xl lg:text-7xl font-extrabold leading-[1.0] tracking-tight text-[#1D1D1F] dark:text-[#F5F5F7]"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            <span className="text-[#86868B] dark:text-zinc-500">Tobiloba</span>
+            <span className="text-[#86868B] dark:text-zinc-500 font-mono">{firstName}</span>
             <br />
-            <span className="text-[#1D1D1F] dark:text-[#F5F5F7]">Jagun</span>
+            <span className="text-[#1D1D1F] dark:text-[#F5F5F7] font-mono">{lastName}</span>
           </motion.h1>
 
           <motion.div
@@ -82,7 +79,7 @@ export function Hero(): React.JSX.Element {
           >
             <span className="text-zinc-500 dark:text-zinc-400 mr-2">I am</span>
             <div className="relative flex-1 h-full">
-              {titles.map((title, index) => (
+              {TITLES.map((title, index) => (
                 <motion.span
                   key={index}
                   className="absolute font-semibold text-[#0066CC] dark:text-[#0070F3] left-0"
@@ -90,14 +87,8 @@ export function Hero(): React.JSX.Element {
                   transition={{ type: "spring", stiffness: 50 }}
                   animate={
                     titleNumber === index
-                      ? {
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : {
-                          y: titleNumber > index ? -150 : 150,
-                          opacity: 0,
-                        }
+                      ? { y: 0, opacity: 1 }
+                      : { y: titleNumber > index ? -150 : 150, opacity: 0 }
                   }
                 >
                   {title}

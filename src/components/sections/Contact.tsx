@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { useSectionInView } from "../../hooks/useSectionInView";
@@ -32,8 +32,22 @@ interface ContactCardProps {
 }
 
 function ContactCard({ label, value, icon, status = false }: ContactCardProps): React.JSX.Element {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback((): void => {
+    if (label === "Email") {
+      navigator.clipboard.writeText(value).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    }
+  }, [label, value]);
+
   return (
-    <div className="flex items-center gap-5 p-5 rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md shadow-sm hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-200">
+    <div
+      onClick={label === "Email" ? handleCopy : undefined}
+      className={`flex items-center gap-5 p-5 rounded-3xl border border-slate-200/60 dark:border-zinc-800/60 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md shadow-sm hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-200 ${label === "Email" ? "cursor-pointer select-none" : ""}`}
+    >
       <div className="w-12 h-12 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 flex items-center justify-center text-slate-500 dark:text-zinc-400 shrink-0">
         {status ? (
           <span className="relative flex h-3 w-3">
@@ -42,10 +56,19 @@ function ContactCard({ label, value, icon, status = false }: ContactCardProps): 
           </span>
         ) : icon}
       </div>
-      <div className="flex flex-col min-w-0">
+      <div className="flex flex-col min-w-0 flex-1">
         <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 uppercase tracking-widest font-semibold">{label}</span>
         <span className="text-sm font-bold text-[#1D1D1F] dark:text-[#F5F5F7] mt-0.5 truncate">{value}</span>
       </div>
+      {label === "Email" && (
+        <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 shrink-0 transition-colors duration-200">
+          {copied ? (
+            <span className="text-emerald-500 font-semibold">✓ Copied!</span>
+          ) : (
+            <span className="opacity-60">Click to copy</span>
+          )}
+        </span>
+      )}
     </div>
   );
 }

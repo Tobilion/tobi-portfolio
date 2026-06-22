@@ -1,9 +1,49 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useSectionInView } from "../../hooks/useSectionInView";
 import { EXPERIENCES } from "../../constants/portfolioData";
 import DisplayCards from "../ui/display-cards";
 import { GraduationCap, Briefcase, ChevronUp } from "lucide-react";
+
+interface StatItem {
+  label: string;
+  value: number;
+  suffix: string;
+  prefix?: string;
+}
+
+const STATS: StatItem[] = [
+  { label: "Latency reduced",    value: 60,   suffix: "%"  },
+  { label: "Events/day",         value: 2,    suffix: "M+" },
+  { label: "Engineers served",   value: 200,  suffix: "+"  },
+  { label: "Bundle size cut",    value: 45,   suffix: "%"  },
+];
+
+function AnimatedCounter({ value, suffix, prefix = "" }: { value: number; suffix: string; prefix?: string }): React.JSX.Element {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const duration = 1200;
+    const step = 16;
+    const increment = value / (duration / step);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, step);
+    return () => clearInterval(timer);
+  }, [inView, value]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+}
 
 interface ExperienceItem {
   period: string;
@@ -118,6 +158,21 @@ export function Experience(): React.JSX.Element {
           <p className="mt-6 text-sm text-[#86868B] dark:text-zinc-400 leading-relaxed max-w-xs">
             An interactive timeline of my professional experience and academic milestones. Click the stack to explore.
           </p>
+
+          {/* Animated stats */}
+          <div className="mt-10 grid grid-cols-2 gap-4">
+            {STATS.map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-2xl border border-slate-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 p-4 shadow-sm"
+              >
+                <p className="text-2xl font-extrabold text-[#0066cc] font-mono leading-none">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
+                </p>
+                <p className="text-[11px] text-[#86868B] dark:text-zinc-400 font-mono mt-1 uppercase tracking-wider">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         <div className="w-full">

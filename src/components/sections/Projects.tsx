@@ -17,7 +17,6 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
 }
 
 /* ── Project-specific inline SVG illustrations ── */
@@ -326,7 +325,7 @@ function ProjectIllustration({ project }: { project: Project }): React.JSX.Eleme
 
 /* ── Project Card ── */
 
-function ProjectCard({ project, index }: ProjectCardProps): React.JSX.Element {
+function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
   return (
     <TiltCard>
       <SpotlightCard
@@ -420,7 +419,7 @@ export function Projects(): React.JSX.Element {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {PROJECTS.map((p, i) => <ProjectCard key={p.title} project={p as Project} index={i} />)}
+          {PROJECTS.map((p) => <ProjectCard key={p.title} project={p as Project} />)}
         </div>
       </div>
     </section>
