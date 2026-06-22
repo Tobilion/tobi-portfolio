@@ -78,7 +78,7 @@ export function Hero(): React.JSX.Element {
             className="relative flex items-center h-10 w-full overflow-hidden font-sans text-spektr-cyan-50 text-2xl md:text-3xl font-regular"
           >
             <span className="text-zinc-500 dark:text-zinc-400 mr-2">I am</span>
-            <div className="relative flex-1 h-full">
+            <div className="relative flex-1 h-full" aria-live="polite" aria-atomic="true" aria-label={`I am ${TITLES[titleNumber]}`}>
               {TITLES.map((title, index) => (
                 <motion.span
                   key={index}

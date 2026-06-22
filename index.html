@@ -4,8 +4,11 @@
     <!-- Sync theme class before React hydrates — prevents flash of wrong theme -->
     <script>
       (function() {
-        var t = localStorage.getItem('theme');
-        if (t === 'dark') document.documentElement.classList.add('dark');
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
       })();
     </script>
     <meta charset="UTF-8" />
@@ -13,6 +16,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tobiloba Jagun — Software Engineer & Front-End Developer</title>
     <meta name="description" content="Portfolio of Tobiloba Jagun — software engineer specialising in distributed systems, developer tooling, and elegant front-end interfaces." />
+
+    <!-- Open Graph / LinkedIn / Twitter cards -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://tobi-portfolio.vercel.app/" />
+    <meta property="og:title"       content="Tobiloba Jagun — Software Engineer" />
+    <meta property="og:description" content="Software engineer crafting high-performance systems and elegant interfaces. Specialising in distributed architecture, developer tooling, and ML infrastructure." />
+    <meta property="og:image"       content="https://tobi-portfolio.vercel.app/Images/hero-3d.jpeg" />
+    <meta name="twitter:card"       content="summary_large_image" />
+    <meta name="twitter:title"      content="Tobiloba Jagun — Software Engineer" />
+    <meta name="twitter:description" content="Software engineer crafting high-performance systems and elegant interfaces." />
+    <meta name="twitter:image"      content="https://tobi-portfolio.vercel.app/Images/hero-3d.jpeg" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://tobi-portfolio.vercel.app/" />
 
     <!-- Preload the hero fallback image so it shows instantly (WebP, then JPEG) -->
     <link rel="preload" as="image" href="/Images/hero-3d.webp" type="image/webp" />
@@ -22,6 +39,7 @@
     <link rel="preconnect" href="https://prod.spline.design" crossorigin />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

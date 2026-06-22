@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Skip-to-content link — visually hidden until focused by keyboard */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 99999;
+  padding: 0.5rem 1rem;
+  background: #0066CC;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {

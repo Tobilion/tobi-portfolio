@@ -7,12 +7,14 @@ import { CustomCursor } from "./components/ui/CustomCursor";
 import { ScrollProgressBar } from "./components/ui/ScrollProgressBar";
 import { Terminal } from "./components/ui/Terminal";
 
-const Footer    = lazy(() => import("./components/layout/Footer"));
-const About     = lazy(() => import("./components/sections/About"));
-const Skills    = lazy(() => import("./components/sections/Skills"));
-const Experience = lazy(() => import("./components/sections/Experience"));
-const Projects  = lazy(() => import("./components/sections/Projects"));
-const Contact   = lazy(() => import("./components/sections/Contact"));
+const Footer          = lazy(() => import("./components/layout/Footer"));
+const About           = lazy(() => import("./components/sections/About"));
+const Skills          = lazy(() => import("./components/sections/Skills"));
+const Experience      = lazy(() => import("./components/sections/Experience"));
+const Projects        = lazy(() => import("./components/sections/Projects"));
+const Blog            = lazy(() => import("./components/sections/Blog"));
+const GitHubActivity  = lazy(() => import("./components/sections/GitHubActivity"));
+const Contact         = lazy(() => import("./components/sections/Contact"));
 
 export default function App(): React.JSX.Element {
   useEffect(() => {
@@ -45,12 +47,14 @@ export default function App(): React.JSX.Element {
       <Terminal />
       <EvolvingBackground />
       <Navbar />
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10">
         <Hero />
         <Suspense fallback={null}><About /></Suspense>
         <Suspense fallback={null}><Skills /></Suspense>
         <Suspense fallback={null}><Experience /></Suspense>
         <Suspense fallback={null}><Projects /></Suspense>
+        <Suspense fallback={null}><Blog /></Suspense>
+        <Suspense fallback={null}><GitHubActivity /></Suspense>
         <Suspense fallback={null}><Contact /></Suspense>
         <Suspense fallback={null}><Footer /></Suspense>
       </main>

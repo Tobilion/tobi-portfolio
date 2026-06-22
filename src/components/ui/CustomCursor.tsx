@@ -16,8 +16,11 @@ export function CustomCursor(): React.JSX.Element | null {
   const auraX = useSpring(mouseX, { stiffness: 120, damping: 18, mass: 0.6 });
   const auraY = useSpring(mouseY, { stiffness: 120, damping: 18, mass: 0.6 });
 
-  // Hide on touch / mobile devices
-  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+  // Hide on touch devices or when user prefers reduced motion
+  if (typeof window !== "undefined" && (
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  )) {
     return null;
   }
 
