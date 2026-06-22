@@ -17,10 +17,19 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'three':    ['three', '@react-three/fiber', '@react-three/drei'],
-          'spline':   ['@splinetool/react-spline', '@splinetool/runtime'],
-          'motion':   ['framer-motion'],
+        // Converted from an object to a function to satisfy Rolldown
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three') || id.includes('@react-three')) {
+              return 'three';
+            }
+            if (id.includes('@splinetool')) {
+              return 'spline';
+            }
+            if (id.includes('framer-motion')) {
+              return 'motion';
+            }
+          }
         },
       },
     },
