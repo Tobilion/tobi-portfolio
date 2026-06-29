@@ -8,12 +8,15 @@ import { MetalButton } from "../ui/liquid-glass-button";
 import { useTextScramble } from "../../hooks/useTextScramble";
 
 const TITLES = ["innovative", "adaptive", "detail-oriented", "resourceful", "passionate"];
+const ROLES  = ["Front-End Developer", "Systems Engineer", "Open Source Builder", "ML Infrastructure"];
 
 export function Hero(): React.JSX.Element {
   const containerRef = React.useRef<HTMLElement>(null);
   const [titleNumber, setTitleNumber] = React.useState(0);
-  const firstName = useTextScramble("Tobiloba", 400);
-  const lastName  = useTextScramble("Jagun", 700);
+  const [roleIndex,   setRoleIndex]   = React.useState(0);
+  const firstName    = useTextScramble("Tobiloba", 400);
+  const lastName     = useTextScramble("Jagun", 700);
+  const scrambledRole = useTextScramble(ROLES[roleIndex] ?? "Front-End Developer", 0, 28);
 
   React.useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -21,6 +24,13 @@ export function Hero(): React.JSX.Element {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber]);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex(prev => (prev + 1) % ROLES.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -35,15 +45,16 @@ export function Hero(): React.JSX.Element {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 bg-[#0B0B0C]"
     >
-      {/* Soft light studio highlights */}
-      <GlowOrb color="#0066CC" size="600px" top="-150px" left="-250px" blur={220} opacity={0.06} />
-      <GlowOrb color="#7c3aed" size="500px" top="150px" left="65%" blur={220} opacity={0.05} />
-      <GlowOrb color="#0ea5e9" size="400px" top="55%" left="25%" blur={200} opacity={0.04} />
+      {/* Glow orbs — always on dark bg */}
+      <GlowOrb color="#0066CC" size="600px" top="-150px" left="-250px" blur={220} opacity={0.08} />
+      <GlowOrb color="#7c3aed" size="500px" top="150px" left="65%" blur={220} opacity={0.07} />
+      <GlowOrb color="#0ea5e9" size="400px" top="55%" left="25%" blur={200} opacity={0.06} />
 
+      {/* Noise texture */}
       <div
-        className="absolute inset-0 opacity-[0.25] pointer-events-none"
+        className="absolute inset-0 opacity-[0.35] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
@@ -59,25 +70,25 @@ export function Hero(): React.JSX.Element {
           animate="visible"
           className="flex flex-col gap-5"
         >
-          <motion.span variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 text-lg font-normal tracking-wide font-mono">
+          <motion.span variants={fadeUp} className="text-zinc-400 text-lg font-normal tracking-wide font-mono">
             Hi there, I'm
           </motion.span>
 
           <motion.h1
             variants={fadeUp}
-            className="text-6xl lg:text-7xl font-extrabold leading-[1.0] tracking-tight text-[#1D1D1F] dark:text-[#F5F5F7]"
+            className="text-6xl lg:text-7xl font-extrabold leading-[1.0] tracking-tight"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            <span className="text-[#86868B] dark:text-zinc-500 font-mono">{firstName}</span>
+            <span className="text-zinc-500 font-mono">{firstName}</span>
             <br />
-            <span className="text-[#1D1D1F] dark:text-[#F5F5F7] font-mono">{lastName}</span>
+            <span className="text-[#F5F5F7] font-mono">{lastName}</span>
           </motion.h1>
 
           <motion.div
             variants={fadeUp}
             className="relative flex items-center h-10 w-full overflow-hidden font-sans text-spektr-cyan-50 text-2xl md:text-3xl font-regular"
           >
-            <span className="text-zinc-500 dark:text-zinc-400 mr-2">I am</span>
+            <span className="text-zinc-400 mr-2">I am</span>
             <div className="relative flex-1 h-full" aria-live="polite" aria-atomic="true" aria-label={`I am ${TITLES[titleNumber]}`}>
               {TITLES.map((title, index) => (
                 <motion.span
@@ -99,14 +110,14 @@ export function Hero(): React.JSX.Element {
 
           <motion.div
             variants={fadeUp}
-            className="w-fit px-5 py-2.5 rounded-full border border-slate-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 text-[#86868B] dark:text-zinc-400 text-xs font-mono font-semibold tracking-wider uppercase"
+            className="w-fit px-5 py-2.5 rounded-full border border-zinc-800/60 bg-zinc-900 text-zinc-400 text-xs font-mono font-semibold tracking-wider uppercase"
           >
-            Front-End Developer
+            {scrambledRole}
           </motion.div>
 
           <motion.p
             variants={fadeUp}
-            className="text-base text-[#86868B] dark:text-zinc-400 leading-relaxed max-w-md font-light pt-2"
+            className="text-base text-zinc-400 leading-relaxed max-w-md font-light pt-2"
           >
             Software engineer crafting high-performance systems and elegant interfaces.
             Specialising in distributed architecture, developer tooling, and ML infrastructure.
@@ -147,8 +158,8 @@ export function Hero(): React.JSX.Element {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
-        <span className="text-[10px] font-mono tracking-widest uppercase text-[#86868B]/60">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-slate-200 to-transparent" />
+        <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-600">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-zinc-700 to-transparent" />
       </motion.div>
     </section>
   );

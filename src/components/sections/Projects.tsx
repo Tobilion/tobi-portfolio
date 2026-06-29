@@ -311,7 +311,13 @@ function FootballManagerGraphic({ color }: { color: string }): React.JSX.Element
   );
 }
 
-/* ── SVG project illustration router ── */
+/* ── Real screenshot map — add entries here as you get more images ── */
+const PROJECT_IMAGES: Record<string, string> = {
+  "Football Bet Simulator":     "/Images/Bet-simulator_demo.jpg",
+  "Football Manager Simulator": "/Images/sportsim_demo.jpg",
+};
+
+/* ── SVG project illustration router (fallback for projects without a screenshot) ── */
 
 function ProjectIllustration({ project }: { project: Project }): React.JSX.Element {
   const title = project.title.toLowerCase();
@@ -332,14 +338,33 @@ function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
         spotlightColor={`${project.color}08`}
         className="rounded-3xl border border-slate-200/50 dark:border-zinc-800/50 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md overflow-hidden flex flex-col h-full shadow-[0_4px_20px_rgba(0,0,0,0.01)] dark:shadow-none hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300"
       >
-        {/* SVG illustration wrapper */}
-        <div className="h-44 w-full relative overflow-hidden bg-[#F5F5F7] dark:bg-zinc-950 transition-colors duration-300">
-          <ProjectIllustration project={project} />
-          <div
-            className="absolute top-4 right-4 w-2 h-2 rounded-full"
-            style={{ background: project.color }}
-          />
-        </div>
+        {/* Project preview — real screenshot or SVG fallback */}
+        {(() => {
+          const img = PROJECT_IMAGES[project.title];
+          return img ? (
+            <div className="h-44 w-full relative overflow-hidden">
+              <img
+                src={img}
+                alt={`${project.title} screenshot`}
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              />
+              {/* Subtle bottom fade so the card content blends in */}
+              <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#F5F5F7]/80 dark:from-zinc-900/80 to-transparent pointer-events-none" />
+              <div
+                className="absolute top-4 right-4 w-2 h-2 rounded-full"
+                style={{ background: project.color }}
+              />
+            </div>
+          ) : (
+            <div className="h-44 w-full relative overflow-hidden bg-[#F5F5F7] dark:bg-zinc-950 transition-colors duration-300">
+              <ProjectIllustration project={project} />
+              <div
+                className="absolute top-4 right-4 w-2 h-2 rounded-full"
+                style={{ background: project.color }}
+              />
+            </div>
+          );
+        })()}
 
         {/* Card Content info */}
         <div className="p-6 flex flex-col gap-4 flex-1">

@@ -2,106 +2,110 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useSectionInView } from "../../hooks/useSectionInView";
 import { fadeUp, stagger } from "../../animations/variants";
+import { Hammer, GraduationCap, Tv, MapPin, RefreshCw } from "lucide-react";
 
-interface Post {
-  slug: string;
+interface NowCard {
+  icon: React.ElementType;
+  label: string;
   title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  tags: string[];
-  color: string;
+  body: string;
+  accent: string;
+  active: boolean;
+  meta?: string;
 }
 
-const POSTS: Post[] = [
+const NOW_CARDS: NowCard[] = [
   {
-    slug: "zero-config-secrets-manager-rust",
-    title: "Building a Zero-Config Secrets Manager in Rust",
-    excerpt:
-      "How I designed Vaultex CLI — a tool that handles end-to-end local encryption, secret rotation, and dynamic sharing without a single config file. A deep dive into AES-256-GCM, the Rust ownership model, and why zero-config UX is harder than it sounds.",
-    date: "May 2026",
-    readTime: "8 min read",
-    tags: ["Rust", "CLI", "Cryptography"],
-    color: "#0ea5e9",
+    icon: Hammer,
+    label: "Currently Building",
+    title: "Football Simulators",
+    body: "Working through bug fixes and UX improvements on the Football Bet Simulator and Football Manager Simulator. Summer plan: serious feature development on both — new match engine, better data visualisation, and multiplayer groundwork.",
+    accent: "#0ea5e9",
+    active: true,
+    meta: "Active",
   },
   {
-    slug: "high-performance-log-analyzer",
-    title: "Lessons from Building a High-Performance Log Analyzer",
-    excerpt:
-      "Real-time log parsing sounds simple until you're processing 50MB/s of unstructured text with sub-second alert latency requirements. Here's how I used async I/O, string tokenizers, and a sliding-window buffer to make it work — and what I'd do differently.",
-    date: "Mar 2026",
-    readTime: "6 min read",
-    tags: ["TypeScript", "Python", "Systems"],
-    color: "#00ff88",
+    icon: GraduationCap,
+    label: "Current Focus",
+    title: "University Exams",
+    body: "Sitting my exams at Covenant University, Lagos. Fully heads-down on academics right now. Dev mode resumes in full once summer starts — already have a list of projects lined up.",
+    accent: "#7c3aed",
+    active: false,
+    meta: "Until July",
   },
   {
-    slug: "microservices-latency-lessons",
-    title: "How We Cut p95 Latency by 60% Migrating to Microservices",
-    excerpt:
-      "The rewrite nobody wanted to do but everyone needed. A frank account of migrating a monolith to distributed microservices at Quantum Systems — the good decisions, the costly mistakes, and the one architectural choice that made all the difference.",
-    date: "Jan 2026",
-    readTime: "10 min read",
-    tags: ["Go", "Microservices", "Architecture"],
-    color: "#7c3aed",
+    icon: Tv,
+    label: "Learning From",
+    title: "YouTube Tech Channels",
+    body: "Keeping sharp between study sessions with engineering deep-dives and system design content. Building a mental list of techniques to apply once the summer build sprint kicks off.",
+    accent: "#ef4444",
+    active: false,
+    meta: "Ongoing",
   },
 ];
 
-interface PostCardProps {
-  post: Post;
-  index: number;
-}
-
-function PostCard({ post, index }: PostCardProps): React.JSX.Element {
+function NowCard({ card, index }: { card: NowCard; index: number }): React.JSX.Element {
+  const Icon = card.icon;
   return (
-    <motion.article
+    <motion.div
       variants={fadeUp}
       custom={index}
-      className="group rounded-3xl border border-slate-200/50 dark:border-zinc-800/50 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md overflow-hidden flex flex-col hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] dark:shadow-none"
+      className="rounded-3xl border border-slate-200/50 dark:border-zinc-800/50 bg-[#F5F5F7]/85 dark:bg-zinc-900/85 backdrop-blur-md overflow-hidden flex flex-col transition-all duration-300 hover:border-slate-300 dark:hover:border-zinc-700 shadow-[0_4px_20px_rgba(0,0,0,0.01)] dark:shadow-none"
     >
-      {/* Colour accent bar */}
-      <div className="h-1 w-full" style={{ background: post.color }} />
+      {/* Accent bar */}
+      <div className="h-1 w-full" style={{ background: card.accent }} />
 
-      <div className="p-7 flex flex-col gap-4 flex-1">
-        {/* Meta */}
-        <div className="flex items-center gap-3 text-[11px] font-mono text-slate-400 dark:text-zinc-500">
-          <span>{post.date}</span>
-          <span>·</span>
-          <span>{post.readTime}</span>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F5F5F7] leading-snug group-hover:text-[#0066CC] dark:group-hover:text-[#0070F3] transition-colors duration-200">
-          {post.title}
-        </h3>
-
-        {/* Excerpt */}
-        <p className="text-sm text-[#86868B] dark:text-zinc-400 leading-relaxed flex-1">
-          {post.excerpt}
-        </p>
-
-        {/* Tags + CTA */}
-        <div className="flex items-center justify-between mt-2">
-          <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[11px] px-2.5 py-1 rounded-md font-mono font-semibold"
-                style={{
-                  background: `${post.color}10`,
-                  color: post.color,
-                  border: `1px solid ${post.color}20`,
-                }}
-              >
-                {tag}
-              </span>
-            ))}
+      <div className="p-7 flex flex-col gap-5 flex-1">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div
+            className="flex items-center justify-center w-10 h-10 rounded-2xl"
+            style={{ background: `${card.accent}15`, border: `1px solid ${card.accent}25` }}
+          >
+            <Icon size={18} style={{ color: card.accent }} strokeWidth={2} />
           </div>
-          <span className="text-xs font-mono font-semibold text-[#0066CC] dark:text-[#0070F3] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            Read →
-          </span>
+          <div className="flex items-center gap-1.5">
+            {card.active && (
+              <span className="relative flex h-2 w-2">
+                <span
+                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                  style={{ background: card.accent }}
+                />
+                <span
+                  className="relative inline-flex rounded-full h-2 w-2"
+                  style={{ background: card.accent }}
+                />
+              </span>
+            )}
+            <span
+              className="text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full"
+              style={{
+                color: card.accent,
+                background: `${card.accent}12`,
+                border: `1px solid ${card.accent}25`,
+              }}
+            >
+              {card.meta}
+            </span>
+          </div>
         </div>
+
+        {/* Label + Title */}
+        <div className="flex flex-col gap-1">
+          <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 uppercase tracking-widest">
+            {card.label}
+          </span>
+          <h3 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F5F5F7] leading-snug">
+            {card.title}
+          </h3>
+        </div>
+
+        {/* Body */}
+        <p className="text-sm text-[#86868B] dark:text-zinc-400 leading-relaxed flex-1">
+          {card.body}
+        </p>
       </div>
-    </motion.article>
+    </motion.div>
   );
 }
 
@@ -115,33 +119,80 @@ export function Blog(): React.JSX.Element {
       className="py-32 relative bg-[#FAF9F6] dark:bg-[#0B0B0C] transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto px-6">
+        {/* Header */}
         <motion.div
           variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="flex flex-col gap-3 mb-16"
         >
-          <motion.span variants={fadeUp} className="text-xs font-mono text-[#0066CC] tracking-widest uppercase font-semibold">
-            06 / Writing
+          <motion.span
+            variants={fadeUp}
+            className="text-xs font-mono text-[#0066CC] tracking-widest uppercase font-semibold"
+          >
+            06 / Now
           </motion.span>
-          <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl font-extrabold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight">
-            Technical Writing
-          </motion.h2>
-          <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 max-w-md text-sm leading-relaxed">
-            Deep dives into systems design, developer tooling, and the lessons behind the projects.
-          </motion.p>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div className="flex flex-col gap-2">
+              <motion.h2
+                variants={fadeUp}
+                className="text-4xl lg:text-5xl font-extrabold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight"
+              >
+                What I'm Up To
+              </motion.h2>
+              <motion.p
+                variants={fadeUp}
+                className="text-[#86868B] dark:text-zinc-400 max-w-md text-sm leading-relaxed"
+              >
+                A snapshot of where my head is at right now — building, studying, and preparing for a big summer.
+              </motion.p>
+            </div>
+            {/* Last updated + location */}
+            <motion.div
+              variants={fadeUp}
+              className="flex items-center gap-4 text-[11px] font-mono text-slate-400 dark:text-zinc-500 shrink-0 pb-1"
+            >
+              <span className="flex items-center gap-1.5">
+                <MapPin size={11} />
+                Lagos, Nigeria
+              </span>
+              <span className="flex items-center gap-1.5">
+                <RefreshCw size={11} />
+                Updated June 2026
+              </span>
+            </motion.div>
+          </div>
         </motion.div>
 
+        {/* Cards */}
         <motion.div
           variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {POSTS.map((post, i) => (
-            <PostCard key={post.slug} post={post} index={i} />
+          {NOW_CARDS.map((card, i) => (
+            <NowCard key={card.label} card={card} index={i} />
           ))}
         </motion.div>
+
+        {/* Footer note */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="mt-10 text-center text-[11px] font-mono text-slate-300 dark:text-zinc-700 tracking-wide"
+        >
+          This page is updated manually whenever something changes. Inspired by{" "}
+          <a
+            href="https://nownownow.com/about"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-slate-400 dark:hover:text-zinc-500 transition-colors"
+          >
+            nownownow.com
+          </a>
+        </motion.p>
       </div>
     </section>
   );

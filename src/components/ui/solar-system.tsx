@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowRight, Link, Zap } from "lucide-react";
 
 export interface TimelineItem {
@@ -18,17 +18,18 @@ interface SolarSystemProps {
   timelineData: TimelineItem[];
 }
 
-// Natural (desktop) orbit config — radii are scaled down on smaller screens
+// Orbit config — radius in px (at full desktop size), CSS animation duration in seconds
 const BASE_ORBIT = [
-  { radius: 72,  speed: 0.45,  size: 38 },
-  { radius: 108, speed: 0.28,  size: 34 },
-  { radius: 148, speed: 0.18,  size: 36 },
-  { radius: 190, speed: 0.13,  size: 32 },
-  { radius: 230, speed: 0.09,  size: 34 },
-  { radius: 268, speed: 0.065, size: 30 },
+  { radius: 72,  duration: 8  },
+  { radius: 108, duration: 13 },
+  { radius: 148, duration: 20 },
+  { radius: 190, duration: 28 },
+  { radius: 230, duration: 38 },
+  { radius: 268, duration: 50 },
 ];
 
-const MAX_RADIUS = 268; // largest natural orbit radius
+const MAX_RADIUS = 268;
+const PLANET_SIZE = 34;
 
 function statusLabel(s: TimelineItem["status"]): string {
   return s === "completed" ? "EXPERT" : s === "in-progress" ? "ADVANCED" : "INTERMEDIATE";
@@ -43,89 +44,69 @@ function statusClass(s: TimelineItem["status"]): string {
 }
 
 export default function SolarSystem({ timelineData }: SolarSystemProps) {
-  const wrapperRef   = useRef<HTMLDivElement>(null);
-  const anglesRef    = useRef<number[]>(timelineData.map((_, i) => (i / timelineData.length) * 360));
-  const rafRef       = useRef<number>(0);
-  const pausedRef    = useRef<boolean>(false);
-  const [, forceRender] = useState(0);
-
-  // Responsive: track actual container width
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(600);
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const [relatedIds, setRelatedIds] = useState<number[]>([]);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      setContainerWidth(entry.contentRect.width);
-    });
+    const ro = new ResizeObserver(([entry]) => setContainerWidth(entry.contentRect.width));
     ro.observe(el);
     setContainerWidth(el.offsetWidth);
     return () => ro.disconnect();
   }, []);
 
-  // Scale factor: fit the largest orbit inside the available half-width with padding
-  const PADDING = 52; // room for planet label + margin
-  const availableRadius = Math.max(60, containerWidth / 2 - PADDING);
-  const scaleFactor     = Math.min(1, availableRadius / MAX_RADIUS);
+  // Inject CSS keyframes once
+  useEffect(() => {
+    const styleId = "solar-orbit-keyframes";
+    if (document.getElementById(styleId)) return;
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = `
+      @keyframes orbit-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes orbit-label { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(-360deg); } }
+    `;
+    document.head.appendChild(style);
+  }, []);
 
-  // Scaled config derived from BASE_ORBIT
+  const PADDING = 52;
+  const availableRadius = Math.max(60, containerWidth / 2 - PADDING);
+  const scaleFactor = Math.min(1, availableRadius / MAX_RADIUS);
+
   const orbitConfig = BASE_ORBIT.map(c => ({
-    radius: c.radius * scaleFactor,
-    speed:  c.speed,
-    size:   Math.max(24, Math.round(c.size * (0.65 + 0.35 * scaleFactor))),
+    radius: Math.round(c.radius * scaleFactor),
+    duration: c.duration,
+    size: Math.max(24, Math.round(PLANET_SIZE * (0.65 + 0.35 * scaleFactor))),
   }));
 
-  // Dynamic container height — exactly enough for outermost orbit + labels
-  const outerRadius  = (orbitConfig[orbitConfig.length - 1]?.radius ?? 60);
-  const containerH   = Math.round(outerRadius * 2 + 80);
-
-  const [activeId,   setActiveId]   = useState<number | null>(null);
-  const [relatedIds, setRelatedIds] = useState<number[]>([]);
-
-  // 60 fps rAF loop
-  const animate = useCallback(() => {
-    if (!pausedRef.current) {
-      anglesRef.current = anglesRef.current.map((a, i) => {
-        const speed = orbitConfig[i]?.speed ?? orbitConfig[orbitConfig.length - 1]!.speed;
-        return (a + speed * 0.4) % 360;
-      });
-      forceRender(n => n + 1);
-    }
-    rafRef.current = requestAnimationFrame(animate);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scaleFactor]); // re-create when scale changes so speeds stay correct
-
-  useEffect(() => {
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [animate]);
+  const outerRadius = orbitConfig[orbitConfig.length - 1]?.radius ?? 60;
+  const containerH = Math.round(outerRadius * 2 + 80);
 
   const handlePlanetClick = (e: React.MouseEvent, item: TimelineItem) => {
     e.stopPropagation();
     if (activeId === item.id) {
-      setActiveId(null); setRelatedIds([]); pausedRef.current = false;
+      setActiveId(null); setRelatedIds([]); setPaused(false);
     } else {
-      setActiveId(item.id); setRelatedIds(item.relatedIds); pausedRef.current = true;
+      setActiveId(item.id); setRelatedIds(item.relatedIds); setPaused(true);
     }
   };
 
   const handleBackdrop = () => {
-    setActiveId(null); setRelatedIds([]); pausedRef.current = false;
+    setActiveId(null); setRelatedIds([]); setPaused(false);
   };
 
   const activeItem = timelineData.find(t => t.id === activeId) ?? null;
-
-  // Info card: on mobile sit below the system, on desktop same bottom anchor
   const isMobile = containerWidth < 480;
 
   return (
     <div ref={wrapperRef} className="relative w-full select-none" onClick={handleBackdrop}>
       {/* Solar canvas */}
-      <div
-        className="relative w-full flex items-center justify-center"
-        style={{ height: containerH }}
-      >
-        {/* ── Orbit rings ── */}
+      <div className="relative w-full flex items-center justify-center" style={{ height: containerH }}>
+
+        {/* Orbit rings */}
         {timelineData.map((_, i) => {
           const cfg = orbitConfig[i] ?? orbitConfig[orbitConfig.length - 1]!;
           const d = cfg.radius * 2;
@@ -138,81 +119,104 @@ export default function SolarSystem({ timelineData }: SolarSystemProps) {
           );
         })}
 
-        {/* ── Sun ── */}
+        {/* Sun */}
         <div className="absolute z-20 flex items-center justify-center" style={{ width: 48, height: 48 }}>
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0066CC] via-[#0ea5e9] to-[#7c3aed] shadow-lg shadow-[#0066CC]/30" />
           <div className="absolute w-[64px] h-[64px] rounded-full border border-[#0066CC]/20 animate-ping opacity-50" />
-          <div className="absolute w-[80px] h-[80px] rounded-full border border-slate-200/30 dark:border-zinc-700/30 animate-ping opacity-25"
-            style={{ animationDelay: "0.6s" }} />
+          <div
+            className="absolute w-[80px] h-[80px] rounded-full border border-slate-200/30 dark:border-zinc-700/30 animate-ping opacity-25"
+            style={{ animationDelay: "0.6s" }}
+          />
           <span className="relative z-10 text-[8px] font-mono font-bold text-white/90 tracking-widest">TECH</span>
         </div>
 
-        {/* ── Planets ── */}
+        {/* Planets — each sits in a CSS-animated rotating arm, zero JS overhead */}
         {timelineData.map((item, i) => {
-          const cfg      = orbitConfig[i] ?? orbitConfig[orbitConfig.length - 1]!;
-          const angleDeg = anglesRef.current[i] ?? 0;
-          const rad      = (angleDeg * Math.PI) / 180;
-          const px       = cfg.radius * Math.cos(rad);
-          const py       = cfg.radius * Math.sin(rad);
+          const cfg = orbitConfig[i] ?? orbitConfig[orbitConfig.length - 1]!;
           const isActive  = activeId === item.id;
           const isRelated = relatedIds.includes(item.id);
-          const Icon      = item.icon;
-          const depth     = (Math.sin(rad) + 1) / 2;
-          const opacity   = 0.55 + 0.45 * depth;
-          const depthScale = 0.82 + 0.22 * depth;
+          const Icon = item.icon;
+          // Stagger start angle so planets distribute around the sun
+          const startDeg = (i / timelineData.length) * 360;
 
           return (
             <div
               key={item.id}
-              className="absolute flex flex-col items-center justify-center cursor-pointer group"
+              className="absolute"
               style={{
-                width: cfg.size,
-                height: cfg.size,
-                transform: `translate(${px}px, ${py}px) scale(${isActive ? 1.22 : depthScale})`,
-                zIndex: isActive ? 50 : Math.round(10 + 40 * depth),
-                opacity: isActive ? 1 : opacity,
-                transition: "transform 0.15s ease, opacity 0.15s ease",
-                willChange: "transform",
+                width: cfg.radius * 2,
+                height: cfg.radius * 2,
+                animationName: "orbit-cw",
+                animationDuration: `${cfg.duration}s`,
+                animationTimingFunction: "linear",
+                animationIterationCount: "infinite",
+                animationPlayState: paused ? "paused" : "running",
+                animationDelay: `-${(startDeg / 360) * cfg.duration}s`,
               }}
-              onClick={(e) => handlePlanetClick(e, item)}
             >
-              {(isActive || isRelated) && (
-                <div className="absolute inset-0 rounded-full animate-pulse" style={{
-                  boxShadow: isActive ? "0 0 18px 4px rgba(0,102,204,0.35)" : "0 0 10px 2px rgba(0,102,204,0.2)",
-                  borderRadius: "50%",
-                }} />
-              )}
+              {/* Planet disc — sits at the right edge (3 o'clock) of the arm */}
+              <div
+                className="absolute cursor-pointer group"
+                style={{
+                  width: cfg.size,
+                  height: cfg.size,
+                  top: "50%",
+                  right: 0,
+                  transform: "translateY(-50%)",
+                }}
+                onClick={(e) => handlePlanetClick(e, item)}
+              >
+                {(isActive || isRelated) && (
+                  <div
+                    className="absolute inset-0 rounded-full animate-pulse pointer-events-none"
+                    style={{
+                      boxShadow: isActive
+                        ? "0 0 18px 4px rgba(0,102,204,0.4)"
+                        : "0 0 10px 2px rgba(0,102,204,0.2)",
+                    }}
+                  />
+                )}
 
-              <div className={`
-                w-full h-full rounded-full flex items-center justify-center border transition-all duration-200
-                ${isActive
-                  ? "bg-[#0066CC] border-[#0066CC] shadow-md shadow-[#0066CC]/30 text-white"
-                  : isRelated
-                  ? "bg-[#0066CC]/10 border-[#0066CC]/50 text-[#0066CC] dark:text-blue-400 animate-pulse"
-                  : "bg-white dark:bg-zinc-900 border-slate-200/80 dark:border-zinc-800 text-slate-600 dark:text-zinc-300 group-hover:border-[#0066CC]/40 group-hover:bg-[#0066CC]/5"
-                }
-              `}>
-                <Icon size={Math.max(10, Math.round(13 * scaleFactor + 3))} strokeWidth={2} />
+                <div className={`
+                  w-full h-full rounded-full flex items-center justify-center border transition-all duration-200
+                  ${isActive
+                    ? "bg-[#0066CC] border-[#0066CC] shadow-md shadow-[#0066CC]/30 text-white"
+                    : isRelated
+                    ? "bg-[#0066CC]/10 border-[#0066CC]/50 text-[#0066CC] dark:text-blue-400 animate-pulse"
+                    : "bg-white dark:bg-zinc-900 border-slate-200/80 dark:border-zinc-800 text-slate-600 dark:text-zinc-300 group-hover:border-[#0066CC]/40 group-hover:bg-[#0066CC]/5"
+                  }
+                `}>
+                  <Icon size={Math.max(10, Math.round(13 * scaleFactor + 3))} strokeWidth={2} />
+                </div>
+
+                {/* Label counter-rotates to stay upright */}
+                {containerWidth >= 320 && (
+                  <span
+                    className={`
+                      absolute whitespace-nowrap font-mono font-semibold uppercase tracking-wider pointer-events-none
+                      ${isMobile ? "text-[7px]" : "text-[8.5px]"}
+                      ${isActive ? "text-[#1D1D1F] dark:text-white" : "text-[#86868B] dark:text-zinc-500"}
+                    `}
+                    style={{
+                      top: "100%",
+                      left: "50%",
+                      marginTop: 3,
+                      animationName: "orbit-label",
+                      animationDuration: `${cfg.duration}s`,
+                      animationTimingFunction: "linear",
+                      animationIterationCount: "infinite",
+                      animationPlayState: paused ? "paused" : "running",
+                      animationDelay: `-${(startDeg / 360) * cfg.duration}s`,
+                    }}
+                  >
+                    {item.title}
+                  </span>
+                )}
               </div>
-
-              {/* Hide text labels on very small screens to avoid overlap */}
-              {containerWidth >= 320 && (
-                <span
-                  className={`
-                    absolute whitespace-nowrap font-mono font-semibold uppercase tracking-wider pointer-events-none
-                    ${isMobile ? "text-[7px]" : "text-[8.5px]"}
-                    ${isActive ? "text-[#1D1D1F] dark:text-white" : "text-[#86868B] dark:text-zinc-500"}
-                  `}
-                  style={{ top: "100%", marginTop: 3 }}
-                >
-                  {item.title}
-                </span>
-              )}
             </div>
           );
         })}
 
-        {/* Hint */}
         {!activeItem && (
           <p className="absolute bottom-0 text-[8px] font-mono text-slate-300 dark:text-zinc-700 tracking-widest pointer-events-none">
             {isMobile ? "TAP A PLANET" : "CLICK A PLANET TO EXPLORE"}
@@ -220,7 +224,7 @@ export default function SolarSystem({ timelineData }: SolarSystemProps) {
         )}
       </div>
 
-      {/* ── Info card — rendered OUTSIDE the orbit canvas so it never clips ── */}
+      {/* Info card */}
       {activeItem && (
         <div
           className="relative mx-auto mt-4 w-full max-w-xs bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-slate-200/80 dark:border-zinc-800 rounded-2xl shadow-xl shadow-slate-200/30 dark:shadow-none p-4 pointer-events-auto z-[100]"
@@ -271,7 +275,11 @@ export default function SolarSystem({ timelineData }: SolarSystemProps) {
                     <button
                       key={rid}
                       className="flex items-center gap-0.5 h-5 px-2 text-[8px] font-mono rounded border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-950 text-slate-600 dark:text-zinc-400 hover:border-[#0066CC]/40 hover:text-[#0066CC] transition-all"
-                      onClick={(e) => { e.stopPropagation(); setActiveId(rid); setRelatedIds(rel.relatedIds); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveId(rid);
+                        setRelatedIds(rel.relatedIds);
+                      }}
                     >
                       {rel.title} <ArrowRight size={6} className="ml-0.5" />
                     </button>

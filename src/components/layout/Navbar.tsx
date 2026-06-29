@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { ThemeToggle } from "../ui/theme-toggle";
 import { NavBar } from "../ui/tubelight-navbar";
-import { Home, User, Code2, Briefcase, FileText, Mail, X, PenLine, Activity } from "lucide-react";
+import { Home, User, Code2, Briefcase, FileText, Mail, X, Radio, Activity } from "lucide-react";
 
 const NAV_ITEMS = [
   { name: "Home", url: "#hero", icon: Home },
@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { name: "Skills", url: "#skills", icon: Code2 },
   { name: "Experience", url: "#experience", icon: Briefcase },
   { name: "Projects", url: "#projects", icon: FileText },
-  { name: "Writing", url: "#blog", icon: PenLine },
+  { name: "Now", url: "#blog", icon: Radio },
   { name: "Activity", url: "#activity", icon: Activity },
   { name: "Contact", url: "#contact", icon: Mail },
 ];
