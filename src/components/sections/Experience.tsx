@@ -13,10 +13,10 @@ interface StatItem {
 }
 
 const STATS: StatItem[] = [
-  { label: "Latency reduced",    value: 60,   suffix: "%"  },
-  { label: "Events/day",         value: 2,    suffix: "M+" },
-  { label: "Engineers served",   value: 200,  suffix: "+"  },
-  { label: "Bundle size cut",    value: 45,   suffix: "%"  },
+  { label: "Projects built",     value: 6,    suffix: ""   },
+  { label: "Live deployments",   value: 2,    suffix: ""   },
+  { label: "WASSCE A1 grades",   value: 4,    suffix: ""   },
+  { label: "Graduating class",   value: 2028, suffix: ""   },
 ];
 
 function AnimatedCounter({ value, suffix, prefix = "" }: { value: number; suffix: string; prefix?: string }): React.JSX.Element {
@@ -108,8 +108,8 @@ const experienceStackCards = [
   },
   {
     icon: <Briefcase className="size-4 text-purple-600 dark:text-purple-400" />,
-    title: "Quantum Systems",
-    description: "Senior Software Engineer (2023 - Pres)",
+    title: "VDT Communications",
+    description: "Intern (Aug – Sep 2025, returning 2026)",
     date: "Work History",
     iconClassName: "bg-purple-50 p-1 rounded-full text-purple-600 border border-purple-100 dark:bg-purple-950/40 dark:text-purple-400 dark:border-purple-900/40",
     titleClassName: "text-purple-600 dark:text-purple-400 font-semibold",
@@ -117,18 +117,18 @@ const experienceStackCards = [
   },
   {
     icon: <Briefcase className="size-4 text-amber-600 dark:text-amber-400" />,
-    title: "NexaCloud",
-    description: "Full-Stack Engineer (2021 - 2023)",
+    title: "Jagun Associates",
+    description: "Office Assistant (school holidays)",
     date: "Work History",
     iconClassName: "bg-amber-50 p-1 rounded-full text-amber-600 border border-amber-100 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/40",
     titleClassName: "text-amber-600 dark:text-amber-400 font-semibold",
     className: "[grid-area:stack] translate-x-16 translate-y-12 hover:-translate-y-2 border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none grayscale-[100%] hover:before:opacity-0 hover:grayscale-0",
   },
   {
-    icon: <Briefcase className="size-4 text-green-600 dark:text-emerald-400" />,
-    title: "Vertex Labs",
-    description: "Software Developer (2019 - 2021)",
-    date: "Work History",
+    icon: <GraduationCap className="size-4 text-green-600 dark:text-emerald-400" />,
+    title: "Rainbow College",
+    description: "WASSCE 2024 — four A1s (2018 - 2024)",
+    date: "Education Journey",
     iconClassName: "bg-green-50 p-1 rounded-full text-green-600 border border-green-100 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/40",
     titleClassName: "text-green-600 dark:text-emerald-400 font-semibold",
     className: "[grid-area:stack] translate-x-24 translate-y-18 hover:translate-y-8 border-slate-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-md shadow-slate-200/20 dark:shadow-none",

@@ -8,7 +8,7 @@ import { MetalButton } from "../ui/liquid-glass-button";
 import { useTextScramble } from "../../hooks/useTextScramble";
 
 const TITLES = ["innovative", "adaptive", "detail-oriented", "resourceful", "passionate"];
-const ROLES  = ["Front-End Developer", "Systems Engineer", "Open Source Builder", "ML Infrastructure"];
+const ROLES  = ["Front-End Developer", "CS Student @ Covenant", "Simulation Builder", "Python Tinkerer"];
 
 export function Hero(): React.JSX.Element {
   const containerRef = React.useRef<HTMLElement>(null);
@@ -119,8 +119,8 @@ export function Hero(): React.JSX.Element {
             variants={fadeUp}
             className="text-base text-zinc-400 leading-relaxed max-w-md font-light pt-2"
           >
-            Software engineer crafting high-performance systems and elegant interfaces.
-            Specialising in distributed architecture, developer tooling, and ML infrastructure.
+            Computer science student building fast, playful web apps — from football
+            simulators to data tools. Driven by maths, curiosity, and clean interfaces.
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4 pt-4 items-center">

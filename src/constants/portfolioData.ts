@@ -3,13 +3,13 @@ export const NAV_LINKS = ["About", "Skills", "Experience", "Projects", "Contact"
 export interface SkillSet {
   Languages: string[];
   "Dev Tools": string[];
-  Architecture: string[];
+  Frameworks: string[];
 }
 
 export const SKILLS: SkillSet = {
-  Languages: ["TypeScript", "Python", "Rust", "Go", "SQL", "C++", "Bash", "Java"],
-  "Dev Tools": ["Docker", "Kubernetes", "Git", "Webpack", "Vite", "Terraform", "AWS", "CI/CD"],
-  Architecture: ["Microservices", "Event-Driven", "CQRS", "GraphQL", "REST", "WebSockets", "gRPC", "DDD"],
+  Languages: ["JavaScript", "TypeScript", "Python", "HTML/CSS"],
+  "Dev Tools": ["Git & GitHub", "Vite", "VS Code", "Vercel", "npm"],
+  Frameworks: ["React", "Tailwind CSS", "Framer Motion", "PySide6", "Pandas"],
 };
 
 export interface Experience {
@@ -25,29 +25,29 @@ export const EXPERIENCES: Experience[] = [
     type: "education",
     role: "B.Sc. Computer Science",
     company: "Covenant University",
-    period: "2024 – Present",
-    desc: "Currently pursuing a degree in Computer Science, focusing on core computing systems, algorithm design, and software engineering principles.",
+    period: "2024 – 2028 (expected)",
+    desc: "Studying core computing systems, algorithm design, and software engineering principles. Aiming for First Class honours while building and shipping personal projects alongside coursework.",
   },
   {
     type: "work",
-    role: "Senior Software Engineer",
-    company: "Quantum Systems Inc.",
-    period: "2023 – Present",
-    desc: "Led migration of monolithic backend to distributed microservices, reducing p95 latency by 60%. Architected a real-time event pipeline handling 2M+ events/day.",
+    role: "Intern",
+    company: "VDT Communications",
+    period: "Aug – Sep 2025",
+    desc: "Five-week internship at one of Nigeria's leading broadband and telecommunications providers — my first taste of a professional engineering environment. Invited back for a second internship in July – August 2026.",
   },
   {
     type: "work",
-    role: "Full-Stack Engineer",
-    company: "NexaCloud",
-    period: "2021 – 2023",
-    desc: "Built internal developer platform used by 200+ engineers. Owned frontend performance — reduced bundle size by 45% through code splitting and lazy loading.",
+    role: "Office Assistant",
+    company: "Jagun Associates",
+    period: "School holidays",
+    desc: "Help out at the family estate-management firm during breaks — client records, property documentation, and day-to-day office operations.",
   },
   {
-    type: "work",
-    role: "Software Developer",
-    company: "Vertex Labs",
-    period: "2019 – 2021",
-    desc: "Delivered 3 major product features shipped to 500K users. Introduced testing culture that brought coverage from 12% to 78% in 6 months.",
+    type: "education",
+    role: "WASSCE",
+    company: "Rainbow College, Lagos",
+    period: "2018 – 2024",
+    desc: "A1 in Mathematics, Further Mathematics, Physics, and Computer Studies. Represented the school at the Mathematics Olympiad and was an active member of the STEM and LEGO Robotics clubs.",
   },
 ];
 

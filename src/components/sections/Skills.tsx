@@ -67,8 +67,8 @@ export function Skills(): React.JSX.Element {
   const cards: CardConfig[] = [
     { title: "Languages", items: SKILLS.Languages, span: "lg:col-span-2", icon: "🌌" },
     { title: "Dev Tools", items: SKILLS["Dev Tools"], span: "", icon: "🛠️" },
-    { title: "Architecture", items: SKILLS.Architecture, span: "lg:col-span-2", icon: "🏗️" },
-    { title: "Currently Learning", items: ["WebAssembly", "eBPF", "Temporal", "Nix"], span: "", icon: "🧪" },
+    { title: "Frameworks & Libraries", items: SKILLS.Frameworks, span: "lg:col-span-2", icon: "🏗️" },
+    { title: "Currently Learning", items: ["Node.js", "SQL", "Data Structures & Algorithms"], span: "", icon: "🧪" },
   ];
 
   return (
@@ -87,7 +87,7 @@ export function Skills(): React.JSX.Element {
             Technical Stack
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[#86868B] dark:text-zinc-400 max-w-md text-sm leading-relaxed">
-            A curated toolkit refined over years of production systems, open-source contributions, and deep technical curiosity.
+            The tools I use to build and ship my projects — and what I'm learning next as I work through my CS degree.
           </motion.p>
         </motion.div>
 

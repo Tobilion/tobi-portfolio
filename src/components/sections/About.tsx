@@ -11,74 +11,74 @@ const languageData: TimelineItem[] = [
   {
     id: 1,
     title: "TypeScript",
-    date: "Expert",
+    date: "Comfortable",
     content:
-      "My primary tool for building scalable web apps, robust backend services, and type-safe developer tooling. Extensive experience in React and Node.js ecosystems.",
+      "My main language for the web — this portfolio and both football simulators are written in it. I like the safety net the types give me as projects grow.",
     category: "Languages",
     icon: Code,
-    relatedIds: [4, 6],
+    relatedIds: [2, 4],
     status: "completed",
-    energy: 95,
+    energy: 75,
   },
   {
     id: 2,
-    title: "Python",
-    date: "Expert",
+    title: "JavaScript",
+    date: "Comfortable",
     content:
-      "Extensively used for data engineering pipelines, ML infrastructure, automation scripting, and backend development with FastAPI/PyTorch.",
+      "Where I started with web development — the foundation under everything I build in the browser, from DOM logic to the match engines in my simulators.",
     category: "Languages",
-    icon: Brain,
-    relatedIds: [1, 6],
+    icon: Terminal,
+    relatedIds: [1, 4],
     status: "completed",
-    energy: 90,
+    energy: 78,
   },
   {
     id: 3,
-    title: "Rust",
-    date: "Advanced",
+    title: "Python",
+    date: "Comfortable",
     content:
-      "Utilized for performance-critical systems, WebAssembly tooling, network protocol design, and safe concurrency patterns.",
+      "My tool for desktop utilities and data work — InsightFlow (PySide6 + Pandas) and the Duplicate File Analyzer CLI are both built with it.",
     category: "Languages",
-    icon: Terminal,
-    relatedIds: [5],
-    status: "in-progress",
-    energy: 80,
+    icon: Brain,
+    relatedIds: [6],
+    status: "completed",
+    energy: 70,
   },
   {
     id: 4,
-    title: "Go",
-    date: "Advanced",
+    title: "React",
+    date: "Comfortable",
     content:
-      "Used to build highly concurrent microservices, CLI tools, Kubernetes controllers, and high-performance network daemons.",
-    category: "Languages",
+      "The framework behind all my deployed projects — component design, hooks, and animation with Framer Motion.",
+    category: "Frameworks",
     icon: Binary,
-    relatedIds: [1, 6],
-    status: "in-progress",
-    energy: 85,
+    relatedIds: [1, 5],
+    status: "completed",
+    energy: 72,
   },
   {
     id: 5,
-    title: "C++",
-    date: "Intermediate",
+    title: "Tailwind CSS",
+    date: "Comfortable",
     content:
-      "Applied for graphics rendering engines, algorithm performance optimizations, and memory-constrained system engineering.",
-    category: "Languages",
+      "How I style everything I ship — fast to iterate with, and it keeps my designs consistent across projects.",
+    category: "Frameworks",
     icon: Cpu,
-    relatedIds: [3],
-    status: "pending",
-    energy: 65,
+    relatedIds: [4],
+    status: "completed",
+    energy: 68,
   },
   {
     id: 6,
     title: "SQL",
-    date: "Expert",
+    date: "Learning",
     content:
-      "Proficient in database schema design, indexing strategies, querying optimization, and transactional performance tuning in PostgreSQL.",
+      "Currently learning relational databases and query design as part of my CS degree — next on the list for my projects.",
     category: "Languages",
     icon: Database,
-    relatedIds: [1, 2, 4],
-    status: "completed",
-    energy: 88,
+    relatedIds: [3],
+    status: "in-progress",
+    energy: 40,
   },
 ];
 
@@ -106,7 +106,7 @@ export function About(): React.JSX.Element {
             Tech Solar System
           </h2>
           <p className="text-sm text-[#86868B] dark:text-zinc-400 max-w-md leading-relaxed">
-            Each planet represents a language I work with — orbit speed reflects how often I use it.
+            Each planet is a language or tool I build with — orbit speed reflects how often I use it.
             Click any planet to see proficiency &amp; ecosystem connections.
           </p>
         </motion.div>
@@ -136,20 +136,22 @@ export function About(): React.JSX.Element {
                 variants={fadeUp}
                 className="text-[#86868B] dark:text-zinc-400 leading-[1.8] text-base mb-6"
               >
-                I'm a passionate software engineer with a deep obsession for
-                distributed systems, developer experience, and the craftsmanship
-                of high-quality software. My journey started tinkering with
-                network protocols at 14 — today I architect systems at scale.
+                I'm Tobiloba Jagun, a computer science student at Covenant
+                University. It all started with numbers — as a kid I'd spend
+                hours playing with the maths books my mum left me, and that
+                love of maths (Further Maths especially) never left. These
+                days it shows up as an obsession with building things in code.
               </motion.p>
               <motion.p
                 variants={fadeUp}
                 className="text-[#86868B] dark:text-zinc-400 leading-[1.8] text-base mb-8"
               >
-                My approach combines clean code principles with modern design
-                aesthetics, ensuring that every project delivers exceptional value
-                to users and stakeholders alike. I believe the best code is
-                invisible — it empowers teams, survives ambiguity, and ages
-                gracefully.
+                The tech spark came from watching Iron Man — Jarvis, the
+                gadgets, the idea that you can build your way out of any
+                problem. I keep that curiosity fed with tech YouTube and
+                builder biographies, and I put it to work shipping web apps
+                and simulation games. I'm still figuring out exactly where
+                I'll make my mark — but I'm building towards it every day.
               </motion.p>
 
               <MagneticButton className="w-fit">
