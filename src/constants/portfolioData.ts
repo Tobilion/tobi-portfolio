@@ -33,7 +33,7 @@ export const EXPERIENCES: Experience[] = [
     role: "Intern",
     company: "VDT Communications",
     period: "Aug – Sep 2025",
-    desc: "Five-week internship at one of Nigeria's leading broadband and telecommunications providers — my first taste of a professional engineering environment. Invited back for a second internship in July – August 2026.",
+    desc: "Rotated across IT, Network Servicing, Customer Service, and Field Engineering at one of Nigeria's leading broadband providers — designing ERDs, running IP diagnostics (latency and packet-loss analysis), and supporting engineers maintaining networking infrastructure. Returning July – August 2026.",
   },
   {
     type: "work",
@@ -61,6 +61,14 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    title: "NetPulse — ISP Performance Tracker",
+    tags: ["Python", "Flask", "SQLite", "Chart.js"],
+    desc: "Logs real internet performance over time — speed tests, latency, packet loss, and outages — into SQLite, with a dark-themed dashboard showing uptime %, hour-of-day congestion patterns, and outage history. Built on the IP diagnostics skills from my VDT internship.",
+    color: "#38bdf8",
+    githubUrl: "https://github.com/Tobilion/netpulse",
+    demoUrl: "",
+  },
   {
     title: "Log Analyzer",
     tags: ["TypeScript", "React", "Python", "Vite"],

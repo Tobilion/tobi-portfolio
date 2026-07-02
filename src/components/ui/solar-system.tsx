@@ -32,7 +32,7 @@ const MAX_RADIUS = 268;
 const PLANET_SIZE = 34;
 
 function statusLabel(s: TimelineItem["status"]): string {
-  return s === "completed" ? "EXPERT" : s === "in-progress" ? "ADVANCED" : "INTERMEDIATE";
+  return s === "completed" ? "COMFORTABLE" : s === "in-progress" ? "LEARNING" : "EXPLORING";
 }
 
 function statusClass(s: TimelineItem["status"]): string {
@@ -146,6 +146,7 @@ export default function SolarSystem({ timelineData }: SolarSystemProps) {
               style={{
                 width: cfg.radius * 2,
                 height: cfg.radius * 2,
+                pointerEvents: "none",
                 animationName: "orbit-cw",
                 animationDuration: `${cfg.duration}s`,
                 animationTimingFunction: "linear",
@@ -163,6 +164,7 @@ export default function SolarSystem({ timelineData }: SolarSystemProps) {
                   top: "50%",
                   right: 0,
                   transform: "translateY(-50%)",
+                  pointerEvents: "auto",
                 }}
                 onClick={(e) => handlePlanetClick(e, item)}
               >

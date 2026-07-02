@@ -11,7 +11,7 @@ const languageData: TimelineItem[] = [
   {
     id: 1,
     title: "TypeScript",
-    date: "Comfortable",
+    date: "Daily driver",
     content:
       "My main language for the web — this portfolio and both football simulators are written in it. I like the safety net the types give me as projects grow.",
     category: "Languages",
@@ -23,7 +23,7 @@ const languageData: TimelineItem[] = [
   {
     id: 2,
     title: "JavaScript",
-    date: "Comfortable",
+    date: "Daily",
     content:
       "Where I started with web development — the foundation under everything I build in the browser, from DOM logic to the match engines in my simulators.",
     category: "Languages",
@@ -35,7 +35,7 @@ const languageData: TimelineItem[] = [
   {
     id: 3,
     title: "Python",
-    date: "Comfortable",
+    date: "Project work",
     content:
       "My tool for desktop utilities and data work — InsightFlow (PySide6 + Pandas) and the Duplicate File Analyzer CLI are both built with it.",
     category: "Languages",
@@ -47,7 +47,7 @@ const languageData: TimelineItem[] = [
   {
     id: 4,
     title: "React",
-    date: "Comfortable",
+    date: "Every web project",
     content:
       "The framework behind all my deployed projects — component design, hooks, and animation with Framer Motion.",
     category: "Frameworks",
@@ -59,7 +59,7 @@ const languageData: TimelineItem[] = [
   {
     id: 5,
     title: "Tailwind CSS",
-    date: "Comfortable",
+    date: "Every project",
     content:
       "How I style everything I ship — fast to iterate with, and it keeps my designs consistent across projects.",
     category: "Frameworks",
@@ -71,7 +71,7 @@ const languageData: TimelineItem[] = [
   {
     id: 6,
     title: "SQL",
-    date: "Learning",
+    date: "In coursework",
     content:
       "Currently learning relational databases and query design as part of my CS degree — next on the list for my projects.",
     category: "Languages",
