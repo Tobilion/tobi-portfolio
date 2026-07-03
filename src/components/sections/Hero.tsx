@@ -94,7 +94,7 @@ export function Hero(): React.JSX.Element {
                 <motion.span
                   key={index}
                   className="absolute font-semibold text-[#0066CC] dark:text-[#0070F3] left-0"
-                  initial={{ opacity: 0, y: "-100" }}
+                  initial={{ opacity: 0, y: -100 }}
                   transition={{ type: "spring", stiffness: 50 }}
                   animate={
                     titleNumber === index

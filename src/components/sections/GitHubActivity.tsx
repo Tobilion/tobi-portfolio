@@ -101,8 +101,11 @@ export function GitHubActivity(): React.JSX.Element {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const fetchedRef = React.useRef(false);
+
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || fetchedRef.current) return;
+    fetchedRef.current = true;
     fetch("https://api.github.com/users/Tobilion/events?per_page=30")
       .then((r) => {
         if (!r.ok) throw new Error("rate limited");

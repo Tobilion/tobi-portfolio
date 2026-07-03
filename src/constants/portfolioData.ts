@@ -9,7 +9,7 @@ export interface SkillSet {
 export const SKILLS: SkillSet = {
   Languages: ["JavaScript", "TypeScript", "Python", "HTML/CSS"],
   "Dev Tools": ["Git & GitHub", "Vite", "VS Code", "Vercel", "npm"],
-  Frameworks: ["React", "Tailwind CSS", "Framer Motion", "PySide6", "Pandas"],
+  Frameworks: ["React", "Tailwind CSS", "Framer Motion", "Flask", "PySide6", "Pandas"],
 };
 
 export interface Experience {

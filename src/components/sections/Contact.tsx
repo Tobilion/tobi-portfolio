@@ -39,7 +39,7 @@ function ContactCard({ label, value, icon, status = false }: ContactCardProps): 
       navigator.clipboard.writeText(value).then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-      });
+      }).catch(() => { /* clipboard unavailable (insecure context / permission denied) */ });
     }
   }, [label, value]);
 

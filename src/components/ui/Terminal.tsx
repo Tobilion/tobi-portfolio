@@ -115,8 +115,13 @@ export function Terminal(): React.JSX.Element {
   }, [history]);
 
   const submit = useCallback((): void => {
-    if (!input.trim() && input !== "") return;
     const cmd = input;
+    if (!cmd.trim()) {
+      // Empty enter: echo a blank prompt line but don't record it in history
+      setHistory(prev => [...prev, { type: "input", text: "$" }]);
+      setInput("");
+      return;
+    }
     setHistory(prev => [...prev, { type: "input", text: `$ ${cmd}` }]);
     setCmdHistory(prev => [cmd, ...prev]);
     setHistIdx(-1);
