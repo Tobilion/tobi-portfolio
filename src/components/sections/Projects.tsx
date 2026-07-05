@@ -110,32 +110,169 @@ function DuplicateFileGraphic({ color }: { color: string }): React.JSX.Element {
   );
 }
 
-function VaultexGraphic({ color }: { color: string }): React.JSX.Element {
+function NetPulseGraphic({ color }: { color: string }): React.JSX.Element {
   return (
-    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Vaultex secrets manager graphic">
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="NetPulse network dashboard graphic">
       <rect width="400" height="176" rx="8" fill={`${color}08`} />
-      {/* Shield / Vault outline */}
+      <text x="16" y="28" fill={color} fontSize="9" fontFamily="monospace" fontWeight="700">NETPULSE — LIVE MONITOR</text>
+      {/* Speed chart area */}
+      <rect x="16" y="40" width="240" height="100" rx="4" fill={`${color}06`} stroke={`${color}20`} strokeWidth="0.8" />
+      {/* Grid lines */}
+      <line x1="16" y1="65" x2="256" y2="65" stroke={`${color}10`} strokeWidth="0.5" />
+      <line x1="16" y1="90" x2="256" y2="90" stroke={`${color}10`} strokeWidth="0.5" />
+      <line x1="16" y1="115" x2="256" y2="115" stroke={`${color}10`} strokeWidth="0.5" />
+      {/* Download speed line */}
       <motion.path
-        d="M200 24 L290 60 L290 105 Q290 140 200 160 Q110 140 110 105 L110 60 Z"
-        fill={`${color}10`}
+        d="M20 100 L50 85 L80 95 L110 70 L140 80 L170 60 L200 75 L230 55 L252 65"
         stroke={color}
-        strokeWidth="1.2"
-        animate={{ scale: [1, 1.02, 1] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        style={{ transformOrigin: "200px 92px" }}
+        strokeWidth="1.5"
+        fill="none"
+        strokeLinecap="round"
+        animate={{ opacity: [0.7, 1, 0.7] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
       />
-      {/* Key icon inside shield */}
-      <circle cx="185" cy="85" r="6" stroke={color} strokeWidth="1.2" fill={`${color}15`} />
-      <line x1="190" y1="88" x2="205" y2="103" stroke={color} strokeWidth="1.2" />
-      <line x1="198" y1="94" x2="208" y2="94" stroke={color} strokeWidth="1.2" />
-      {/* Encryption particles */}
-      <motion.circle cx="240" cy="40" r="2" fill={color} animate={{ opacity: [0, 0.8, 0] }} transition={{ duration: 1.5, repeat: Infinity }} />
-      <motion.circle cx="310" cy="55" r="2" fill={color} animate={{ opacity: [0, 0.6, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }} />
-      <motion.circle cx="150" cy="38" r="1.5" fill={color} animate={{ opacity: [0, 0.7, 0] }} transition={{ duration: 1.8, repeat: Infinity, delay: 0.6 }} />
-      <motion.circle cx="265" cy="145" r="2" fill={color} animate={{ opacity: [0, 0.5, 0] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.9 }} />
-      {/* Lock badge */}
-      <rect x="280" y="125" width="96" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
-      <text x="328" y="138" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">AES-256-GCM</text>
+      {/* Latency line */}
+      <path d="M20 125 L60 122 L100 128 L140 120 L180 126 L220 118 L252 124" stroke={`${color}50`} strokeWidth="1" fill="none" strokeDasharray="3 2" />
+      {/* Pulse dot at line end */}
+      <motion.circle cx="252" cy="65" r="3" fill={color} animate={{ opacity: [1, 0.3, 1], r: [3, 4.5, 3] }} transition={{ duration: 1.2, repeat: Infinity }} />
+      {/* Outage marker */}
+      <rect x="150" y="42" width="3" height="96" fill={`${color}25`} />
+      {/* Stats panel */}
+      <rect x="272" y="40" width="112" height="100" rx="6" fill={`${color}12`} stroke={color} strokeWidth="0.8" />
+      <text x="284" y="60" fill={`${color}90`} fontSize="8" fontFamily="monospace">↓ 87.4 Mbps</text>
+      <text x="284" y="76" fill={`${color}90`} fontSize="8" fontFamily="monospace">↑ 21.2 Mbps</text>
+      <text x="284" y="92" fill={`${color}90`} fontSize="8" fontFamily="monospace">Ping: 18 ms</text>
+      <text x="284" y="108" fill={`${color}90`} fontSize="8" fontFamily="monospace">Uptime: 99.2%</text>
+      <rect x="284" y="118" width="60" height="14" rx="3" fill={`${color}25`} />
+      <text x="314" y="128" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace" fontWeight="700">1 OUTAGE</text>
+      <text x="16" y="158" fill={`${color}60`} fontSize="8" fontFamily="monospace">Hour-of-day congestion profile · 30-min cycles · SQLite</text>
+    </svg>
+  );
+}
+
+function DreamKickGraphic({ color }: { color: string }): React.JSX.Element {
+  return (
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Dream Kick 3D football game graphic">
+      <rect width="400" height="176" rx="8" fill={`${color}08`} />
+      {/* Perspective pitch (3D feel) */}
+      <path d="M120 150 L280 150 L250 40 L150 40 Z" fill={`${color}08`} stroke={`${color}30`} strokeWidth="1" />
+      <path d="M200 150 L200 40" stroke={`${color}20`} strokeWidth="0.8" />
+      <ellipse cx="200" cy="95" rx="28" ry="12" stroke={`${color}25`} strokeWidth="0.8" fill="none" />
+      {/* Goal at far end */}
+      <rect x="180" y="32" width="40" height="12" stroke={color} strokeWidth="1" fill="none" />
+      {/* Players (simple 3D-ish figures) */}
+      <motion.circle cx="170" cy="120" r="5" fill={color} animate={{ cx: [170, 178, 170] }} transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.circle cx="228" cy="105" r="5" fill={`${color}70`} animate={{ cy: [105, 98, 105] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
+      <circle cx="200" cy="48" r="4" fill={`${color}50`} />
+      {/* Ball with motion arc */}
+      <motion.circle
+        cx="185"
+        cy="110"
+        r="3.5"
+        fill="#fff"
+        stroke={color}
+        strokeWidth="1"
+        animate={{ cx: [185, 200, 185], cy: [110, 60, 110] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+      />
+      {/* HUD elements */}
+      <rect x="16" y="16" width="76" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
+      <text x="54" y="29" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">2 - 1  ·  78:42</text>
+      {/* Mini radar */}
+      <rect x="312" y="120" width="72" height="40" rx="4" fill={`${color}10`} stroke={`${color}40`} strokeWidth="0.8" />
+      <circle cx="330" cy="135" r="2" fill={color} />
+      <circle cx="350" cy="145" r="2" fill={`${color}60`} />
+      <circle cx="365" cy="130" r="2" fill={`${color}60`} />
+      {/* Controls hint */}
+      <text x="16" y="158" fill={`${color}60`} fontSize="8" fontFamily="monospace">WASD move · X pass · Z shoot — Three.js, zero assets</text>
+      <rect x="312" y="16" width="72" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
+      <text x="348" y="29" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">3D · PWA</text>
+    </svg>
+  );
+}
+
+function HabitlineGraphic({ color }: { color: string }): React.JSX.Element {
+  const cells: React.JSX.Element[] = [];
+  const pattern = [0,1,2,0,3,1,0, 2,3,1,0,2,0,1, 1,0,3,2,0,1,3, 0,2,1,3,1,2,0, 3,1,0,2,3,0,1, 2,0,2,1,0,3,2];
+  for (let w = 0; w < 14; w++) {
+    for (let d = 0; d < 3; d++) {
+      const v = pattern[(w * 3 + d) % pattern.length];
+      const opacities = ["10", "35", "65", "FF"];
+      cells.push(
+        <rect key={`${w}-${d}`} x={20 + w * 17} y={56 + d * 17} width="13" height="13" rx="3" fill={`${color}${opacities[v]}`} />
+      );
+    }
+  }
+  return (
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="Habitline habit tracker heatmap graphic">
+      <rect width="400" height="176" rx="8" fill={`${color}08`} />
+      <text x="20" y="32" fill={color} fontSize="9" fontFamily="monospace" fontWeight="700">HABITLINE — 14 WEEK STREAK MAP</text>
+      {cells}
+      {/* Today cell pulsing */}
+      <motion.rect
+        x={20 + 13 * 17}
+        y={56 + 2 * 17}
+        width="13"
+        height="13"
+        rx="3"
+        fill={color}
+        animate={{ opacity: [1, 0.4, 1] }}
+        transition={{ duration: 1.6, repeat: Infinity }}
+      />
+      {/* Streak + progress ring */}
+      <rect x="278" y="120" width="106" height="36" rx="6" fill={`${color}12`} stroke={color} strokeWidth="0.8" />
+      <text x="290" y="135" fill={`${color}90`} fontSize="8" fontFamily="monospace">Streak: 23 🔥</text>
+      <text x="290" y="149" fill={`${color}90`} fontSize="8" fontFamily="monospace">Today: 3/4 done</text>
+      <circle cx="40" cy="138" r="14" stroke={`${color}25`} strokeWidth="3" fill="none" />
+      <motion.circle
+        cx="40" cy="138" r="14"
+        stroke={color}
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+        strokeDasharray="88"
+        animate={{ strokeDashoffset: [88, 22] }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
+        transform="rotate(-90 40 138)"
+      />
+      <text x="40" y="141" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">75%</text>
+    </svg>
+  );
+}
+
+function StudyFlashGraphic({ color }: { color: string }): React.JSX.Element {
+  return (
+    <svg viewBox="0 0 400 176" fill="none" className="w-full h-full" role="img" aria-label="StudyFlash flashcard review graphic">
+      <rect width="400" height="176" rx="8" fill={`${color}08`} />
+      {/* Stacked cards behind */}
+      <rect x="76" y="34" width="200" height="104" rx="8" fill={`${color}08`} stroke={`${color}20`} strokeWidth="0.8" transform="rotate(-4 176 86)" />
+      <rect x="82" y="32" width="200" height="104" rx="8" fill={`${color}10`} stroke={`${color}30`} strokeWidth="0.8" transform="rotate(-2 182 84)" />
+      {/* Front card with subtle flip wobble */}
+      <motion.g
+        animate={{ rotateY: [0, 8, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transformOrigin: "190px 84px" }}
+      >
+        <rect x="90" y="30" width="200" height="104" rx="8" fill={`${color}15`} stroke={color} strokeWidth="1" />
+        <text x="190" y="66" textAnchor="middle" fill={`${color}90`} fontSize="9" fontFamily="monospace">Q: What does SM-2</text>
+        <text x="190" y="80" textAnchor="middle" fill={`${color}90`} fontSize="9" fontFamily="monospace">schedule?</text>
+        <line x1="110" y1="94" x2="270" y2="94" stroke={`${color}25`} strokeWidth="0.8" />
+        <text x="190" y="112" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="600">tap to reveal ↻</text>
+      </motion.g>
+      {/* Rating buttons */}
+      <rect x="112" y="146" width="36" height="14" rx="3" fill={`${color}15`} stroke={`${color}40`} strokeWidth="0.5" />
+      <text x="130" y="156" textAnchor="middle" fill={`${color}80`} fontSize="7" fontFamily="monospace">AGAIN</text>
+      <rect x="154" y="146" width="36" height="14" rx="3" fill={`${color}20`} stroke={`${color}50`} strokeWidth="0.5" />
+      <text x="172" y="156" textAnchor="middle" fill={`${color}80`} fontSize="7" fontFamily="monospace">HARD</text>
+      <rect x="196" y="146" width="36" height="14" rx="3" fill={`${color}30`} stroke={color} strokeWidth="0.5" />
+      <text x="214" y="156" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace">GOOD</text>
+      <rect x="238" y="146" width="36" height="14" rx="3" fill={`${color}40`} stroke={color} strokeWidth="0.7" />
+      <text x="256" y="156" textAnchor="middle" fill={color} fontSize="7" fontFamily="monospace" fontWeight="700">EASY</text>
+      {/* Due badge */}
+      <rect x="300" y="20" width="84" height="20" rx="4" fill={`${color}20`} stroke={color} strokeWidth="0.5" />
+      <text x="342" y="33" textAnchor="middle" fill={color} fontSize="8" fontFamily="monospace" fontWeight="700">17 CARDS DUE</text>
+      {/* Streak */}
+      <motion.text x="316" y="60" fill={color} fontSize="9" fontFamily="monospace" animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 2, repeat: Infinity }}>🔥 12-day</motion.text>
     </svg>
   );
 }
@@ -321,12 +458,16 @@ const PROJECT_IMAGES: Record<string, string> = {
 
 function ProjectIllustration({ project }: { project: Project }): React.JSX.Element {
   const title = project.title.toLowerCase();
+  if (title.includes("netpulse")) return <NetPulseGraphic color={project.color} />;
+  if (title.includes("dream kick")) return <DreamKickGraphic color={project.color} />;
+  if (title.includes("habit")) return <HabitlineGraphic color={project.color} />;
+  if (title.includes("studyflash") || title.includes("flashcard")) return <StudyFlashGraphic color={project.color} />;
   if (title.includes("log")) return <LogAnalyzerGraphic color={project.color} />;
   if (title.includes("duplicate")) return <DuplicateFileGraphic color={project.color} />;
   if (title.includes("insight")) return <InsightFlowGraphic color={project.color} />;
   if (title.includes("bet")) return <FootballBetGraphic color={project.color} />;
   if (title.includes("manager") || title.includes("sport")) return <FootballManagerGraphic color={project.color} />;
-  return <VaultexGraphic color={project.color} />;
+  return <InsightFlowGraphic color={project.color} />;
 }
 
 /* ── Project Card ── */
