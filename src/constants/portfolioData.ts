@@ -109,6 +109,7 @@ export const PROJECTS: Project[] = [
     githubUrl: "https://github.com/Tobilion/insightflow",
     demoUrl: "",
   },
+  {
     title: "Dream Kick — 3D Football Game",
     tags: ["JavaScript", "Three.js", "PWA", "Game Dev"],
     desc: "A browser-based 3D football game with live playable 11v11 matches, AI opponents, ball physics, and a career mode — built in vanilla JavaScript with zero external assets: every texture, badge, and icon is generated in code at runtime. Installable as an offline PWA.",
