@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
     desc: "An asynchronous system utility that monitors active server log directories, parses incoming logs in real time, and triggers safety alerts on critical stack traces using string tokenizers.",
     color: "#00ff88",
     githubUrl: "https://github.com/Tobilion/log_analyzer",
-    demoUrl: "https://ai.studio/apps/d926e70d-03e5-4d04-9c14-676f97e1e86b",
+    demoUrl: "",
   },
   {
     title: "Duplicate File Analyzer",
@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Football Bet Simulator",
     tags: ["React", "Vite", "Tailwind CSS", "Local Storage"],
-    desc: "A web-based football betting simulator where users can manage virtual bankrolls, place bets on real-time simulated odds, and track their performance history.",
+    desc: "An offline-first football simulation and sportsbook: a real-time match engine drives live-shifting odds, single/accumulator slips, Bet Builder, mid-match Cash Out, club ownership with a transfer market, and a 14-game casino suite — all client-side.",
     color: "#10b981",
     githubUrl: "https://github.com/Tobilion/football-bet-simulator",
     demoUrl: "https://football-bet-simulator.vercel.app/",
