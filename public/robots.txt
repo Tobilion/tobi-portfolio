@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tobi-portfolio.vercel.app/sitemap.xml
+Sitemap: https://tobiloba-jagun-portfolio.vercel.app/sitemap.xml

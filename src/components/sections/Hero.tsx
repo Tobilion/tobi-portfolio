@@ -2,6 +2,7 @@ import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { GlowOrb } from "../ui/GlowOrb";
 import { SplineScene } from "../ui/splite";
+import { ErrorBoundary } from "../ui/ErrorBoundary";
 import { MagneticButton } from "../ui/MagneticButton";
 import { fadeUp, stagger } from "../../animations/variants";
 import { MetalButton } from "../ui/liquid-glass-button";
@@ -145,11 +146,27 @@ export function Hero(): React.JSX.Element {
         </motion.div>
 
         <div className="relative w-full aspect-square max-w-[480px] mx-auto" role="img" aria-label="Interactive 3D abstract hero graphic">
-          <SplineScene
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full"
-            offlineFallback="/Images/hero-3d.jpeg"
-          />
+          <ErrorBoundary
+            fallback={
+              <picture>
+                <source srcSet="/Images/hero-3d.webp" type="image/webp" />
+                <img
+                  src="/Images/hero-3d.jpeg"
+                  alt="3D Scene Preview"
+                  width={480}
+                  height={480}
+                  decoding="async"
+                  className="object-cover object-center rounded-3xl w-full h-full"
+                />
+              </picture>
+            }
+          >
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+              offlineFallback="/Images/hero-3d.jpeg"
+            />
+          </ErrorBoundary>
         </div>
       </motion.div>
 

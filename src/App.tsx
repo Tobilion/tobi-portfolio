@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
 import { ScrollProgressBar } from "./components/ui/ScrollProgressBar";
 import { Terminal } from "./components/ui/Terminal";
+import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 
 const Footer          = lazy(() => import("./components/layout/Footer"));
 const About           = lazy(() => import("./components/sections/About"));
@@ -44,15 +45,15 @@ export default function App(): React.JSX.Element {
       <Terminal />
       <Navbar />
       <main id="main-content" className="relative z-10">
-        <Hero />
-        <Suspense fallback={null}><About /></Suspense>
-        <Suspense fallback={null}><Skills /></Suspense>
-        <Suspense fallback={null}><Experience /></Suspense>
-        <Suspense fallback={null}><Projects /></Suspense>
-        <Suspense fallback={null}><Blog /></Suspense>
-        <Suspense fallback={null}><GitHubActivity /></Suspense>
-        <Suspense fallback={null}><Contact /></Suspense>
-        <Suspense fallback={null}><Footer /></Suspense>
+        <ErrorBoundary fallback={null}><Hero /></ErrorBoundary>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><About /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><Skills /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><Experience /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><Projects /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><Blog /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><GitHubActivity /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><Contact /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><ErrorBoundary fallback={null}><Footer /></ErrorBoundary></Suspense>
       </main>
     </div>
   );
