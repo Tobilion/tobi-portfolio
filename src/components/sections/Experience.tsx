@@ -13,8 +13,8 @@ interface StatItem {
 }
 
 const STATS: StatItem[] = [
-  { label: "Projects built",     value: 6,    suffix: ""   },
-  { label: "Live deployments",   value: 2,    suffix: ""   },
+  { label: "Projects built",     value: 11,   suffix: ""   },
+  { label: "Live deployments",   value: 6,    suffix: ""   },
   { label: "WASSCE A1 grades",   value: 4,    suffix: ""   },
   { label: "Graduating class",   value: 2028, suffix: ""   },
 ];
