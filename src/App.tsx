@@ -15,6 +15,13 @@ const Blog            = lazy(() => import("./components/sections/Blog"));
 const GitHubActivity  = lazy(() => import("./components/sections/GitHubActivity"));
 const Contact         = lazy(() => import("./components/sections/Contact"));
 
+// Reserves layout height while a lazy section's chunk is still downloading,
+// so the page's scrollable height is roughly correct from first paint
+// (prevents the scroll-spy's "reached bottom" check from misfiring early).
+function SectionFallback(): React.JSX.Element {
+  return <div className="min-h-screen" aria-hidden="true" />;
+}
+
 export default function App(): React.JSX.Element {
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
@@ -46,14 +53,14 @@ export default function App(): React.JSX.Element {
       <Navbar />
       <main id="main-content" className="relative z-10">
         <ErrorBoundary fallback={null}><Hero /></ErrorBoundary>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><About /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><Skills /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><Experience /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><Projects /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><Blog /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><GitHubActivity /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><Contact /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary fallback={null}><Footer /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><About /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><Skills /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><Experience /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><Projects /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><Blog /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><GitHubActivity /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><Contact /></ErrorBoundary></Suspense>
+        <Suspense fallback={<SectionFallback />}><ErrorBoundary fallback={null}><Footer /></ErrorBoundary></Suspense>
       </main>
     </div>
   );
