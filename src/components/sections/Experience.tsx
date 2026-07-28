@@ -23,22 +23,19 @@ function AnimatedCounter({ value, suffix, prefix = "" }: { value: number; suffix
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
-    let start = 0;
+    if (!inView || hasAnimatedRef.current) return;
+    hasAnimatedRef.current = true;
     const duration = 1200;
-    const step = 16;
-    const increment = value / (duration / step);
+    const startTime = performance.now();
     const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, step);
+      const elapsed = performance.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      setCount(Math.floor(progress * value));
+      if (progress >= 1) clearInterval(timer);
+    }, 16);
     return () => clearInterval(timer);
   }, [inView, value]);
 

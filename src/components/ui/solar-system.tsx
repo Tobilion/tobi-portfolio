@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowRight, Link, Zap } from "lucide-react";
 
@@ -46,9 +45,15 @@ function statusClass(s: TimelineItem["status"]): string {
 export default function SolarSystem({ timelineData }: SolarSystemProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(600);
+  const [debouncedWidth, setDebouncedWidth] = useState(600);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [relatedIds, setRelatedIds] = useState<number[]>([]);
   const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedWidth(containerWidth), 150);
+    return () => clearTimeout(t);
+  }, [containerWidth]);
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -70,10 +75,11 @@ export default function SolarSystem({ timelineData }: SolarSystemProps) {
       @keyframes orbit-label { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(-360deg); } }
     `;
     document.head.appendChild(style);
+    return () => { const el = document.getElementById(styleId); el?.remove(); };
   }, []);
 
   const PADDING = 52;
-  const availableRadius = Math.max(60, containerWidth / 2 - PADDING);
+  const availableRadius = Math.max(60, debouncedWidth / 2 - PADDING);
   const scaleFactor = Math.min(1, availableRadius / MAX_RADIUS);
 
   const orbitConfig = BASE_ORBIT.map(c => ({
@@ -167,6 +173,14 @@ export default function SolarSystem({ timelineData }: SolarSystemProps) {
                   pointerEvents: "auto",
                 }}
                 onClick={(e) => handlePlanetClick(e, item)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handlePlanetClick(e as unknown as React.MouseEvent, item);
+                  }
+                }}
               >
                 {(isActive || isRelated) && (
                   <div

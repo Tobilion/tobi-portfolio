@@ -1,4 +1,3 @@
-"use client"
 
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
@@ -122,13 +121,12 @@ function LiquidButton({
         <div className="pointer-events-none z-10 flex items-center justify-center gap-1.5 w-full h-full text-[#1d1d1f] dark:text-[#F5F5F7] font-semibold text-sm">
           {children}
         </div>
-        <GlassFilter />
       </Comp>
     </>
   )
 }
 
-function GlassFilter() {
+export function GlassFilter() {
   return (
     <svg className="hidden">
       <defs>
@@ -314,6 +312,7 @@ export const MetalButton = React.forwardRef<
   const [isTouchDevice, setIsTouchDevice] = React.useState(false);
  
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
  
@@ -377,4 +376,4 @@ export const MetalButton = React.forwardRef<
 });
  
 MetalButton.displayName = "MetalButton";
-export { LiquidButton, GlassFilter }
+export { LiquidButton }

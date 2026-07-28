@@ -29,3 +29,13 @@ dist-ssr
 *.sw?
 
 CLAUDE.md
+
+# CV PDF — no source doc, generated separately, tracked in git-lfs or external
+public/Tobiloba_Jagun_CV.pdf
+
+# Sitemap and robots — generated at build time
+public/robots.txt
+public/sitemap.xml
+
+# Local Project Console chat memory (not for git)
+.console/

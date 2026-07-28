@@ -1,43 +1,14 @@
-"use client"
-
-import { useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useTheme } from "../../providers/ThemeProvider"
 
 interface ThemeToggleProps {
   className?: string
-  theme?: "light" | "dark"
-  toggleTheme?: () => void
 }
 
-export function ThemeToggle({ className, theme, toggleTheme }: ThemeToggleProps) {
-  const [localIsDark, setLocalIsDark] = useState(true)
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isDarkClass = document.documentElement.classList.contains("dark")
-      setLocalIsDark(isDarkClass)
-    }
-  }, [])
-
-  const isDark = theme ? theme === "dark" : localIsDark
-
-  const handleToggle = () => {
-    if (toggleTheme) {
-      toggleTheme()
-    } else {
-      const nextDark = !isDark
-      setLocalIsDark(nextDark)
-      const root = window.document.documentElement
-      if (nextDark) {
-        root.classList.add("dark")
-        localStorage.setItem("theme", "dark")
-      } else {
-        root.classList.remove("dark")
-        localStorage.setItem("theme", "light")
-      }
-    }
-  }
+export function ThemeToggle({ className }: ThemeToggleProps) {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark"
 
   return (
     <div
@@ -48,12 +19,12 @@ export function ThemeToggle({ className, theme, toggleTheme }: ThemeToggleProps)
           : "bg-zinc-100 border border-zinc-200",
         className
       )}
-      onClick={handleToggle}
+      onClick={toggleTheme}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
-          handleToggle()
+          toggleTheme()
         }
       }}
     >

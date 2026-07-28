@@ -11,15 +11,14 @@ const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#
 export function useTextScramble(text: string, delay = 0, speed = 35): string {
   const [display, setDisplay] = useState(text);
   const frame = useRef(0);
-  const raf = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     let started = false;
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
     const start = (): void => {
       started = true;
       frame.current = 0;
-
       const totalFrames = text.length * 3;
 
       const tick = (): void => {
@@ -39,20 +38,20 @@ export function useTextScramble(text: string, delay = 0, speed = 35): string {
         frame.current++;
 
         if (frame.current <= totalFrames) {
-          raf.current = setTimeout(tick, speed);
+          const id = setTimeout(tick, speed);
+          timers.push(id);
         } else {
           setDisplay(text);
         }
       };
-
       tick();
     };
 
-    const timer = setTimeout(start, delay);
+    const delayId = setTimeout(start, delay);
+    timers.push(delayId);
 
     return () => {
-      clearTimeout(timer);
-      if (raf.current) clearTimeout(raf.current);
+      timers.forEach(clearTimeout);
       if (started) setDisplay(text);
     };
   }, [text, delay, speed]);

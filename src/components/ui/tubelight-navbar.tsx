@@ -1,9 +1,9 @@
-"use client"
 
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { LucideIcon, X, Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLenis } from "../../providers/LenisProvider"
 
 interface NavItem {
   name: string
@@ -20,7 +20,7 @@ export function NavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0].name)
   const [isDesktop, setIsDesktop] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
-
+  const lenis = useLenis()
   useEffect(() => {
     const handleResize = () => setIsDesktop(window.innerWidth >= 1024)
     handleResize()
@@ -35,39 +35,29 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [drawerOpen])
 
-  // Scroll spy
+  // Scroll spy — IntersectionObserver per section
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 220
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120) {
-        const lastItem = items[items.length - 1]
-        if (lastItem) setActiveTab(lastItem.name)
-        return
-      }
-      for (const item of items) {
-        const targetId = item.url.replace("#", "")
-        if (!targetId) continue
-        const element = document.getElementById(targetId)
-        if (element) {
-          const top = element.offsetTop
-          const height = element.offsetHeight
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveTab(item.name)
-            break
-          }
-        }
-      }
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [items])
+    const observers = items.map((item) => {
+      const targetId = item.url.replace("#", "");
+      if (!targetId) return null;
+      const el = document.getElementById(targetId);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveTab(item.name);
+        },
+        { rootMargin: "0px 0px -50% 0px", threshold: 0.1 }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, [items]);
 
   const scrollTo = (item: NavItem) => {
     setActiveTab(item.name)
     setDrawerOpen(false)
     const targetId = item.url.replace("#", "")
-    const lenis = (window as any).lenis
     if (targetId) {
       const element = document.getElementById(targetId)
       if (element) {
@@ -101,7 +91,6 @@ export function NavBar({ items, className }: NavBarProps) {
                 {item.name}
                 {isActive && (
                   <motion.div
-                    layoutId="lamp"
                     className="absolute inset-0 w-full bg-zinc-200/20 dark:bg-zinc-800/20 rounded-full -z-10"
                     initial={false}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}

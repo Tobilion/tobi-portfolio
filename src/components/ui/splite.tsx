@@ -1,6 +1,5 @@
-'use client'
 
-import { Suspense, lazy, useState, useEffect } from 'react'
+import React, { Suspense, lazy, useState, useEffect } from 'react'
 
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
@@ -53,14 +52,13 @@ export function SplineScene({ scene, className, offlineFallback }: SplineScenePr
   const [canMount, setCanMount] = useState(false)
 
   useEffect(() => {
-    // requestIdleCallback lets the browser finish critical work first.
-    // Fallback to setTimeout for browsers that don't support rIC (Safari < 17).
+    let mounted = true;
     if ('requestIdleCallback' in window) {
-      const id = requestIdleCallback(() => setCanMount(true), { timeout: 3000 })
-      return () => cancelIdleCallback(id)
+      const id = requestIdleCallback(() => { if (mounted) setCanMount(true); }, { timeout: 3000 });
+      return () => { mounted = false; cancelIdleCallback(id); };
     } else {
-      const id = setTimeout(() => setCanMount(true), 1500)
-      return () => clearTimeout(id)
+      const id = setTimeout(() => { if (mounted) setCanMount(true); }, 1500);
+      return () => { mounted = false; clearTimeout(id); };
     }
   }, [])
 

@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { useSectionInView } from "../../hooks/useSectionInView";
 import { fadeUp, stagger } from "../../animations/variants";
 
@@ -33,13 +32,23 @@ interface ContactCardProps {
 
 function ContactCard({ label, value, icon, status = false }: ContactCardProps): React.JSX.Element {
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
 
   const handleCopy = useCallback((): void => {
     if (label === "Email") {
       navigator.clipboard.writeText(value).then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-      }).catch(() => { /* clipboard unavailable (insecure context / permission denied) */ });
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = value;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try { document.execCommand('copy'); } catch { /* clipboard API unavailable */ }
+        document.body.removeChild(textarea);
+        setCopyError(true);
+        setTimeout(() => setCopyError(false), 3000);
+      });
     }
   }, [label, value]);
 
@@ -64,6 +73,8 @@ function ContactCard({ label, value, icon, status = false }: ContactCardProps): 
         <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 shrink-0 transition-colors duration-200">
           {copied ? (
             <span className="text-emerald-500 font-semibold">✓ Copied!</span>
+          ) : copyError ? (
+            <span className="text-amber-500 font-semibold">Select text & Ctrl+C</span>
           ) : (
             <span className="opacity-60">Click to copy</span>
           )}
@@ -93,21 +104,13 @@ export function Contact(): React.JSX.Element {
     setErrorMsg("");
 
     if (EMAILJS_READY) {
-      // ── EmailJS path: sends silently without opening the mail client ──
       try {
-        await emailjs.send(
-          EMAILJS_SERVICE_ID!,
-          EMAILJS_TEMPLATE_ID!,
-          {
-            from_name:  formData.name,
-            from_email: formData.email,
-            phone:      formData.phone,
-            subject:    formData.subject || "Portfolio Contact",
-            message:    formData.message,
-            to_email:   "tobilobajagun@gmail.com",
-          },
-          { publicKey: EMAILJS_PUBLIC_KEY! }
-        );
+        const res = await fetch("/api/send-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        if (!res.ok) throw new Error("Server error");
         setSendState("success");
         setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
       } catch (err: unknown) {

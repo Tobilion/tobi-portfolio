@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Minus, Square } from "lucide-react";
+import { X } from "lucide-react";
 
 interface TerminalLine {
   type: "input" | "output" | "error" | "system";
@@ -102,6 +102,11 @@ export function Terminal(): React.JSX.Element {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // Close terminal on unmount
+  useEffect(() => {
+    return () => setOpen(false);
   }, []);
 
   // Focus input when opened

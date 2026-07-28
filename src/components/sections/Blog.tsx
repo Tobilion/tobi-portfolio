@@ -44,7 +44,7 @@ const NOW_CARDS: NowCard[] = [
   },
 ];
 
-function NowCard({ card, index }: { card: NowCard; index: number }): React.JSX.Element {
+function NowCardItem({ card, index }: { card: NowCard; index: number }): React.JSX.Element {
   const Icon = card.icon;
   return (
     <motion.div
@@ -172,7 +172,7 @@ export function Blog(): React.JSX.Element {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {NOW_CARDS.map((card, i) => (
-            <NowCard key={card.label} card={card} index={i} />
+            <NowCardItem key={card.label} card={card} index={i} />
           ))}
         </motion.div>
 

@@ -106,7 +106,7 @@ export function GitHubActivity(): React.JSX.Element {
   useEffect(() => {
     if (!isInView || fetchedRef.current) return;
     fetchedRef.current = true;
-    fetch("https://api.github.com/users/Tobilion/events?per_page=30")
+    fetch("/api/github-activity")
       .then((r) => {
         if (!r.ok) throw new Error("rate limited");
         return r.json();
@@ -171,7 +171,9 @@ export function GitHubActivity(): React.JSX.Element {
           {error && (
             <div className="flex items-center gap-3 text-sm text-slate-400 dark:text-zinc-500 p-6 rounded-2xl border border-dashed border-slate-200 dark:border-zinc-800">
               <AlertCircle size={16} />
-              GitHub rate limit reached — check back in a minute.
+              {import.meta.env.DEV
+                ? "GitHub activity needs `npx vercel dev` locally (this API route isn't available under plain `vite dev`)."
+                : "Could not load GitHub activity right now."}
             </div>
           )}
 

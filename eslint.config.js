@@ -5,9 +5,9 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'api', 'scripts', 'eslint.config.js', 'vite.config.js']),
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     extends: [
       js.configs.recommended,
       reactHooks.configs.flat.recommended,
@@ -15,10 +15,14 @@ export default defineConfig([
     ],
     languageOptions: {
       globals: globals.browser,
-      parserOptions: { ecmaFeatures: { jsx: true } },
+      parser: (await import('@typescript-eslint/parser')).default,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+        project: ['./tsconfig.json'],
+      },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^(React|index|accent)$', argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
 ])

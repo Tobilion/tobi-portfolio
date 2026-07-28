@@ -1,3 +1,4 @@
+import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 /**
@@ -5,7 +6,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
  */
 export function ScrollProgressBar(): React.JSX.Element {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30, mass: 0.5 });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 500, damping: 50, mass: 0.5 });
 
   return (
     <motion.div

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { ThemeToggle } from "../ui/theme-toggle";
 import { NavBar } from "../ui/tubelight-navbar";
+import { useLenis } from "../../providers/LenisProvider";
 import { Home, User, Code2, Briefcase, FileText, Mail, X, Radio, Activity } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -17,30 +18,9 @@ const NAV_ITEMS = [
 ];
 
 export function Navbar(): React.JSX.Element {
+  const lenis = useLenis();
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [pillVisible, setPillVisible] = useState<boolean>(true);
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("theme") as "light" | "dark" | null;
-      if (stored) return stored;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-    return "light";
-  });
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = (): void => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
 
   useEffect(() => {
     const onScroll = (): void => setScrolled(window.scrollY > 40);
@@ -90,7 +70,8 @@ export function Navbar(): React.JSX.Element {
             whileHover={{ scale: 1.03 }}
             onClick={(e) => {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              if (lenis) lenis.scrollTo(0, { duration: 1.5 });
+              else window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
             <span className="text-[#0066CC] font-semibold">&lt;</span>
@@ -104,7 +85,7 @@ export function Navbar(): React.JSX.Element {
           />
 
           <div className="flex items-center gap-4 shrink-0">
-            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+            <ThemeToggle />
             <LiquidButton
               onClick={() => window.open("/Tobiloba_Jagun_CV.pdf", "_blank")}
               className="text-xs h-8 px-4"

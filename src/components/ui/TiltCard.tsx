@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -8,6 +9,7 @@ interface TiltCardProps {
 
 export function TiltCard({ children, className = "" }: TiltCardProps): React.JSX.Element {
   const cardRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -36,14 +38,15 @@ export function TiltCard({ children, className = "" }: TiltCardProps): React.JSX
   return (
     <motion.div
       ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
+      onMouseMove={prefersReducedMotion ? undefined : handleMouseMove}
+      onMouseLeave={prefersReducedMotion ? undefined : handleMouseLeave}
+      style={prefersReducedMotion ? undefined : {
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
       }}
       className={`${className}`}
+      role="presentation"
     >
       <div style={{ transformStyle: "preserve-3d" }}>{children}</div>
     </motion.div>

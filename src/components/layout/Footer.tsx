@@ -31,7 +31,7 @@ export function Footer(): React.JSX.Element {
           </a>
 
           <a
-            href="https://www.instagram.com/theylovejagun?igsh=aWlvYnU3NnJqNGpz&utm_source=qr"
+            href="https://www.instagram.com/theylovejagun"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-[#86868B] dark:text-zinc-400 hover:text-[#0066CC] dark:hover:text-blue-400 transition-colors duration-200 font-mono"

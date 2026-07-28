@@ -1,6 +1,12 @@
 @echo off
 cd /d "C:\Users\tobil\Desktop\tobi-portfolio"
 
+if "%*"=="" (
+  echo Usage: %~nx0 "commit message"
+  pause
+  exit /b 1
+)
+
 echo Removing stale git lock...
 if exist ".git\index.lock" del /f ".git\index.lock"
 
@@ -8,7 +14,7 @@ echo Staging all changes...
 git add -A
 
 echo Committing...
-git commit -m "feat: SEO, OG tags, favicon, blog, GitHub activity, a11y, dark mode OS pref, WebP hero"
+git commit -m "%*"
 
 echo Pushing to GitHub...
 git push
