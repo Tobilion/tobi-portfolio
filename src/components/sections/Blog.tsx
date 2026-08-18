@@ -19,7 +19,7 @@ const NOW_CARDS: NowCard[] = [
     icon: Hammer,
     label: "Currently Building",
     title: "Football Simulators",
-    body: "Working through bug fixes and UX improvements on the Football Bet Simulator and Football Manager Simulator. Summer plan: serious feature development on both — new match engine, better data visualisation, and multiplayer groundwork.",
+    body: "Working through bug fixes and UX improvements on Matchday Exchange and Football Manager Simulator. Summer plan: serious feature development on both — new match engine, better data visualisation, and multiplayer groundwork.",
     accent: "#0ea5e9",
     active: true,
     meta: "Active",

@@ -33,7 +33,7 @@ const FootballManagerGraphic = lazy(() => import("../ui/project-graphics/Footbal
 
 /* ── Real screenshot map — add entries here as you get more images ── */
 const PROJECT_IMAGES: Record<string, string> = {
-  "Football Bet Simulator":     "/Images/Bet-simulator_demo.jpg",
+  "Matchday Exchange":          "/Images/Bet-simulator_demo.jpg",
   "Football Manager Simulator": "/Images/sportsim_demo.jpg",
 };
 
@@ -53,7 +53,7 @@ function ProjectIllustration({ project }: { project: Project }): React.JSX.Eleme
   else if (title.includes("log")) Graphic = LogAnalyzerGraphic;
   else if (title.includes("duplicate")) Graphic = DuplicateFileGraphic;
   else if (title.includes("insight")) Graphic = InsightFlowGraphic;
-  else if (title.includes("bet")) Graphic = FootballBetGraphic;
+  else if (title.includes("matchday") || title.includes("bet")) Graphic = FootballBetGraphic;
   else if (title.includes("manager") || title.includes("sport")) Graphic = FootballManagerGraphic;
   else Graphic = InsightFlowGraphic;
   return (
