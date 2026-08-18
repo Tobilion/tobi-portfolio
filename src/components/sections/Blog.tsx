@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useSectionInView } from "../../hooks/useSectionInView";
 import { fadeUp, stagger } from "../../animations/variants";
-import { Hammer, GraduationCap, Tv, MapPin, RefreshCw } from "lucide-react";
+import { Hammer, Briefcase, Tv, MapPin, RefreshCw } from "lucide-react";
 
 interface NowCard {
   icon: React.ElementType;
@@ -18,29 +18,29 @@ const NOW_CARDS: NowCard[] = [
   {
     icon: Hammer,
     label: "Currently Building",
-    title: "Football Simulators",
-    body: "Working through bug fixes and UX improvements on Matchday Exchange and Football Manager Simulator. Summer plan: serious feature development on both — new match engine, better data visualisation, and multiplayer groundwork.",
+    title: "Local Project Console",
+    body: "Shipping Local Project Console — the offline command dispatcher and AI coding assistant for managing projects from one web UI. Just published to npm as local-project-console; next up is tightening the AI tool-calling loop and the Electron desktop wrapper.",
     accent: "#0ea5e9",
     active: true,
     meta: "Active",
   },
   {
-    icon: GraduationCap,
-    label: "Current Focus",
-    title: "University Exams",
-    body: "Sitting my exams at Covenant University, Lagos. Fully heads-down on academics right now. Dev mode resumes in full once summer starts — already have a list of projects lined up.",
-    accent: "#7c3aed",
-    active: false,
-    meta: "Until July",
-  },
-  {
     icon: Tv,
-    label: "Learning From",
-    title: "YouTube Tech Channels",
-    body: "Keeping sharp between study sessions with engineering deep-dives and system design content. Building a mental list of techniques to apply once the summer build sprint kicks off.",
+    label: "On Vacation",
+    title: "Learning & YouTube",
+    body: "Making the most of the break — picking up new coding techniques and keeping up with tech YouTube channels, building a mental list of things to apply once third year starts.",
     accent: "#ef4444",
     active: false,
     meta: "Ongoing",
+  },
+  {
+    icon: Briefcase,
+    label: "Current Focus",
+    title: "Internship at VDT Communications",
+    body: "Back for a second internship at one of Nigeria's leading broadband providers — building on last year's network diagnostics and infrastructure support across IT, Network Servicing, and Field Engineering.",
+    accent: "#7c3aed",
+    active: false,
+    meta: "July – August 2026",
   },
 ];
 
@@ -144,7 +144,7 @@ export function Blog(): React.JSX.Element {
                 variants={fadeUp}
                 className="text-[#86868B] dark:text-zinc-400 max-w-md text-sm leading-relaxed"
               >
-                A snapshot of where my head is at right now — building, studying, and preparing for a big summer.
+                A snapshot of what I'm working on right now — building, learning, and interning.
               </motion.p>
             </div>
             {/* Last updated + location */}
@@ -158,7 +158,7 @@ export function Blog(): React.JSX.Element {
               </span>
               <span className="flex items-center gap-1.5">
                 <RefreshCw size={11} />
-                Updated June 2026
+                Updated August 2026
               </span>
             </motion.div>
           </div>

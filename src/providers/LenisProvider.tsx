@@ -10,10 +10,13 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
     const instance = new Lenis({
-      duration: isMobile ? 0.6 : 1.2,
+      duration: isMobile ? 0.6 : 0.9,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       touchMultiplier: isMobile ? 1.2 : 2,
       wheelMultiplier: isMobile ? 1.2 : 1,
+      // Trackpads and touchscreens (common on laptops) must scroll natively
+      // and let Lenis sync to them; intercepting them made scrolling feel sticky.
+      syncTouch: true,
       infinite: false,
       wrapper: window,
       content: document.documentElement,

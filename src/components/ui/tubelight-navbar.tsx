@@ -35,23 +35,26 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [drawerOpen])
 
-  // Scroll spy — IntersectionObserver per section
+  // Scroll spy — the active section is the last one whose top has passed a
+  // line just above the viewport midpoint. Computed on scroll instead of with
+  // IntersectionObserver because sections taller than the viewport never exit
+  // the observer's intersection state, which left the highlight stuck when
+  // scrolling back up.
   useEffect(() => {
-    const observers = items.map((item) => {
-      const targetId = item.url.replace("#", "");
-      if (!targetId) return null;
-      const el = document.getElementById(targetId);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveTab(item.name);
-        },
-        { rootMargin: "0px 0px -50% 0px", threshold: 0.1 }
-      );
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach((o) => o?.disconnect());
+    const onScroll = () => {
+      const triggerLine = window.innerHeight * 0.35;
+      let current: string | undefined = items[0]?.name;
+      for (const item of items) {
+        const el = document.getElementById(item.url.replace("#", ""));
+        if (el && el.getBoundingClientRect().top <= triggerLine) {
+          current = item.name;
+        }
+      }
+      setActiveTab(current ?? items[0]?.name);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, [items]);
 
   const scrollTo = (item: NavItem) => {

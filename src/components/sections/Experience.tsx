@@ -13,10 +13,11 @@ interface StatItem {
 }
 
 const STATS: StatItem[] = [
-  { label: "Projects built",     value: 11,   suffix: ""   },
-  { label: "Live deployments",   value: 6,    suffix: ""   },
-  { label: "WASSCE A1 grades",   value: 4,    suffix: ""   },
-  { label: "Graduating class",   value: 2028, suffix: ""   },
+  { label: "Projects built",         value: 12,   suffix: ""   },
+  { label: "Live deployments",       value: 6,    suffix: ""   },
+  { label: "npm packages published", value: 1,    suffix: ""   },
+  { label: "WASSCE A1 grades",       value: 4,    suffix: ""   },
+  { label: "Graduating class",       value: 2028, suffix: ""   },
 ];
 
 function AnimatedCounter({ value, suffix, prefix = "" }: { value: number; suffix: string; prefix?: string }): React.JSX.Element {
@@ -106,7 +107,7 @@ const experienceStackCards = [
   {
     icon: <Briefcase className="size-4 text-purple-600 dark:text-purple-400" />,
     title: "VDT Communications",
-    description: "Intern (Aug – Sep 2025, returning 2026)",
+    description: "Intern (2025 & 2026)",
     date: "Work History",
     iconClassName: "bg-purple-50 p-1 rounded-full text-purple-600 border border-purple-100 dark:bg-purple-950/40 dark:text-purple-400 dark:border-purple-900/40",
     titleClassName: "text-purple-600 dark:text-purple-400 font-semibold",

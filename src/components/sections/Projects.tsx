@@ -13,6 +13,8 @@ interface Project {
   color: string;
   githubUrl: string;
   demoUrl: string;
+  npmUrl?: string;
+  npmInstall?: string;
 }
 
 interface ProjectCardProps {
@@ -30,11 +32,13 @@ const DuplicateFileGraphic = lazy(() => import("../ui/project-graphics/Duplicate
 const InsightFlowGraphic = lazy(() => import("../ui/project-graphics/InsightFlowGraphic"));
 const FootballBetGraphic = lazy(() => import("../ui/project-graphics/FootballBetGraphic"));
 const FootballManagerGraphic = lazy(() => import("../ui/project-graphics/FootballManagerGraphic"));
+const JokeKickGraphic = lazy(() => import("../ui/project-graphics/JokeKickGraphic"));
 
 /* ── Real screenshot map — add entries here as you get more images ── */
 const PROJECT_IMAGES: Record<string, string> = {
   "Matchday Exchange":          "/Images/Bet-simulator_demo.jpg",
-  "Football Manager Simulator": "/Images/sportsim_demo.jpg",
+  "SportSim Pro":               "/Images/sportsim_demo.jpg",
+  "Local Project Console":      "/Images/project-console.png",
 };
 
 /* ── SVG project illustration router (fallback for projects without a screenshot) ── */
@@ -55,6 +59,7 @@ function ProjectIllustration({ project }: { project: Project }): React.JSX.Eleme
   else if (title.includes("insight")) Graphic = InsightFlowGraphic;
   else if (title.includes("matchday") || title.includes("bet")) Graphic = FootballBetGraphic;
   else if (title.includes("manager") || title.includes("sport")) Graphic = FootballManagerGraphic;
+  else if (title.includes("joke")) Graphic = JokeKickGraphic;
   else Graphic = InsightFlowGraphic;
   return (
     <Suspense fallback={<ProjectIllustrationFallback />}>
@@ -109,6 +114,19 @@ const ProjectCard = React.memo(function ProjectCard({ project }: ProjectCardProp
               </span>
             ))}
           </div>
+
+          {project.npmUrl && project.npmInstall && (
+            <a
+              href={project.npmUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-xs font-mono py-2 px-3 rounded-xl border border-slate-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-950 text-slate-500 dark:text-zinc-400 hover:text-[var(--proj-color)] hover:border-[var(--proj-color)]/30 transition-all duration-200 cursor-pointer"
+            >
+              <span className="text-[var(--proj-color)]">$</span>
+              <span className="truncate">{project.npmInstall}</span>
+              <span className="ml-auto shrink-0">↗ npm</span>
+            </a>
+          )}
 
           <div className="flex gap-3 pt-2">
             {project.demoUrl && (
