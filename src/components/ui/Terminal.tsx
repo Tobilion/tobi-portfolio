@@ -25,7 +25,7 @@ const COMMANDS: Record<string, string | string[]> = {
   "ls projects": [
     "log-analyzer/",
     "duplicate-file-analyzer/",
-    "football-bet-simulator/",
+    "matchday-exchange/",
     "football-manager-sim/",
     "insightflow/",
     "vaultex-cli/",
