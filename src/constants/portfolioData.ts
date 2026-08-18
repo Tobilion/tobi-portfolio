@@ -76,7 +76,7 @@ export const PROJECTS: Project[] = [
     desc: "A fully client-side football simulation and prediction market: a tick-by-tick match engine drives live-shifting odds, single/accumulator slips, a same-game multi builder, mid-match cash-out, club ownership with a transfer market, and a 14-game casino suite. 96 Vitest tests with enforced coverage floors on the money-math, and an optional server-authoritative wallet that falls back gracefully to local computation.",
     color: "#10b981",
     githubUrl: "https://github.com/Tobilion/football-bet-simulator",
-    demoUrl: "https://football-bet-simulator.vercel.app/",
+    demoUrl: "https://matchday-exchange.vercel.app/",
   },
   {
     title: "Local Project Console",
